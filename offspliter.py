@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import sys
+
 import yaml
 import urwid
 
@@ -47,7 +49,7 @@ class Split(urwid.WidgetWrap):
             text.append((color, part))
         self.description_widget = urwid.Text(text)
         self.stats = stats
-        self.stats_widget = urwid.Text('\n'.join('%s %s' % (key, value) for key, value in self.stats.items()), align='right')
+        self.stats_widget = urwid.Text('\n'.join(f'{key} {value}' for key, value in self.stats.items()), align='right')
         self.start = start
         self.bpt = bpt
         self.pb = pb
@@ -59,15 +61,11 @@ class Split(urwid.WidgetWrap):
         self.current_widget = urwid.Text('', align='right')
         self.reset()
 
-        #vline = urwid.AttrWrap(urwid.SolidFill('\u2502'), 'line')
         self.view = urwid.Columns(
             [
                 ('weight', 4, self.name_widget),
-                #('fixed', 1, vline),
                 ('weight', 8, self.description_widget),
-                #('fixed', 1, vline),
                 ('weight', 2, self.stats_widget),
-                #('fixed', 1, vline),
                 ('weight', 2, self.time_widget),
                 ('weight', 1, self.current_widget),
             ],
@@ -85,8 +83,6 @@ class Split(urwid.WidgetWrap):
 
     def update(self, display_all=False, color=None):
         text = [get_timer_display((self.start + self.pb) if self.pb else None)]
-        #text.append('\n')
-        #text += [str(self.progress), ' ', str(self.start), ' ', str(self.pb), ' ', str(self.bpt)]
         if display_all or self.progress - self.progress_start > self.bpt or self.progress >= (self.start + self.pb):
             text.append('\n',)
             if not color:
@@ -117,51 +113,55 @@ class Split(urwid.WidgetWrap):
 
 class MainWindow(urwid.WidgetWrap):
     palette = [
-        ('body', 'white', 'black'),
-        #('focus', 'light gray', 'dark blue', 'standout'),
-        ('header', 'yellow', 'dark blue', 'standout'),
-        ('footer', 'black', 'light gray'),
-        ('footer key', 'yellow', 'dark blue'),
-        ('hilight', 'light green', 'black'),
-        ('line',         'white',      'black', 'standout'),
-        ('focus line',   'yellow', 'black', 'standout'),
-        ('boss',         'light red',      'black'),
-        ('build',        'dark magenta',           'black'),
+        ('body',            'white',        'black'),
 
-        ('title normal',   'white', 'dark blue', 'bold'),
-        ('title green',    'light green', 'dark blue', 'bold'),
-        ('title red',      'light red', 'dark blue', 'bold'),
-        ('title paused',   'yellow', 'dark blue', 'bold'),
+        ('header',          'yellow',       'dark blue'),
+        ('header normal',   'white',        'dark blue', 'bold'),
+        ('header green',    'light green',  'dark blue', 'bold'),
+        ('header red',      'light red',    'dark blue', 'bold'),
+        ('header paused',   'yellow',       'dark blue', 'bold'),
 
-        ('normal',       'white', 'black'),
-        ('green',        'light green', 'black'),
-        ('red',          'light red', 'black'),
-        ('gold',         'yellow', 'black'),
+
+        ('footer',          'yellow',       'dark blue'),
+        ('footer key',      'black',        'light gray'),
+        ('footer error',    'dark red',     'dark blue'),
+        ('footer msg',      'light green',  'dark blue'),
+
+        ('line',            'white',        'black'),
+        ('focus line',      'yellow',       'black'),
+        ('hilight',         'light green',  'black'),
+        ('boss',            'light red',    'black'),
+        ('build',           'dark magenta', 'black'),
+
+        ('normal',          'white',        'black'),
+        ('green',           'light green',  'black'),
+        ('red',             'light red',    'black'),
+        ('gold',            'yellow',       'black'),
     ]
     focus_map = {
-        'line': 'focus line',
-        'split': 'focus split',
+        'line':     'focus line',
+        'split':    'focus split',
     }
 
     footer_text = [
-        '     ',
+        ' ',
         ('footer key', 'ENTER'),
-        ': start/split',
-        '     ',
+        ' start/split',
+        ' ',
         ('footer key', 'SPACE'),
-        ': pause',
-        '     ',
+        ' pause',
+        ' ',
         ('footer key', 'R'),
-        ': reset',
-        '     ',
+        ' reset',
+        ' ',
         ('footer key', 'S'),
-        ': save',
-        '     ',
+        ' save',
+        ' ',
         ('footer key', 'G'),
-        ': save golds only',
-        '     ',
+        ' save golds',
+        ' ',
         ('footer key', 'Q'),
-        ': quit',
+        ' quit',
     ]
 
     def __init__(self, controller):
@@ -171,13 +171,27 @@ class MainWindow(urwid.WidgetWrap):
         self.timer = urwid.Text('Elapsed: 0', align='center')
         self.pb = urwid.Text('PB: 0', align='center')
         self.header = urwid.AttrWrap(urwid.Columns([self.stats, self.pb, self.timer]), 'header')
+        self.message_widget = urwid.AttrWrap(urwid.Text('', align='center'), 'footer msg')
 
-        self.footer = urwid.AttrWrap(urwid.Text(self.footer_text), 'footer')
+        self.footer = urwid.AttrWrap(
+            urwid.Columns([
+                ('weight', 2, urwid.Text(self.footer_text)),
+                ('weight', 2, self.message_widget),
+                ('weight', 1, urwid.Text(controller.config_path, align='right')),
+            ]),
+            'footer'
+        )
         self.splits = urwid.SimpleFocusListWalker([])
         self.listbox = urwid.ListBox(self.splits)
         self.view = urwid.Frame(urwid.AttrWrap(self.listbox, 'body'), header=self.header, footer=self.footer)
 
         super().__init__(self.view)
+
+    def error(self, message, color='footer error'):
+        self.message_widget.set_text((color, message))
+
+    def message(self, message, color='footer msg'):
+        self.message_widget.set_text((color, message))
 
     def add_split(self, split):
         self.splits.append(urwid.AttrMap(split, 'split', self.focus_map))
@@ -193,7 +207,10 @@ class MainWindow(urwid.WidgetWrap):
 
 
 class Spliter:
-    def __init__(self):
+    DEFAULT_CONFIG_FILE = 'route.yml'
+
+    def __init__(self, config_path):
+        self.config_path = config_path or self.DEFAULT_CONFIG_FILE
         self.view = MainWindow(self)
         self.current_split_idx = -1
         self.splits = []
@@ -218,8 +235,12 @@ class Spliter:
         return self.splits[self.current_split_idx-1]
 
     def main(self):
-        with open('route.yml', 'r', encoding='utf-8') as fp:
-            route = yaml.safe_load(fp)
+        try:
+            with open(self.config_path, 'r', encoding='utf-8') as fp:
+                route = yaml.safe_load(fp)
+        except OSError as e:
+            print(f'Unable to open {self.config_path}: {e.strerror}', file=sys.stderr)
+            return 1
 
         start = 0
         for s in route['route']:
@@ -235,6 +256,8 @@ class Spliter:
 
         self.loop.set_alarm_in(1, self.tick)
         self.loop.run()
+
+        return 0
 
     def tick(self, loop=None, user_data=None):
         try:
@@ -263,28 +286,28 @@ class Spliter:
 
         text = []
         text.append('Sum of Best:        ')
-        text.append(get_timer_display(sob, 'title normal'))
+        text.append(get_timer_display(sob, 'header normal'))
         text.append('\n')
         text.append('Best Possible Time: ')
-        text.append(get_timer_display(bpt, 'title normal'))
+        text.append(get_timer_display(bpt, 'header normal'))
         self.view.stats.set_text(text)
 
         if self.paused:
-            color = 'title paused'
+            color = 'header paused'
         elif self.previous_split:
             if self.previous_split.progress > self.previous_split.start + self.previous_split.pb:
-                color = 'title red'
+                color = 'header red'
             else:
-                color = 'title green'
+                color = 'header green'
         elif self.current_split:
             if self.current_split.progress > self.current_split.start + self.current_split.pb:
-                color = 'title red'
+                color = 'header red'
             else:
-                color = 'title green'
+                color = 'header green'
         else:
-            color = 'title normal'
+            color = 'header normal'
         self.view.timer.set_text(['Elapsed: ', get_timer_display(self.progress, color)])
-        self.view.pb.set_text(['PB: ', get_timer_display(pb, 'title normal')])
+        self.view.pb.set_text(['PB: ', get_timer_display(pb, 'header normal')])
 
 
     def go_next_split(self):
@@ -319,6 +342,8 @@ class Spliter:
             return
 
         self.paused = not self.paused
+        self.view.message('---PAUSED---' if self.paused else '')
+
         self.update()
 
     def unhandled_input(self, k):
@@ -347,26 +372,40 @@ class Spliter:
             # s = save of pb
             # g = save only golds
 
-            with open('route.yml', 'w', encoding='utf-8') as fp:
-                route = []
-                for split in self.splits:
-                    split.bpt = split.new_bpt
-                    if k == 's':
-                        split.pb = split.new_pb
+            try:
+                with open(self.config_path, 'w', encoding='utf-8') as fp:
+                    route = []
+                    for split in self.splits:
+                        split.bpt = split.new_bpt
+                        if k == 's':
+                            split.pb = split.new_pb
 
-                    route.append({
-                        'name': split.name,
-                        'description': split.description,
-                        'pb': split.pb,
-                        'bpt': split.bpt,
-                        'color': split.color,
-                        'stats': split.stats,
-                        'build': split.build,
-                    })
-                yaml.dump({'route': route}, fp)
+                        route.append({
+                            'name': split.name,
+                            'description': split.description,
+                            'pb': split.pb,
+                            'bpt': split.bpt,
+                            'color': split.color,
+                            'stats': split.stats,
+                            'build': split.build,
+                        })
+                    yaml.dump({'route': route}, fp)
+            except OSError as e:
+                self.view.error(f'Unable to save to {self.config_path}: {e.strerror}')
+            else:
+                self.view.message('Route saved' if k == 's' else 'Golds saved')
 
-        if k in ('q','Q'):
+        if k in ('q', 'Q'):
             raise urwid.ExitMainLoop()
 
 if __name__ == '__main__':
-    Spliter().main()
+    config_path = None
+
+    if len(sys.argv) > 1:
+        if sys.argv[1] in ('-h', '--help'):
+            print(f'{sys.argv[0]} [config_path]')
+            sys.exit(0)
+
+        config_path = sys.argv[1]
+
+    sys.exit(Spliter(config_path).main())
