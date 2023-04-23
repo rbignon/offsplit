@@ -2,8 +2,9 @@
 
 import sys
 
-import yaml
 import urwid
+
+import yaml
 
 
 def get_time_str(seconds):
@@ -18,6 +19,7 @@ def get_time_str(seconds):
 
     return str(seconds)
 
+
 def get_timer_display(progress, color='normal', sign=False):
     if progress is None:
         return (color, '-')
@@ -27,7 +29,6 @@ def get_timer_display(progress, color='normal', sign=False):
         progress_text = ('+' if progress >= 0 else '-') + progress_text
 
     return (color, progress_text)
-
 
 
 class Split(urwid.WidgetWrap):
@@ -115,11 +116,11 @@ class MainWindow(urwid.WidgetWrap):
     palette = [
         ('body',            'white',        'black'),
 
-        ('header',          'yellow',       'dark blue'),
-        ('header normal',   'white',        'dark blue', 'bold'),
-        ('header green',    'light green',  'dark blue', 'bold'),
-        ('header red',      'light red',    'dark blue', 'bold'),
-        ('header paused',   'yellow',       'dark blue', 'bold'),
+        ('header',          'white',        'dark blue'),
+        ('header normal',   'white',        'dark blue',    'bold'),
+        ('header green',    'black',        'dark green',   'bold'),
+        ('header red',      'white',        'dark red',     'bold'),
+        ('header paused',   'black',        'yellow',       'bold'),
 
 
         ('footer',          'yellow',       'dark blue'),
@@ -276,6 +277,22 @@ class Spliter:
         if self.current_split:
             self.current_split.update()
 
+        if not self.current_split:
+            color = 'header'
+        elif self.paused:
+            color = 'header paused'
+        elif self.previous_split and self.previous_split.progress > self.previous_split.start + self.previous_split.pb:
+            color = 'header red'
+        elif self.current_split:
+            if self.current_split.progress > self.current_split.start + self.current_split.pb:
+                color = 'header red'
+            else:
+                color = 'header green'
+        else:
+            color = 'header normal'
+
+        self.view.header.set_attr_map({None: color})
+
         sob = 0
         bpt = 0
         pb = 0
@@ -286,29 +303,14 @@ class Spliter:
 
         text = []
         text.append('Sum of Best:        ')
-        text.append(get_timer_display(sob, 'header normal'))
+        text.append(get_timer_display(sob, color))
         text.append('\n')
         text.append('Best Possible Time: ')
-        text.append(get_timer_display(bpt, 'header normal'))
+        text.append(get_timer_display(bpt, color))
         self.view.stats.set_text(text)
 
-        if self.paused:
-            color = 'header paused'
-        elif self.previous_split:
-            if self.previous_split.progress > self.previous_split.start + self.previous_split.pb:
-                color = 'header red'
-            else:
-                color = 'header green'
-        elif self.current_split:
-            if self.current_split.progress > self.current_split.start + self.current_split.pb:
-                color = 'header red'
-            else:
-                color = 'header green'
-        else:
-            color = 'header normal'
         self.view.timer.set_text(['Elapsed: ', get_timer_display(self.progress, color)])
-        self.view.pb.set_text(['PB: ', get_timer_display(pb, 'header normal')])
-
+        self.view.pb.set_text(['PB: ', get_timer_display(pb, color)])
 
     def go_next_split(self):
         if self.current_split:
@@ -397,6 +399,7 @@ class Spliter:
 
         if k in ('q', 'Q'):
             raise urwid.ExitMainLoop()
+
 
 if __name__ == '__main__':
     config_path = None
