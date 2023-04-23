@@ -83,23 +83,19 @@ class Split(urwid.WidgetWrap):
         self.current_widget.set_text([get_timer_display(self.bpt, color='gold')])
 
     def update(self, display_all=False, color=None):
+        if not color:
+            if self.progress >= (self.start + self.pb):
+                color = 'red'
+            else:
+                color = 'green'
+
         text = [get_timer_display((self.start + self.pb) if self.pb else None)]
         if display_all or self.progress - self.progress_start > self.bpt or self.progress >= (self.start + self.pb):
             text.append('\n',)
-            if not color:
-                if self.progress < (self.start + self.pb):
-                    color = 'green'
-                else:
-                    color = 'red'
             text.append(get_timer_display(self.progress - (self.start + self.pb), color, sign=True))
 
         self.time_widget.set_text(text)
 
-        if not color:
-            if self.progress > self.start + self.pb:
-                color = 'red'
-            else:
-                color = 'green'
         self.current_widget.set_text([get_timer_display(self.bpt, color='gold'), '\n', get_timer_display(self.progress - self.progress_start, color)])
 
     def stop(self):
@@ -281,10 +277,10 @@ class Spliter:
             color = 'header'
         elif self.paused:
             color = 'header paused'
-        elif self.previous_split and self.previous_split.progress > self.previous_split.start + self.previous_split.pb:
+        elif self.previous_split and self.previous_split.progress >= self.previous_split.start + self.previous_split.pb:
             color = 'header red'
         elif self.current_split:
-            if self.current_split.progress > self.current_split.start + self.current_split.pb:
+            if self.current_split.progress >= self.current_split.start + self.current_split.pb:
                 color = 'header red'
             else:
                 color = 'header green'
@@ -323,6 +319,7 @@ class Spliter:
             return False
 
         self.current_split.progress_start = self.progress
+        self.current_split.progress = self.progress
 
         return True
 
