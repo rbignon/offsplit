@@ -29,13 +29,23 @@ def get_timer_display(progress, color='normal', sign=False):
 
 
 class Split(urwid.WidgetWrap):
-    def __init__(self, name, description, stats, start=0, bpt=0, pb=0, color=None):
+    def __init__(self, name, description, stats, start=0, bpt=0, pb=0, color=None, build=None):
         self.name = name
         self.name_widget = urwid.Text(self.name, align='center')
+        self.color = color
         if color:
             self.name_widget = urwid.AttrWrap(self.name_widget, color)
+        self.build = build or []
         self.description = description
-        self.description_widget = urwid.Text(self.description)
+        text = []
+        for b in self.build:
+            text.append(('build', b + '\n'))
+
+        color = 'hilight'
+        for part in self.description.split('|'):
+            color = 'hilight' if color == 'normal' else 'normal'
+            text.append((color, part))
+        self.description_widget = urwid.Text(text)
         self.stats = stats
         self.stats_widget = urwid.Text('\n'.join('%s %s' % (key, value) for key, value in self.stats.items()), align='right')
         self.start = start
@@ -46,23 +56,23 @@ class Split(urwid.WidgetWrap):
         self.progress = 0
         self.progress_start = start
         self.time_widget = urwid.Text('', align='right')
+        self.current_widget = urwid.Text('', align='right')
         self.reset()
 
         #vline = urwid.AttrWrap(urwid.SolidFill('\u2502'), 'line')
         self.view = urwid.Columns(
             [
-                ('weight', 2, self.name_widget),
+                ('weight', 4, self.name_widget),
                 #('fixed', 1, vline),
-                ('weight', 4, self.description_widget),
+                ('weight', 8, self.description_widget),
                 #('fixed', 1, vline),
-                ('weight', 1, self.stats_widget),
+                ('weight', 2, self.stats_widget),
                 #('fixed', 1, vline),
-                ('weight', 1, self.time_widget),
+                ('weight', 2, self.time_widget),
+                ('weight', 1, self.current_widget),
             ],
         )
-        self.view = urwid.Padding(self.view, ('fixed left',1),('fixed right',20))
-        if color is None:
-            color = 'body'
+        self.view = urwid.Padding(self.view, ('fixed left', 1), ('fixed right', 5))
         self.view = urwid.AttrWrap(self.view, 'body')
         self.view = urwid.LineBox(self.view)
         self.view = urwid.AttrWrap(self.view, 'line')
@@ -70,15 +80,14 @@ class Split(urwid.WidgetWrap):
         super().__init__(self.view)
 
     def reset(self):
-        #self.pb = self.new_pb
-        #self.bpt = self.new_bpt
         self.time_widget.set_text(get_timer_display((self.start + self.pb) if self.pb else None))
+        self.current_widget.set_text([get_timer_display(self.bpt, color='gold')])
 
     def update(self, display_all=False, color=None):
         text = [get_timer_display((self.start + self.pb) if self.pb else None)]
         #text.append('\n')
         #text += [str(self.progress), ' ', str(self.start), ' ', str(self.pb), ' ', str(self.bpt)]
-        if display_all or self.start + self.progress > self.start + self.bpt:
+        if display_all or self.progress - self.progress_start > self.bpt or self.progress >= (self.start + self.pb):
             text.append('\n',)
             if not color:
                 if self.progress < (self.start + self.pb):
@@ -88,6 +97,13 @@ class Split(urwid.WidgetWrap):
             text.append(get_timer_display(self.progress - (self.start + self.pb), color, sign=True))
 
         self.time_widget.set_text(text)
+
+        if not color:
+            if self.progress > self.start + self.pb:
+                color = 'red'
+            else:
+                color = 'green'
+        self.current_widget.set_text([get_timer_display(self.bpt), '\n', get_timer_display(self.progress - self.progress_start, color)])
 
     def stop(self):
         color = None
@@ -106,10 +122,11 @@ class MainWindow(urwid.WidgetWrap):
         ('header', 'yellow', 'dark blue', 'standout'),
         ('footer', 'black', 'light gray'),
         ('footer key', 'yellow', 'dark blue'),
-        ('important', 'light green', 'black'),
+        ('hilight', 'light green', 'black'),
         ('line',         'white',      'black', 'standout'),
         ('focus line',   'yellow', 'black', 'standout'),
         ('boss',         'light red',      'black'),
+        ('build',        'dark magenta',           'black'),
 
         ('title normal',   'white', 'dark blue', 'bold'),
         ('title green',    'light green', 'dark blue', 'bold'),
@@ -129,7 +146,7 @@ class MainWindow(urwid.WidgetWrap):
     footer_text = [
         '     ',
         ('footer key', 'ENTER'),
-        ': start/next split',
+        ': start/split',
         '     ',
         ('footer key', 'SPACE'),
         ': pause',
@@ -140,6 +157,9 @@ class MainWindow(urwid.WidgetWrap):
         ('footer key', 'S'),
         ': save',
         '     ',
+        ('footer key', 'G'),
+        ': save golds only',
+        '     ',
         ('footer key', 'Q'),
         ': quit',
     ]
@@ -147,10 +167,10 @@ class MainWindow(urwid.WidgetWrap):
     def __init__(self, controller):
         self.controller = controller
 
-        self.split_timer = urwid.Text('', align='center')
-        self.stats = urwid.Text('', align='left')
-        self.timer = urwid.Text('0', align='center')
-        self.header = urwid.AttrWrap(urwid.Columns([self.split_timer, self.stats, self.timer]), 'header')
+        self.stats = urwid.Text('', align='center')
+        self.timer = urwid.Text('Elapsed: 0', align='center')
+        self.pb = urwid.Text('PB: 0', align='center')
+        self.header = urwid.AttrWrap(urwid.Columns([self.stats, self.pb, self.timer]), 'header')
 
         self.footer = urwid.AttrWrap(urwid.Text(self.footer_text), 'footer')
         self.splits = urwid.SimpleFocusListWalker([])
@@ -190,6 +210,13 @@ class Spliter:
 
         return self.splits[self.current_split_idx]
 
+    @property
+    def previous_split(self):
+        if self.current_split_idx < 1:
+            return None
+
+        return self.splits[self.current_split_idx-1]
+
     def main(self):
         with open('route.yml', 'r', encoding='utf-8') as fp:
             route = yaml.safe_load(fp)
@@ -198,7 +225,7 @@ class Spliter:
         for s in route['route']:
             bpt = s.get('bpt', 0)
             pb = s.get('pb', 0)
-            split = Split(s['name'], s['description'], s.get('stats', {}), start, bpt, pb, s.get('color'))
+            split = Split(s['name'], s['description'], s.get('stats', {}), start, bpt, pb, s.get('color'), s.get('build'))
             self.splits.append(split)
             self.view.add_split(split)
             start += pb
@@ -223,23 +250,16 @@ class Spliter:
             self.loop.set_alarm_in(1, self.tick)
 
     def update(self):
-        if self.paused:
-            color = 'title paused'
-        else:
-            color = 'title normal'
-        self.view.timer.set_text(get_timer_display(self.progress, color))
-
-        if self.current_split:
-            self.view.split_timer.set_text(get_timer_display(self.progress - self.current_split.progress_start, color))
-
         if self.current_split:
             self.current_split.update()
 
         sob = 0
         bpt = 0
-        for split_idx, split in enumerate(self.splits):
+        pb = 0
+        for split in self.splits:
             sob += split.new_bpt or max(0, split.progress - split.progress_start)
             bpt += max(split.new_bpt, split.progress - split.progress_start)
+            pb += split.pb
 
         text = []
         text.append('Sum of Best:        ')
@@ -248,6 +268,23 @@ class Spliter:
         text.append('Best Possible Time: ')
         text.append(get_timer_display(bpt, 'title normal'))
         self.view.stats.set_text(text)
+
+        if self.paused:
+            color = 'title paused'
+        elif self.previous_split:
+            if self.previous_split.progress > self.previous_split.start + self.previous_split.pb:
+                color = 'title red'
+            else:
+                color = 'title green'
+        elif self.current_split:
+            if self.current_split.progress > self.current_split.start + self.current_split.pb:
+                color = 'title red'
+            else:
+                color = 'title green'
+        else:
+            color = 'title normal'
+        self.view.timer.set_text(['Elapsed: ', get_timer_display(self.progress, color)])
+        self.view.pb.set_text(['PB: ', get_timer_display(pb, 'title normal')])
 
 
     def go_next_split(self):
@@ -306,16 +343,25 @@ class Spliter:
             self.progress = 0
             self.update()
 
-        if k == 's':
+        if k in ('s', 'g'):
+            # s = save of pb
+            # g = save only golds
+
             with open('route.yml', 'w', encoding='utf-8') as fp:
                 route = []
                 for split in self.splits:
+                    split.bpt = split.new_bpt
+                    if k == 's':
+                        split.pb = split.new_pb
+
                     route.append({
                         'name': split.name,
                         'description': split.description,
-                        'pb': split.new_pb,
-                        'bpt': split.new_bpt,
-                        'start': split.progress_start,
+                        'pb': split.pb,
+                        'bpt': split.bpt,
+                        'color': split.color,
+                        'stats': split.stats,
+                        'build': split.build,
                     })
                 yaml.dump({'route': route}, fp)
 
