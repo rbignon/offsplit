@@ -100,7 +100,7 @@ class Split(urwid.WidgetWrap):
                 color = 'red'
             else:
                 color = 'green'
-        self.current_widget.set_text([get_timer_display(self.bpt), '\n', get_timer_display(self.progress - self.progress_start, color)])
+        self.current_widget.set_text([get_timer_display(self.bpt, color='gold'), '\n', get_timer_display(self.progress - self.progress_start, color)])
 
     def stop(self):
         color = None
