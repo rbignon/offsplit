@@ -7,7 +7,7 @@ route:
   pb: 10
   start: 0
   stats: {}
-- bpt: 46
+- bpt: 38
   build: []
   color: null
   description: "Sauter dans le vide pr\xE8s du boss tuto"
@@ -15,7 +15,7 @@ route:
   pb: 46
   start: 3
   stats: {}
-- bpt: 247
+- bpt: 241
   build: []
   color: null
   description: "Utiliser la |Rune d'Entre-terre| pendant l'ascenseur avant de sortir\n\
@@ -27,7 +27,7 @@ route:
   pb: 247
   start: 56
   stats: {}
-- bpt: 255
+- bpt: 238
   build: []
   color: null
   description: "Prendre le site pr\xE8s de la sortie de la grotte\nSortir de la grotte,\
@@ -57,7 +57,7 @@ route:
   pb: 209
   start: 566
   stats: {}
-- bpt: 590
+- bpt: 449
   build: []
   color: null
   description: "Direction E+1 prendre le site de gr\xE2ce pour Darriwil plus tard\n\
@@ -72,7 +72,7 @@ route:
   pb: 590
   start: 775
   stats: {}
-- bpt: 479
+- bpt: 382
   build: []
   color: null
   description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
@@ -82,7 +82,7 @@ route:
   pb: 479
   start: 1365
   stats: {}
-- bpt: 286
+- bpt: 278
   build: []
   color: null
   description: "Direction E-1 faire tout le trajet jusqu'\xE0 la Sentinelle Draconique"
@@ -90,7 +90,7 @@ route:
   pb: 286
   start: 1844
   stats: {}
-- bpt: 385
+- bpt: 103
   build: []
   color: boss
   description: "Faire tomber le boss dans le vide\nApr\xE8s le boss, prendre le site\
@@ -108,7 +108,7 @@ route:
   pb: 30
   start: 2515
   stats: {}
-- bpt: 148
+- bpt: 103
   build:
   - 'ARME : Uchigatana'
   - 'TALISMANS : Sceau meurtri de Radagon'
@@ -163,7 +163,7 @@ route:
   pb: 34
   start: 2820
   stats: {}
-- bpt: 2576
+- bpt: 202
   build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon'
@@ -185,7 +185,7 @@ route:
     DEX: 23
     FOI: 12
     FOR: 15
-- bpt: 87
+- bpt: 67
   build: []
   color: null
   description: "Utiliser le |Souvenir du Fl\xE9au des astres| sur le cheval et aller\
@@ -194,7 +194,7 @@ route:
   pb: 87
   start: 5430
   stats: {}
-- bpt: 88
+- bpt: 76
   build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon'
@@ -236,7 +236,7 @@ route:
     DEX: 23
     FOI: 12
     FOR: 15
-- bpt: 75
+- bpt: 41
   build: []
   color: null
   description: Levelup |42 Dex|
@@ -256,7 +256,7 @@ route:
   pb: 437
   start: 6027
   stats: {}
-- bpt: 925
+- bpt: 426
   build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -272,7 +272,7 @@ route:
     DEX: 42
     FOI: 12
     FOR: 15
-- bpt: 172
+- bpt: 112
   build: []
   color: null
   description: Aller sur Morgott directement
@@ -300,7 +300,7 @@ route:
     DEX: 42
     FOI: 12
     FOR: 15
-- bpt: 353
+- bpt: 329
   build: []
   color: null
   description: "Refaire le Leyndell Skip pour descendre\nApr\xE8s la grande porte,\
@@ -331,7 +331,7 @@ route:
   pb: 205
   start: 8485
   stats: {}
-- bpt: 25
+- bpt: 22
   build: []
   color: null
   description: "Upgrade le |Croc du limier en +8|\n|TP Antiques ruines de la vall\xE9\
@@ -364,7 +364,7 @@ route:
     DEX: 46
     FOI: 12
     FOR: 25
-- bpt: 151
+- bpt: 103
   build: []
   color: null
   description: "Utiliser le |Souvenir du G\xE9ant de feu| sur le cheval\nPrendre le\
@@ -374,7 +374,7 @@ route:
   pb: 151
   start: 9935
   stats: {}
-- bpt: 242
+- bpt: 209
   build: []
   color: null
   description: 'Ramasser |Pierre de forge sombre (9)| avant le site du Duo
@@ -411,7 +411,7 @@ route:
     DEX: 51
     FOI: 12
     FOR: 31
-- bpt: 488
+- bpt: 377
   build: []
   color: null
   description: "Juste apr\xE8s le fight, petit skip en sautant sur les rebords en\
@@ -421,7 +421,7 @@ route:
   pb: 488
   start: 11144
   stats: {}
-- bpt: 263
+- bpt: 237
   build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -444,7 +444,7 @@ route:
   pb: 206
   start: 11895
   stats: {}
-- bpt: 740
+- bpt: 42
   build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -459,7 +459,7 @@ route:
     DEX: 51
     FOI: 12
     FOR: 31
-- bpt: 439
+- bpt: 238
   build: []
   color: null
   description: Levelup |15 Vigueur 44 Force|
@@ -467,7 +467,7 @@ route:
   pb: 439
   start: 12841
   stats: {}
-- bpt: 3354
+- bpt: 189
   build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -484,7 +484,7 @@ route:
     FOI: 12
     FOR: 44
     VIG: 15
-- bpt: 2423
+- bpt: 339
   build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
