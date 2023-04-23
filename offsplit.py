@@ -359,6 +359,8 @@ class Spliter:
             self.view.listbox.set_focus(self.current_split_idx, 'above')
             self.view.listbox.set_focus_valign('middle')
 
+            self.update()
+
         if k == ' ':
             self.pause()
 
