@@ -5,7 +5,6 @@ route:
   description: "Samoura\xEF + Rune d'Entre-terre"
   name: "Cr\xE9ation du perso"
   pb: 10
-  start: 0
   stats: {}
 - bpt: 38
   build: []
@@ -13,7 +12,6 @@ route:
   description: "Sauter dans le vide pr\xE8s du boss tuto"
   name: Chapelle de l'anticipation
   pb: 46
-  start: 3
   stats: {}
 - bpt: 241
   build: []
@@ -25,7 +23,6 @@ route:
     \ puis direction E, prendre le coffre pi\xE9g\xE9 dans les ruines"
   name: "N\xE9crolimbe"
   pb: 247
-  start: 56
   stats: {}
 - bpt: 238
   build: []
@@ -36,7 +33,6 @@ route:
     \ avec Melina"
   name: Caelid
   pb: 255
-  start: 303
   stats: {}
 - bpt: 8
   build: []
@@ -44,7 +40,6 @@ route:
   description: '|TP Galerie cristalline de Sellia|'
   name: Bastion de la Table ronde
   pb: 8
-  start: 558
   stats: {}
 - bpt: 209
   build: []
@@ -55,7 +50,6 @@ route:
     \ dans le Fort Faroth\nPrendre le |Sceau meurtri de Radagon| et |TP Commencement|"
   name: Caelid
   pb: 209
-  start: 566
   stats: {}
 - bpt: 449
   build: []
@@ -70,7 +64,6 @@ route:
     \ puis direction NW, skip Margit & Godrick en passant \xE0 droite vers Liurnia"
   name: "N\xE9crolimbe"
   pb: 590
-  start: 775
   stats: {}
 - bpt: 382
   build: []
@@ -80,7 +73,6 @@ route:
     \ NE\nPrendre le site devant Iji puis direction E aller \xE0 l'ascenseur de Dectus"
   name: Liurnia
   pb: 479
-  start: 1365
   stats: {}
 - bpt: 278
   build: []
@@ -88,7 +80,6 @@ route:
   description: "Direction E-1 faire tout le trajet jusqu'\xE0 la Sentinelle Draconique"
   name: Plateau Altus
   pb: 286
-  start: 1844
   stats: {}
 - bpt: 103
   build: []
@@ -97,7 +88,6 @@ route:
     \ devant Leyndell et |TP Sud du lac d'Agheel|"
   name: SENTINELLE DRACONIQUE
   pb: 385
-  start: 2130
   stats: {}
 - bpt: 30
   build: []
@@ -106,7 +96,6 @@ route:
     \ et allouer 5 popo de mana\nDirection S pour la ge\xF4le de Darriwil"
   name: "N\xE9crolimbe"
   pb: 30
-  start: 2515
   stats: {}
 - bpt: 103
   build:
@@ -118,7 +107,6 @@ route:
     \ manoir|"
   name: DARRIWIL
   pb: 148
-  start: 2545
   stats:
     DEX: 23
     FOI: 12
@@ -130,7 +118,6 @@ route:
     \ le |Croc du limier en +5| puis |TP Commencement|"
   name: Liurnia
   pb: 23
-  start: 2693
   stats: {}
 - bpt: 99
   build:
@@ -142,7 +129,6 @@ route:
     \ pour r\xE9cup\xE9rer l'arme du boss plus vite"
   name: SENTINELLE DE L'ARBRE
   pb: 99
-  start: 2736
   stats:
     DEX: 23
     FOI: 12
@@ -153,7 +139,6 @@ route:
   description: "|TP \xC9glise de la putr\xE9faction|"
   name: "N\xE9crolimbe"
   pb: 5
-  start: 2815
   stats: {}
 - bpt: 34
   build: []
@@ -161,7 +146,6 @@ route:
   description: Skip de l'effigie direction SE pour aller sur Radahn
   name: Caelid
   pb: 34
-  start: 2820
   stats: {}
 - bpt: 202
   build:
@@ -180,7 +164,6 @@ route:
 
     Rune majeure 1'
   pb: 2576
-  start: 2854
   stats:
     DEX: 23
     FOI: 12
@@ -192,7 +175,6 @@ route:
     \ sur Margit"
   name: "N\xE9crolimbe"
   pb: 87
-  start: 5430
   stats: {}
 - bpt: 76
   build:
@@ -203,7 +185,6 @@ route:
   description: CR2, combo WA (stun), 3 R1, WA
   name: MARGIT
   pb: 88
-  start: 5537
   stats:
     DEX: 23
     FOI: 12
@@ -217,7 +198,6 @@ route:
     \ secondes balistes"
   name: "N\xE9crolimbe"
   pb: 276
-  start: 5605
   stats: {}
 - bpt: 71
   build:
@@ -231,7 +211,6 @@ route:
 
     Rune majeure 2'
   pb: 71
-  start: 5911
   stats:
     DEX: 23
     FOI: 12
@@ -242,7 +221,6 @@ route:
   description: Levelup |42 Dex|
   name: Plateau Altus
   pb: 75
-  start: 5952
   stats: {}
 - bpt: 437
   build: []
@@ -254,7 +232,6 @@ route:
     \ ramasser |Rune dor\xE9e (11)| et go Godfrey"
   name: Leyndell
   pb: 437
-  start: 6027
   stats: {}
 - bpt: 426
   build:
@@ -267,7 +244,6 @@ route:
     \ JR1 quand il slide sur le c\xF4t\xE9"
   name: GODFREY
   pb: 925
-  start: 6464
   stats:
     DEX: 42
     FOI: 12
@@ -278,7 +254,6 @@ route:
   description: Aller sur Morgott directement
   name: Leyndell
   pb: 172
-  start: 7389
   stats: {}
 - bpt: 457
   build:
@@ -295,7 +270,6 @@ route:
     \ la capitale|"
   name: MORGOTT
   pb: 457
-  start: 7561
   stats:
     DEX: 42
     FOI: 12
@@ -310,7 +284,6 @@ route:
     \ utiliser |Rune dor\xE9e (9)|, |Rune dor\xE9e (11)|"
   name: Leyndell
   pb: 353
-  start: 8018
   stats: {}
 - bpt: 114
   build: []
@@ -320,7 +293,6 @@ route:
     \ de Rold pour aller aux Cimes des G\xE9ants"
   name: Terres interdites
   pb: 114
-  start: 8371
   stats: {}
 - bpt: 205
   build: []
@@ -329,7 +301,6 @@ route:
     \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s et |TP Route du manoir|"
   name: "Cimes des G\xE9ants"
   pb: 205
-  start: 8485
   stats: {}
 - bpt: 22
   build: []
@@ -338,7 +309,6 @@ route:
     e|"
   name: Liurnia
   pb: 25
-  start: 8690
   stats: {}
 - bpt: 387
   build: []
@@ -346,7 +316,6 @@ route:
   description: "Aller jusqu'au G\xE9ant de Feu"
   name: "Cimes des G\xE9ants"
   pb: 387
-  start: 8715
   stats: {}
 - bpt: 833
   build:
@@ -359,7 +328,6 @@ route:
     \ WA dans l'oeil"
   name: "G\xC9ANT DE FEU"
   pb: 833
-  start: 9102
   stats:
     DEX: 46
     FOI: 12
@@ -372,7 +340,6 @@ route:
     \ Melina"
   name: "Cimes des G\xE9ants"
   pb: 151
-  start: 9935
   stats: {}
 - bpt: 209
   build: []
@@ -382,7 +349,6 @@ route:
     Se reposer au site et |TP Route du manoir|'
   name: Farum Azula
   pb: 242
-  start: 10086
   stats: {}
 - bpt: 14
   build: []
@@ -392,7 +358,6 @@ route:
     |TP Temple du dragon|'
   name: Liurnia
   pb: 14
-  start: 10328
   stats: {}
 - bpt: 802
   build:
@@ -406,7 +371,6 @@ route:
     \ combo WA\nAp\xF4tre : CR2 combo WA (stun), backstab, combo WA"
   name: DUO SANCTECHAIR
   pb: 802
-  start: 10342
   stats:
     DEX: 51
     FOI: 12
@@ -419,7 +383,6 @@ route:
     \ Skip"
   name: Farum Azula
   pb: 488
-  start: 11144
   stats: {}
 - bpt: 237
   build:
@@ -431,7 +394,6 @@ route:
     \ en marchant, d\xE8s qu'il jump CR2 combo WA (stun), frontstab, WA"
   name: MALIKETH
   pb: 263
-  start: 11632
   stats:
     DEX: 51
     FOI: 12
@@ -442,7 +404,6 @@ route:
   description: Go Gideon, |Graisse glaciale| dans l'ascenseur
   name: Leyndell
   pb: 206
-  start: 11895
   stats: {}
 - bpt: 42
   build:
@@ -454,7 +415,6 @@ route:
     \ et le toucher avec le combo, backstab, combo WA"
   name: GIDEON
   pb: 740
-  start: 12101
   stats:
     DEX: 51
     FOI: 12
@@ -465,7 +425,6 @@ route:
   description: Levelup |15 Vigueur 44 Force|
   name: Leyndell
   pb: 439
-  start: 12841
   stats: {}
 - bpt: 189
   build:
@@ -478,7 +437,6 @@ route:
     P2 : Combo WA (stun), frontstab, combo WA'
   name: GODFREY / HOARAH
   pb: 3354
-  start: 13280
   stats:
     DEX: 51
     FOI: 12
@@ -499,7 +457,6 @@ route:
     \ le temps de la save, GG WP"
   name: RADABEAST
   pb: 2423
-  start: 16634
   stats:
     DEX: 51
     FOI: 12
