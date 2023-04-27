@@ -32,7 +32,8 @@ def get_timer_display(progress, color='normal', sign=False):
 
 
 class Split(urwid.WidgetWrap):
-    def __init__(self, name, description, stats, start=0, bpt=0, pb=0, color=None, build=None):
+    def __init__(self, name, color, build, description, stats, gold=None, pb=None, pb_start=None, progress=None, progress_start=None):
+        # Route meta data
         self.name = name
         self.name_widget = urwid.Text(self.name, align='center')
         self.color = color
@@ -51,16 +52,18 @@ class Split(urwid.WidgetWrap):
         self.description_widget = urwid.Text(text)
         self.stats = stats
         self.stats_widget = urwid.Text('\n'.join(f'{key} {value}' for key, value in self.stats.items()), align='right')
-        self.start = start
-        self.bpt = bpt
+
+        # PB
         self.pb = pb
-        self.new_bpt = bpt
-        self.new_pb = pb
-        self.progress = 0
-        self.progress_start = start
+        self.gold = gold
+        self.pb_start = pb_start or (None if self.pb is None else 0)
+
+        # Run
+        self.progress = progress
+        self.progress_start = progress_start or (None if self.progress is None else 0)
         self.time_widget = urwid.Text('', align='right')
         self.current_widget = urwid.Text('', align='right')
-        self.reset()
+        self.update(current=False)
 
         self.view = urwid.Columns(
             [
@@ -78,34 +81,44 @@ class Split(urwid.WidgetWrap):
 
         super().__init__(self.view)
 
-    def reset(self):
-        self.time_widget.set_text(get_timer_display((self.start + self.pb) if self.pb else None))
-        self.current_widget.set_text([get_timer_display(self.bpt, color='gold')])
+    @property
+    def time(self):
+        if self.progress is None or self.progress_start is None:
+            return None
 
-    def update(self, display_all=False, color=None):
-        if not color:
-            if self.progress >= (self.start + self.pb):
+        return self.progress - self.progress_start
+
+    def reset(self):
+        if self.time is not None and (self.gold is None or self.time < self.gold):
+            self.gold = self.time
+
+        self.progress = self.progress_start = None
+
+    def update(self, current=True):
+        if self.time is not None:
+            if not current and self.gold is not None and self.time < self.gold:
+                color = 'gold'
+            elif self.pb and self.progress > (self.pb_start + self.pb):
                 color = 'red'
             else:
                 color = 'green'
 
-        text = [get_timer_display((self.start + self.pb) if self.pb else None)]
-        if display_all or self.progress - self.progress_start > self.bpt or self.progress >= (self.start + self.pb):
+        # PB time
+        text = [get_timer_display((self.pb_start + self.pb) if self.pb is not None else None)]
+        if self.progress is not None and (not current or self.time > (self.gold or 0) or self.pb is None or self.progress >= (self.pb_start + self.pb)):
             text.append('\n',)
-            text.append(get_timer_display(self.progress - (self.start + self.pb), color, sign=True))
+            text.append(get_timer_display(self.progress - (0 if self.pb is None else (self.pb_start + self.pb)), color, sign=True))
 
         self.time_widget.set_text(text)
 
-        self.current_widget.set_text([get_timer_display(self.bpt, color='gold'), '\n', get_timer_display(self.progress - self.progress_start, color)])
+        text = [get_timer_display(self.gold, color='gold')]
+        if self.progress is not None:
+            text.append('\n')
+            text.append(get_timer_display(self.time, color))
+        self.current_widget.set_text(text)
 
     def stop(self):
-        color = None
-        self.new_pb = self.progress - self.progress_start
-        if not self.bpt or self.new_pb < self.bpt:
-            self.new_bpt = self.new_pb
-            color = 'gold'
-
-        self.update(display_all=True, color=color)
+        self.update(current=False)
 
 
 class MainWindow(urwid.WidgetWrap):
@@ -130,7 +143,7 @@ class MainWindow(urwid.WidgetWrap):
         ('boss',            'light red',    'black'),
         ('build',           'dark magenta', 'black'),
 
-        ('normal',          'white',        'black'),
+        ('normal',          'light gray',   'black'),
         ('green',           'light green',  'black'),
         ('red',             'light red',    'black'),
         ('gold',            'yellow',       'black'),
@@ -174,7 +187,7 @@ class MainWindow(urwid.WidgetWrap):
             urwid.Columns([
                 ('weight', 2, urwid.Text(self.footer_text)),
                 ('weight', 2, self.message_widget),
-                ('weight', 1, urwid.Text(controller.config_path, align='right')),
+                ('weight', 1, urwid.Text(f'{controller.run_path} [{controller.route_path}]', align='right')),
             ]),
             'footer'
         )
@@ -197,23 +210,25 @@ class MainWindow(urwid.WidgetWrap):
         if enabled:
             self.focus_map['line'] = 'focus line'
         else:
-            self.focus_map.pop('line')
+            self.focus_map.pop('line', None)
 
         for split in self.splits:
             split._invalidate()
 
 
 class Spliter:
-    DEFAULT_CONFIG_FILE = 'route.yml'
-
-    def __init__(self, config_path):
-        self.config_path = config_path or self.DEFAULT_CONFIG_FILE
+    def __init__(self, route_path, run_path):
+        self.route_path = route_path
+        self.run_path = run_path
         self.view = MainWindow(self)
         self.current_split_idx = -1
         self.splits = []
         self.counter = 0
         self.progress = 0
         self.paused = True
+
+        self.run_route = {}
+        self.route = {}
 
         self.loop = urwid.MainLoop(self.view, self.view.palette, unhandled_input=self.unhandled_input)
 
@@ -233,20 +248,60 @@ class Spliter:
 
     def main(self):
         try:
-            with open(self.config_path, 'r', encoding='utf-8') as fp:
-                route = yaml.safe_load(fp)
+            with open(self.route_path, 'r', encoding='utf-8') as fp:
+                self.route = yaml.safe_load(fp)['route']
         except OSError as e:
-            print(f'Unable to open {self.config_path}: {e.strerror}', file=sys.stderr)
+            print(f'Unable to open {self.route_path}: {e.strerror}', file=sys.stderr)
             return 1
 
-        start = 0
-        for s in route['route']:
-            bpt = s.get('bpt', 0)
-            pb = s.get('pb', 0)
-            split = Split(s['name'], s['description'], s.get('stats', {}), start, bpt, pb, s.get('color'), s.get('build'))
+        try:
+            with open(self.run_path, 'r', encoding='utf-8') as fp:
+                self.run_route = yaml.safe_load(fp)['route']
+
+                for split in self.run_route:
+                    if 'time' not in split:
+                        split['time'] = split['pb']
+                        split.pop('pb')
+        except OSError:
+            # Probably a new run
+            self.run_route = [
+                {
+                    'name': route['name'],
+                    'color': route.get('color'),
+                    'build': route.get('build'),
+                    'description': route['description'],
+                    'stats': route.get('stats', {}),
+                    'gold': route.get('gold', route.get('bpt', None)),
+                    'pb': route.get('time', route.get('pb')),
+                }
+                for route in self.route
+            ]
+
+        pb_start = None
+        progress_start = None
+        for i, s in enumerate(self.run_route):
+            split = Split(
+                s['name'],
+                s.get('color'),
+                s.get('build'),
+                s['description'],
+                s.get('stats', {}),
+                s.get('gold', s.get('bpt', self.route[i].get('bpt', self.route[i].get('gold')))),
+                s.get('pb', self.route[i].get('pb')),
+                pb_start,
+                None if s.get('time') is None else ((progress_start or 0) + s.get('time')),
+                None if s.get('time') is None else progress_start or (0 if s.get('time') else progress_start)
+            )
             self.splits.append(split)
             self.view.add_split(split)
-            start += pb
+            if split.pb is not None:
+                pb_start = (pb_start or 0) + split.pb
+
+            if split.time is not None:
+                progress_start = (progress_start or 0) + split.time
+
+        if progress_start is not None:
+            self.progress = progress_start
 
         self.view.set_enabled(False)
         self.update()
@@ -277,10 +332,10 @@ class Spliter:
             color = 'header'
         elif self.paused:
             color = 'header paused'
-        elif self.previous_split and self.previous_split.progress >= self.previous_split.start + self.previous_split.pb:
+        elif self.previous_split and self.previous_split.pb is not None and self.previous_split.progress > self.previous_split.pb_start + self.previous_split.pb:
             color = 'header red'
         elif self.current_split:
-            if self.current_split.progress >= self.current_split.start + self.current_split.pb:
+            if self.current_split.pb is not None and self.current_split.progress > self.current_split.pb_start + self.current_split.pb:
                 color = 'header red'
             else:
                 color = 'header green'
@@ -293,9 +348,9 @@ class Spliter:
         bpt = 0
         pb = 0
         for split in self.splits:
-            sob += split.new_bpt or max(0, split.progress - split.progress_start)
-            bpt += max(split.new_bpt, split.progress - split.progress_start)
-            pb += split.pb
+            sob += min(split.time or split.gold or 0, split.gold or 0)
+            bpt += max(split.time or split.gold or 0, split.gold or 0)
+            pb += split.pb or 0
 
         text = []
         text.append('Sum of Best:        ')
@@ -323,11 +378,24 @@ class Spliter:
 
         return True
 
+    def reset(self):
+        self.paused = True
+        for split in self.splits:
+            split.reset()
+            split.update(current=False)
+        self.stop()
+        self.progress = 0
+        self.update()
+
     def start(self):
+        self.reset()
+
         self.view.set_enabled(True)
         self.paused = False
         self.progress = 0
         self.current_split_idx = 0
+        self.current_split.progress = 0
+        self.current_split.progress_start = 0
         self.update()
 
     def stop(self):
@@ -361,53 +429,56 @@ class Spliter:
         if k == ' ':
             self.pause()
 
-        if k == 'r' and self.current_split:
-            self.paused = True
-            for split in self.splits:
-                split.reset()
-            self.stop()
-            self.progress = 0
-            self.update()
+        if k == 'r':
+            self.reset()
 
-        if k in ('s', 'g'):
-            # s = save of pb
-            # g = save only golds
-
+        if k in ('p', 's'):
+            path = self.run_path if k == 's' else self.route_path
             try:
-                with open(self.config_path, 'w', encoding='utf-8') as fp:
+                with open(path, 'w', encoding='utf-8') as fp:
                     route = []
                     for split in self.splits:
-                        split.bpt = split.new_bpt
-                        if k == 's':
-                            split.pb = split.new_pb
-
                         route.append({
                             'name': split.name,
                             'description': split.description,
                             'pb': split.pb,
-                            'bpt': split.bpt,
+                            'gold': split.gold,
+                            'time': split.time,
                             'color': split.color,
                             'stats': split.stats,
                             'build': split.build,
                         })
                     yaml.dump({'route': route}, fp)
             except OSError as e:
-                self.view.error(f'Unable to save to {self.config_path}: {e.strerror}')
+                self.view.error(f'Unable to save to {path}: {e.strerror}')
             else:
-                self.view.message('Route saved' if k == 's' else 'Golds saved')
+                self.view.message(f'Run saved in {path}')
+
+        if k == 'g':
+            try:
+                with open(self.route_path, 'w', encoding='utf-8') as fp:
+                    for i, s in enumerate(self.route):
+                        split = self.splits[i]
+                        if split.time is None:
+                            continue
+
+                        gold = s.get('gold', s.get('bpt'))
+                        if gold is None or split.time < gold:
+                            s['gold'] = split.time
+
+                    yaml.dump({'route': self.route}, fp)
+            except OSError as e:
+                self.view.error(f'Unable to save to {self.route_path}: {e.strerror}')
+            else:
+                self.view.message(f'Golds saved in {self.route_path}')
 
         if k in ('q', 'Q'):
             raise urwid.ExitMainLoop()
 
 
 if __name__ == '__main__':
-    config_path = None
+    if len(sys.argv) < 3 or sys.argv[1] in ('-h', '--help'):
+        print(f'{sys.argv[0]} [route] [run]')
+        sys.exit(0)
 
-    if len(sys.argv) > 1:
-        if sys.argv[1] in ('-h', '--help'):
-            print(f'{sys.argv[0]} [config_path]')
-            sys.exit(0)
-
-        config_path = sys.argv[1]
-
-    sys.exit(Spliter(config_path).main())
+    sys.exit(Spliter(sys.argv[1], sys.argv[2]).main())
