@@ -1,5 +1,5 @@
 route:
-- bpt: 0
+- bpt: 1
   build: []
   color: null
   description: "Samoura\xEF + Rune d'Entre-terre"
@@ -13,7 +13,7 @@ route:
   name: Chapelle de l'anticipation
   pb: 46
   stats: {}
-- bpt: 232
+- bpt: 222
   build: []
   color: null
   description: "Utiliser la |Rune d'Entre-terre| pendant l'ascenseur avant de sortir\n\
@@ -65,7 +65,7 @@ route:
   name: "N\xE9crolimbe"
   pb: 590
   stats: {}
-- bpt: 351
+- bpt: 347
   build: []
   color: null
   description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
@@ -168,7 +168,7 @@ route:
     DEX: 23
     FOI: 12
     FOR: 15
-- bpt: 58
+- bpt: 54
   build: []
   color: null
   description: "Utiliser le |Souvenir du Fl\xE9au des astres| sur le cheval et aller\
@@ -176,7 +176,7 @@ route:
   name: "N\xE9crolimbe"
   pb: 87
   stats: {}
-- bpt: 42
+- bpt: 35
   build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon'
@@ -215,14 +215,14 @@ route:
     DEX: 23
     FOI: 12
     FOR: 15
-- bpt: 41
+- bpt: 20
   build: []
   color: null
   description: Levelup |42 Dex|
   name: Plateau Altus
   pb: 75
   stats: {}
-- bpt: 437
+- bpt: 375
   build: []
   color: null
   description: "Pendant l'ascenseur utiliser le |Souvenir du greff\xE9|\nPrendre le\
@@ -248,7 +248,7 @@ route:
     DEX: 42
     FOI: 12
     FOR: 15
-- bpt: 107
+- bpt: 101
   build: []
   color: null
   description: Aller sur Morgott directement
@@ -274,7 +274,7 @@ route:
     DEX: 42
     FOI: 12
     FOR: 15
-- bpt: 329
+- bpt: 281
   build: []
   color: null
   description: "Refaire le Leyndell Skip pour descendre\nApr\xE8s la grande porte,\
@@ -302,7 +302,7 @@ route:
   name: "Cimes des G\xE9ants"
   pb: 205
   stats: {}
-- bpt: 22
+- bpt: 18
   build: []
   color: null
   description: "Upgrade le |Croc du limier en +8|\n|TP Antiques ruines de la vall\xE9\
@@ -310,14 +310,14 @@ route:
   name: Liurnia
   pb: 25
   stats: {}
-- bpt: 387
+- bpt: 341
   build: []
   color: null
   description: "Aller jusqu'au G\xE9ant de Feu"
   name: "Cimes des G\xE9ants"
   pb: 387
   stats: {}
-- bpt: 663
+- bpt: 512
   build:
   - 'ARME : Croc du limier +8'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -375,7 +375,7 @@ route:
     DEX: 51
     FOI: 12
     FOR: 31
-- bpt: 377
+- bpt: 297
   build: []
   color: null
   description: "Juste apr\xE8s le fight, petit skip en sautant sur les rebords en\
@@ -384,7 +384,7 @@ route:
   name: Farum Azula
   pb: 488
   stats: {}
-- bpt: 237
+- bpt: 91
   build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -398,14 +398,14 @@ route:
     DEX: 51
     FOI: 12
     FOR: 31
-- bpt: 145
+- bpt: 94
   build: []
   color: null
   description: Go Gideon, |Graisse glaciale| dans l'ascenseur
   name: Leyndell
   pb: 206
   stats: {}
-- bpt: 42
+- bpt: 57
   build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -419,7 +419,7 @@ route:
     DEX: 51
     FOI: 12
     FOR: 31
-- bpt: 238
+- bpt: 69
   build: []
   color: null
   description: Levelup |15 Vigueur 44 Force|
