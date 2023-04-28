@@ -33,7 +33,7 @@ route:
     \ direction SE |Graine dor\xE9e| puis faire le skip de Sellia sur la branche pour\
     \ remonter\nPrendre le site de gr\xE2ce dans l'\xE9glise puis aller au Bastion\
     \ avec Melina"
-  gold: 203
+  gold: 202
   name: Caelid
   pb: 255
   stats: {}
@@ -41,7 +41,7 @@ route:
 - build: []
   color: null
   description: '|TP Galerie cristalline de Sellia|'
-  gold: 8
+  gold: 7
   name: Bastion de la Table ronde
   pb: 8
   stats: {}
@@ -77,7 +77,7 @@ route:
   description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
     \ N pour le portail vers l'acad\xE9mie\nJump du pont et portail vers Iji direction\
     \ NE\nPrendre le site devant Iji puis direction E aller \xE0 l'ascenseur de Dectus"
-  gold: 347
+  gold: 345
   name: Liurnia
   pb: 479
   stats: {}
@@ -94,7 +94,7 @@ route:
   color: boss
   description: "Faire tomber le boss dans le vide\nApr\xE8s le boss, prendre le site\
     \ devant Leyndell et |TP Sud du lac d'Agheel|"
-  gold: 103
+  gold: 58
   name: SENTINELLE DRACONIQUE
   pb: 385
   stats: {}
@@ -115,7 +115,7 @@ route:
   color: boss
   description: "WAR2 R1 WAR2, stun, WAR2 R1 WAR2\n\nApr\xE8s le fight, |TP Route du\
     \ manoir|"
-  gold: 80
+  gold: 70
   name: DARRIWIL
   pb: 148
   stats:
@@ -139,7 +139,7 @@ route:
   color: boss
   description: "JR2, WA, combo WA (stun), combo WA, WA\n\nApr\xE8s le fight, |TP Commencement|\
     \ pour r\xE9cup\xE9rer l'arme du boss plus vite"
-  gold: 99
+  gold: 68
   name: SENTINELLE DE L'ARBRE
   pb: 99
   stats:
@@ -158,7 +158,7 @@ route:
 - build: []
   color: null
   description: Skip de l'effigie direction SE pour aller sur Radahn
-  gold: 27
+  gold: 26
   name: Caelid
   pb: 34
   stats: {}
@@ -200,7 +200,7 @@ route:
   - 'BUFFS : Aucun'
   color: boss
   description: CR2, combo WA (stun), 3 R1, WA
-  gold: 35
+  gold: 32
   name: MARGIT
   pb: 88
   stats:
@@ -307,7 +307,7 @@ route:
     Utiliser l'|Arc runique| et |Souvenir du roi R\xE9prouv\xE9| dans l'ascenseur\n\
     Courir jusqu'\xE0 l'ascenseur pour descendre aux Terres interdites\nPendant l'ascenseur\
     \ utiliser |Rune dor\xE9e (9)|, |Rune dor\xE9e (11)|"
-  gold: 281
+  gold: 268
   name: Leyndell
   pb: 353
   stats: {}
@@ -356,7 +356,7 @@ route:
   description: "JR2, combo WA, WA, CR2 (stun)\nCombo WA, R1, CR2 (transi)\nPopo de\
     \ mana, |Kukri|, CR2, WA sur la main et le retour sur la t\xEAte (stun), combo\
     \ WA dans l'oeil"
-  gold: 512
+  gold: 405
   name: "G\xC9ANT DE FEU"
   pb: 833
   stats:
@@ -369,7 +369,7 @@ route:
   description: "Utiliser le |Souvenir du G\xE9ant de feu| sur le cheval\nPrendre le\
     \ site de gr\xE2ce de la forge et levelup |31 Force 51 Dex|\nGo Farum Azula avec\
     \ Melina"
-  gold: 103
+  gold: 84
   name: "Cimes des G\xE9ants"
   pb: 151
   stats: {}
@@ -443,7 +443,7 @@ route:
   name: Leyndell
   pb: 206
   stats: {}
-  time: 154
+  time: 94
 - build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -462,11 +462,11 @@ route:
 - build: []
   color: null
   description: Levelup |15 Vigueur 44 Force|
-  gold: 20
+  gold: 66
   name: Leyndell
   pb: 439
   stats: {}
-  time: 20
+  time: 80
 - build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -504,4 +504,4 @@ route:
     FOI: 12
     FOR: 44
     VIG: 15
-  time: 2519
+  time: 2511
