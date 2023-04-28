@@ -348,8 +348,13 @@ class Spliter:
         bpt = 0
         pb = 0
         for split in self.splits:
-            sob += min(split.time or split.gold or 0, split.gold or 0)
-            bpt += max(split.time or split.gold or 0, split.gold or 0)
+            sob += min(split.time if split.time is not None else (split.gold or 0), split.gold or 0)
+            if split == self.current_split:
+                bpt += max(split.time if split.time is not None else (split.gold or 0), split.gold or 0)
+            elif split.time is not None:
+                bpt += split.time
+            else:
+                bpt += split.gold or 0
             pb += split.pb or 0
 
         text = []
