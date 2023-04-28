@@ -62,19 +62,23 @@ class Split(urwid.WidgetWrap):
         self.progress = progress
         self.progress_start = progress_start or (None if self.progress is None else 0)
         self.time_widget = urwid.Text('', align='right')
-        self.current_widget = urwid.Text('', align='right')
+        self.duration_widget = urwid.Text('', align='right')
+        self.gold_widget = urwid.Text('', align='right')
+        self.diff_widget = urwid.Text('', align='right')
         self.update(current=False)
 
         self.view = urwid.Columns(
             [
-                ('weight', 4, self.name_widget),
-                ('weight', 8, self.description_widget),
-                ('weight', 2, self.stats_widget),
+                ('weight', 8, self.name_widget),
+                ('weight', 16, self.description_widget),
+                ('weight', 4, self.stats_widget),
                 ('weight', 2, self.time_widget),
-                ('weight', 1, self.current_widget),
+                ('weight', 2, self.duration_widget),
+                ('weight', 2, self.gold_widget),
+                ('weight', 2, self.diff_widget),
             ],
         )
-        self.view = urwid.Padding(self.view, ('fixed left', 1), ('fixed right', 5))
+        self.view = urwid.Padding(self.view, ('fixed left', 1), ('fixed right', 1))
         self.view = urwid.AttrWrap(self.view, 'body')
         self.view = urwid.LineBox(self.view)
         self.view = urwid.AttrWrap(self.view, 'line')
@@ -98,7 +102,7 @@ class Split(urwid.WidgetWrap):
         if self.time is not None:
             if not current and self.gold is not None and self.time < self.gold:
                 color = 'gold'
-            elif self.pb and self.progress > (self.pb_start + self.pb):
+            elif self.pb is not None and self.progress > (self.pb_start + self.pb):
                 color = 'red'
             else:
                 color = 'green'
@@ -111,11 +115,35 @@ class Split(urwid.WidgetWrap):
 
         self.time_widget.set_text(text)
 
-        text = [get_timer_display(self.gold, color='gold')]
+        text = [get_timer_display(self.pb)]
         if self.progress is not None:
             text.append('\n')
+            if self.pb is None:
+                color = 'normal'
+            elif self.time < self.gold and not current:
+                color = 'gold'
+            elif self.time > self.pb:
+                color = 'red'
+            else:
+                color = 'green'
             text.append(get_timer_display(self.time, color))
-        self.current_widget.set_text(text)
+        self.duration_widget.set_text(text)
+
+        self.gold_widget.set_text(get_timer_display(self.gold, color='gold'))
+
+        text = []
+        if self.gold is not None:
+            if self.pb is not None:
+                if self.pb == self.gold:
+                    text.append(('gold', '0'))
+                else:
+                    text.append(get_timer_display(self.pb - self.gold, sign=True, color='gold' if self.pb <= self.gold else 'diff'))
+            if self.time is not None:
+                text.append('\n')
+                text.append(get_timer_display(self.time - self.gold, sign=True, color='gold' if self.time < self.gold and not current else 'diff'))
+
+        self.diff_widget.set_text(text)
+
 
     def stop(self):
         self.update(current=False)
@@ -143,6 +171,7 @@ class MainWindow(urwid.WidgetWrap):
         ('boss',            'light red',    'black'),
         ('build',           'dark magenta', 'black'),
 
+        ('diff',            'dark magenta', 'black'),
         ('normal',          'light gray',   'black'),
         ('green',           'light green',  'black'),
         ('red',             'light red',    'black'),
