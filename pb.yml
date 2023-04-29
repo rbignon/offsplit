@@ -2,19 +2,19 @@ route:
 - build: []
   color: null
   description: "Samoura\xEF + Rune d'Entre-terre"
+  duration: 0.30000000000000004
   gold: 0
   name: "Cr\xE9ation du perso"
-  pb: 10
+  pb: 0
   stats: {}
-  time: 0
 - build: []
   color: null
   description: "Sauter dans le vide pr\xE8s du boss tuto"
+  duration: 41.00000000000032
   gold: 38
   name: Chapelle de l'anticipation
-  pb: 46
+  pb: 45
   stats: {}
-  time: 45
 - build: []
   color: null
   description: "Utiliser la |Rune d'Entre-terre| pendant l'ascenseur avant de sortir\n\
@@ -22,41 +22,41 @@ route:
     \ au marchand\nDirection N+1, r\xE9cup\xE9rer |3 R\xE9sines de racine| sur le\
     \ passage puis prendre le site des portes et r\xE9cup\xE9rer Torrent\n|TP Commencement|\
     \ puis direction E, prendre le coffre pi\xE9g\xE9 dans les ruines"
-  gold: 222
+  duration: 219.5999999999905
+  gold: 219.5999999999905
   name: "N\xE9crolimbe"
-  pb: 247
+  pb: 233
   stats: {}
-  time: 233
 - build: []
   color: null
   description: "Prendre le site pr\xE8s de la sortie de la grotte\nSortir de la grotte,\
     \ direction SE |Graine dor\xE9e| puis faire le skip de Sellia sur la branche pour\
     \ remonter\nPrendre le site de gr\xE2ce dans l'\xE9glise puis aller au Bastion\
     \ avec Melina"
-  gold: 202
+  duration: 196.30000000004463
+  gold: 196.30000000004463
   name: Caelid
-  pb: 255
+  pb: 203
   stats: {}
-  time: 203
 - build: []
   color: null
   description: '|TP Galerie cristalline de Sellia|'
-  gold: 7
+  duration: 7.700000000001751
+  gold: 7.0
   name: Bastion de la Table ronde
   pb: 8
   stats: {}
-  time: 8
 - build: []
   color: null
   description: "Sortir de la grotte, direction SW aller chercher |Pierre de forge\
     \ sombre (5)| puis |TP \xC9glise de la putr\xE9faction|\nDirection N, prendre\
     \ le courant d'air pour monter et aller chercher |M\xE9daillon de Dectus (droite)|\
     \ dans le Fort Faroth\nPrendre le |Sceau meurtri de Radagon| et |TP Commencement|"
+  duration: 269.5000000000612
   gold: 209
   name: Caelid
-  pb: 209
+  pb: 228
   stats: {}
-  time: 228
 - build: []
   color: null
   description: "Direction E+1 prendre le site de gr\xE2ce pour Darriwil plus tard\n\
@@ -67,47 +67,47 @@ route:
     \ dessus et monter tout en haut pour |M\xE9daillon de Dectus (gauche)|\n|TP Portes|,\
     \ direction cabane W NW, |Graine dor\xE9e| sur le chemin\nPrendre le site du cabanon\
     \ puis direction NW, skip Margit & Godrick en passant \xE0 droite vers Liurnia"
-  gold: 439
+  duration: 403.69999999996196
+  gold: 403.69999999996196
   name: "N\xE9crolimbe"
-  pb: 590
+  pb: 560
   stats: {}
-  time: 560
 - build: []
   color: null
   description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
     \ N pour le portail vers l'acad\xE9mie\nJump du pont et portail vers Iji direction\
     \ NE\nPrendre le site devant Iji puis direction E aller \xE0 l'ascenseur de Dectus"
-  gold: 345
+  duration: 349.1999999996824
+  gold: 345.0
   name: Liurnia
-  pb: 479
+  pb: 349
   stats: {}
-  time: 349
 - build: []
   color: null
   description: "Direction E-1 faire tout le trajet jusqu'\xE0 la Sentinelle Draconique"
+  duration: 246.3999999997759
   gold: 245
   name: Plateau Altus
-  pb: 286
+  pb: 245
   stats: {}
-  time: 245
 - build: []
   color: boss
   description: "Faire tomber le boss dans le vide\nApr\xE8s le boss, prendre le site\
     \ devant Leyndell et |TP Sud du lac d'Agheel|"
-  gold: 58
+  duration: 557.2999999994931
+  gold: 58.0
   name: SENTINELLE DRACONIQUE
-  pb: 385
+  pb: 108
   stats: {}
-  time: 108
 - build: []
   color: null
   description: "Levelup |15 Force|, |23 Dex| et |12 Foi|\nAjouter 2 doses de fiole\
     \ et allouer 5 popo de mana\nDirection S pour la ge\xF4le de Darriwil"
+  duration: 57.399999999947795
   gold: 30
   name: "N\xE9crolimbe"
-  pb: 30
+  pb: 63
   stats: {}
-  time: 63
 - build:
   - 'ARME : Uchigatana'
   - 'TALISMANS : Sceau meurtri de Radagon'
@@ -115,23 +115,23 @@ route:
   color: boss
   description: "WAR2 R1 WAR2, stun, WAR2 R1 WAR2\n\nApr\xE8s le fight, |TP Route du\
     \ manoir|"
-  gold: 70
+  duration: 92.49999999991587
+  gold: 70.0
   name: DARRIWIL
-  pb: 148
+  pb: 89
   stats:
     DEX: 23
     FOI: 12
     FOR: 15
-  time: 89
 - build: []
   color: null
   description: "Parler \xE0 Iji et acheter |Pierre de forge sombre (1-2-3-4)|\nUpgrade\
     \ le |Croc du limier en +5| puis |TP Commencement|"
+  duration: 38.6999999999648
   gold: 23
   name: Liurnia
-  pb: 23
+  pb: 41
   stats: {}
-  time: 41
 - build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon'
@@ -139,30 +139,30 @@ route:
   color: boss
   description: "JR2, WA, combo WA (stun), combo WA, WA\n\nApr\xE8s le fight, |TP Commencement|\
     \ pour r\xE9cup\xE9rer l'arme du boss plus vite"
-  gold: 68
+  duration: 326.29999999970323
+  gold: 68.0
   name: SENTINELLE DE L'ARBRE
   pb: 99
   stats:
     DEX: 23
     FOI: 12
     FOR: 15
-  time: 99
 - build: []
   color: null
   description: "|TP \xC9glise de la putr\xE9faction|"
+  duration: 4.099999999996271
   gold: 3
   name: "N\xE9crolimbe"
-  pb: 5
+  pb: 3
   stats: {}
-  time: 3
 - build: []
   color: null
   description: Skip de l'effigie direction SE pour aller sur Radahn
-  gold: 26
+  duration: 126.19999999988522
+  gold: 26.0
   name: Caelid
-  pb: 34
+  pb: 27
   stats: {}
-  time: 27
 - build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon'
@@ -175,50 +175,50 @@ route:
     \ WA, 2 R1, combo WA, combo WA\n\nApr\xE8s le fight, quitout pr\xE8s de l'emplacement\
     \ d'Alexander\nTuer Alexander pour |Fragment de guerrier-jarre| et |TP Cabane\
     \ de Valorage|"
+  duration: 570.1999999994814
   gold: 202
   name: 'RADAHN
 
     Rune majeure 1'
-  pb: 2576
+  pb: 345
   stats:
     DEX: 23
     FOI: 12
     FOR: 15
-  time: 345
 - build: []
   color: null
   description: "Utiliser le |Souvenir du Fl\xE9au des astres| sur le cheval et aller\
     \ sur Margit"
+  duration: 53.39999999995143
   gold: 49
   name: "N\xE9crolimbe"
-  pb: 87
+  pb: 49
   stats: {}
-  time: 49
 - build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon'
   - 'BUFFS : Aucun'
   color: boss
   description: CR2, combo WA (stun), 3 R1, WA
-  gold: 32
+  duration: 64.19999999994161
+  gold: 32.0
   name: MARGIT
-  pb: 88
+  pb: 85
   stats:
     DEX: 23
     FOI: 12
     FOR: 15
-  time: 85
 - build: []
   color: null
   description: "Parler au PNJ apr\xE8s Margit et lui demander de passer par la porte\
     \ principale\nRevenir se coller \xE0 la grille et quitout pour l'ouvrir\nTraverser\
     \ le ch\xE2teau pour aller sur Godrick, ramasser |5 Khukuri| juste apr\xE8s les\
     \ secondes balistes"
+  duration: 279.3999999997459
   gold: 188
   name: "N\xE9crolimbe"
-  pb: 276
+  pb: 262
   stats: {}
-  time: 262
 - build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -226,24 +226,24 @@ route:
   color: boss
   description: "CR2 R1 R1, combo WA (stun), frontstab, combo WA R1\n\nApr\xE8s le\
     \ fight, |TP Rempart de la capitale|"
+  duration: 122.99999999988813
   gold: 71
   name: 'GODRICK
 
     Rune majeure 2'
-  pb: 71
+  pb: 314
   stats:
     DEX: 23
     FOI: 12
     FOR: 15
-  time: 314
 - build: []
   color: null
   description: Levelup |42 Dex|
+  duration: 54.69999999995025
   gold: 20
   name: Plateau Altus
-  pb: 75
+  pb: 35
   stats: {}
-  time: 35
 - build: []
   color: null
   description: "Pendant l'ascenseur utiliser le |Souvenir du greff\xE9|\nPrendre le\
@@ -251,11 +251,11 @@ route:
     \ ramasser |Arc noir| et |Rune dor\xE9e (9)| sur le passage vers le dragon mort\n\
     Prendre un |Arc runique| apr\xE8s la s\xE9rie de jumps, monter \xE0 l'\xE9chelle,\
     \ ramasser |Rune dor\xE9e (11)| et go Godfrey"
+  duration: 399.4000000013848
   gold: 375
   name: Leyndell
-  pb: 437
+  pb: 439
   stats: {}
-  time: 439
 - build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -264,22 +264,22 @@ route:
   description: "Serment dor\xE9 \xE0 l'ext\xE9rieur de l'ar\xE8ne, quand le boss appara\xEE\
     t |Khukuri| + popo de mana\n\nCombo WA quand c'est possible sinon juste WA ou\
     \ JR1 quand il slide sur le c\xF4t\xE9"
-  gold: 426
+  duration: 124.90000000045438
+  gold: 124.90000000045438
   name: GODFREY
-  pb: 925
+  pb: 1407
   stats:
     DEX: 42
     FOI: 12
     FOR: 15
-  time: 1407
 - build: []
   color: null
   description: Aller sur Morgott directement
-  gold: 101
+  duration: 92.10000000033506
+  gold: 92.10000000033506
   name: Leyndell
-  pb: 172
+  pb: 106
   stats: {}
-  time: 106
 - build:
   - 'ARME : Croc du limier +5'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -292,14 +292,14 @@ route:
     s le fight, aller jusqu'aux ronces, revenir prendre le site et se reposer pour\
     \ le |Medaillon de Rold|\nLevelup |25 Force 46 Dex| et |TP Rempart oriental de\
     \ la capitale|"
+  duration: 1409.7000000051285
   gold: 457
   name: MORGOTT
-  pb: 457
+  pb: 748
   stats:
     DEX: 42
     FOI: 12
     FOR: 15
-  time: 748
 - build: []
   color: null
   description: "Refaire le Leyndell Skip pour descendre\nApr\xE8s la grande porte,\
@@ -307,47 +307,47 @@ route:
     Utiliser l'|Arc runique| et |Souvenir du roi R\xE9prouv\xE9| dans l'ascenseur\n\
     Courir jusqu'\xE0 l'ascenseur pour descendre aux Terres interdites\nPendant l'ascenseur\
     \ utiliser |Rune dor\xE9e (9)|, |Rune dor\xE9e (11)|"
-  gold: 268
+  duration: 290.3000000010561
+  gold: 268.0
   name: Leyndell
-  pb: 353
+  pb: 412
   stats: {}
-  time: 412
 - build: []
   color: null
   description: "Ramasser |Pierre de forge sombre (7)| dans un cr\xE2ne g\xE9ant\n\
     Ramasser |Graisse glaciale| \xE0 gauche avant l'ascenseur de Rold\nPrendre l'ascenseur\
     \ de Rold pour aller aux Cimes des G\xE9ants"
+  duration: 125.50000000045657
   gold: 114
   name: Terres interdites
-  pb: 114
+  pb: 130
   stats: {}
-  time: 130
 - build: []
   color: null
   description: "Tuer le bousier apr\xE8s la muraille pour |Pierre de forge sombre\
     \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s et |TP Route du manoir|"
+  duration: 210.30000000076507
   gold: 205
   name: "Cimes des G\xE9ants"
-  pb: 205
+  pb: 224
   stats: {}
-  time: 224
 - build: []
   color: null
   description: "Upgrade le |Croc du limier en +8|\n|TP Antiques ruines de la vall\xE9\
     e|"
+  duration: 30.400000000110595
   gold: 18
   name: Liurnia
-  pb: 25
+  pb: 31
   stats: {}
-  time: 31
 - build: []
   color: null
   description: "Aller jusqu'au G\xE9ant de Feu"
-  gold: 292
+  duration: 279.10000000101536
+  gold: 279.10000000101536
   name: "Cimes des G\xE9ants"
-  pb: 387
+  pb: 292
   stats: {}
-  time: 292
 - build:
   - 'ARME : Croc du limier +8'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -356,44 +356,44 @@ route:
   description: "JR2, combo WA, WA, CR2 (stun)\nCombo WA, R1, CR2 (transi)\nPopo de\
     \ mana, |Kukri|, CR2, WA sur la main et le retour sur la t\xEAte (stun), combo\
     \ WA dans l'oeil"
-  gold: 405
+  duration: 172.00000000062573
+  gold: 172.00000000062573
   name: "G\xC9ANT DE FEU"
-  pb: 833
+  pb: 1996
   stats:
     DEX: 46
     FOI: 12
     FOR: 25
-  time: 1996
 - build: []
   color: null
   description: "Utiliser le |Souvenir du G\xE9ant de feu| sur le cheval\nPrendre le\
     \ site de gr\xE2ce de la forge et levelup |31 Force 51 Dex|\nGo Farum Azula avec\
     \ Melina"
-  gold: 84
+  duration: 135.1000000004915
+  gold: 84.0
   name: "Cimes des G\xE9ants"
-  pb: 151
+  pb: 228
   stats: {}
-  time: 228
 - build: []
   color: null
   description: 'Ramasser |Pierre de forge sombre (9)| avant le site du Duo
 
     Se reposer au site et |TP Route du manoir|'
-  gold: 183
+  duration: 170.00000000061846
+  gold: 170.00000000061846
   name: Farum Azula
-  pb: 242
+  pb: 183
   stats: {}
-  time: 183
 - build: []
   color: null
   description: 'Upgrade le |Croc du limier en +9|
 
     |TP Temple du dragon|'
+  duration: 24.900000000090586
   gold: 14
   name: Liurnia
-  pb: 14
+  pb: 27
   stats: {}
-  time: 27
 - build:
   - 'ARME : Arc noir et Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -403,24 +403,24 @@ route:
     ches de Trina sur l'ap\xF4tre\nQuand les deux sont endormis, |Serment dor\xE9\
     |, popo de mana et |Chair exalt\xE9e|\n\nNoble : CR2 R2 combo WA (stun), frontstab,\
     \ combo WA\nAp\xF4tre : CR2 combo WA (stun), backstab, combo WA"
+  duration: 2015.400000007332
   gold: 241
   name: DUO SANCTECHAIR
-  pb: 802
+  pb: 241
   stats:
     DEX: 51
     FOI: 12
     FOR: 31
-  time: 241
 - build: []
   color: null
   description: "Juste apr\xE8s le fight, petit skip en sautant sur les rebords en\
     \ hauteur \xE0 gauche\nJump sur la colonne tomb\xE9e juste apr\xE8s puis Bird\
     \ Skip"
-  gold: 297
+  duration: 284.10000000103355
+  gold: 284.10000000103355
   name: Farum Azula
-  pb: 488
+  pb: 302
   stats: {}
-  time: 302
 - build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -428,22 +428,22 @@ route:
   color: boss
   description: "P1 : Trade CR2, combo WA (stun), frontstab, WA\nP2 : Lock et avancer\
     \ en marchant, d\xE8s qu'il jump CR2 combo WA (stun), frontstab, WA"
-  gold: 91
+  duration: 63.10000000022956
+  gold: 63.10000000022956
   name: MALIKETH
-  pb: 263
+  pb: 93
   stats:
     DEX: 51
     FOI: 12
     FOR: 31
-  time: 93
 - build: []
   color: null
   description: Go Gideon, |Graisse glaciale| dans l'ascenseur
-  gold: 94
+  duration: 87.80000000031941
+  gold: 87.80000000031941
   name: Leyndell
-  pb: 206
+  pb: 94
   stats: {}
-  time: 94
 - build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -451,22 +451,22 @@ route:
   color: boss
   description: "Serment dor\xE9 quand il commence \xE0 parler\nRater le premier WA\
     \ et le toucher avec le combo, backstab, combo WA"
-  gold: 57
+  duration: 55.90000000020336
+  gold: 55.90000000020336
   name: GIDEON
-  pb: 740
+  pb: 70
   stats:
     DEX: 51
     FOI: 12
     FOR: 31
-  time: 70
 - build: []
   color: null
   description: Levelup |15 Vigueur 44 Force|
-  gold: 66
+  duration: 63.300000000230284
+  gold: 63.300000000230284
   name: Leyndell
-  pb: 439
+  pb: 80
   stats: {}
-  time: 80
 - build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -475,15 +475,15 @@ route:
   description: 'P1 : 3 CR2 et 2 R1 (stun), frontstab, combo WA, combo WA
 
     P2 : Combo WA (stun), frontstab, combo WA'
+  duration: 806.1000000029326
   gold: 189
   name: GODFREY / HOARAH
-  pb: 3354
+  pb: 921
   stats:
     DEX: 51
     FOI: 12
     FOR: 44
     VIG: 15
-  time: 921
 - build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -496,12 +496,12 @@ route:
     \ sur la droite, CR2, combo WA pendant qu'il plonge (stun)\nCombo WA, R1, frontstab,\
     \ R1, combo WA\nR1 WA\nQuitout \xE0 la fin, activer les cr\xE9dits, ALT+F4, montrer\
     \ le temps de la save, GG WP"
+  duration: 1221.2000000044427
   gold: 339
   name: RADABEAST
-  pb: 2423
+  pb: 2511
   stats:
     DEX: 51
     FOI: 12
     FOR: 44
     VIG: 15
-  time: 2511
