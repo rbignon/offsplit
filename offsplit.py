@@ -591,9 +591,9 @@ class Spliter:
 
     def save_pb(self):
         """save PB"""
-        self.save(self.route_path)
+        self.save(self.route_path, golds=True)
 
-    def save(self, path):
+    def save(self, path, golds=False):
         try:
             with open(path, 'w', encoding='utf-8') as fp:
                 route = []
@@ -602,7 +602,7 @@ class Spliter:
                         'name': segment.name,
                         'description': segment.description,
                         'pb': segment.pb,
-                        'gold': segment.gold,
+                        'gold': segment.duration if segment.duration < segment.gold else segment.gold,
                         'duration': segment.duration,
                         'color': segment.color,
                         'stats': segment.stats,
