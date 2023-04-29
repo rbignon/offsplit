@@ -443,7 +443,7 @@ route:
   name: Leyndell
   pb: 206
   stats: {}
-  time: 154
+  time: 94
 - build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
@@ -466,7 +466,7 @@ route:
   name: Leyndell
   pb: 439
   stats: {}
-  time: 20
+  time: 80
 - build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
