@@ -116,10 +116,9 @@ class Segment(urwid.WidgetWrap):
                 ('weight', 2, self.time_widget),
                 ('weight', 2, self.duration_widget),
                 ('weight', 2, self.gold_widget),
-                ('weight', 2, self.diff_widget),
+                ('weight', 2, urwid.Padding(self.diff_widget, ('fixed right', 1))),
             ],
         )
-        self.view = urwid.Padding(self.view, ('fixed left', 1), ('fixed right', 1))
         self.view = urwid.AttrWrap(self.view, 'body')
 
         super().__init__(self.view)
@@ -287,10 +286,9 @@ class MainWindow(urwid.WidgetWrap):
                 ('weight', 2, urwid.Text('Time', align='right')),
                 ('weight', 2, urwid.Text('Sgmt', align='right')),
                 ('weight', 2, urwid.Text('Gold', align='right')),
-                ('weight', 2, urwid.Text('Diff\nw/ gold', align='right')),
+                ('weight', 2, urwid.Padding(urwid.Text('Diff', align='right'), ('fixed right', 1))),
             ],
         )
-        self.table_head = urwid.Padding(self.table_head, ('fixed left', 1), ('fixed right', 1))
         header = urwid.AttrWrap(urwid.Pile([self.header, self.table_head, urwid.Divider('─')]), 'table head')
 
         self.message_widget = urwid.AttrWrap(urwid.Text('', align='center'), 'footer msg')
@@ -509,7 +507,6 @@ class Spliter:
 
         text = []
         for key, func in self.keys.items():
-            text.append(' ')
             color = 'footer key'
             if self.pressed_key == key:
                 color += ' active'
@@ -520,6 +517,7 @@ class Spliter:
             text.append((color, key.upper()))
             text.append(' ')
             text.append(func.__doc__ or '')
+            text.append(' ')
 
         self.view.keys_widget.set_text(text)
 
