@@ -220,8 +220,8 @@ class MainWindow(urwid.WidgetWrap):
         ('body',            'white',        'black',        '',       text,      default_bg),
         ('focus body',      'white',        'black',        '',       text,      selection_bg),
 
-        ('header',          'white',        'dark blue',    '',       None,      idle),
-        ('header normal',   'white',        'dark blue',    'bold',   None,      idle),
+        ('header',          'white',        'dark blue',    'bold',   'white',   idle),
+        ('header normal',   'white',        'dark blue',    'bold',   'white',   idle),
         ('header green',    'black',        'dark green',   'bold',   selection_bg, ahead_gain),
         ('header red',      'white',        'dark red',     'bold',   text,      behind_loss),
         ('header paused',   'black',        'yellow',       'bold',   selection_bg, gold),
@@ -238,21 +238,21 @@ class MainWindow(urwid.WidgetWrap):
         ('focus line',      'yellow',       'black',        '',       gold,      selection_bg),
         ('hilight',         'light green',  'black',        '',       hilight,   default_bg),
         ('focus hilight',   'light green',  'black',        '',       hilight,   selection_bg),
-        ('boss',            'light red',    'black',        '',       '#ffa502', default_bg),
-        ('focus boss',      'light red',    'black',        '',       '#ffa502', selection_bg),
+        ('boss',            'light red',    'black',        'bold',   '#ffa502', default_bg),
+        ('focus boss',      'light red',    'black',        'bold',   '#ffa502', selection_bg),
         ('build',           'dark magenta', 'black',        '',       'white',   default_bg),
         ('focus build',     'dark magenta', 'black',        '',       'white',   selection_bg),
 
         ('diff',            'dark magenta', 'black',        '',       '#a4b0be', default_bg),
         ('focus diff',      'dark magenta', 'black',        '',       '#a4b0be', selection_bg),
         ('normal',          'light gray',   'black',        '',       '',        default_bg),
-        ('focus normal',    'white',        'black',        'bold',   '#ffffff', selection_bg),
+        ('focus normal',    'white',        'black',        'bold',   'white',   selection_bg),
         ('green',           'light green',  'black',        '',       ahead_gain,   default_bg),
         ('focus green',     'light green',  'black',        'bold',   ahead_gain,   selection_bg),
         ('red',             'light red',    'black',        '',       behind_loss,  default_bg),
         ('focus red',       'light red',    'black',        'bold',   behind_loss,  selection_bg),
         ('fixed gold',      'yellow',       'black',        '',       gold,       default_bg),
-        ('focus fixed gold',    'yellow',   'black',        '',       gold,       selection_bg),
+        ('focus fixed gold',    'yellow',   'black',        'bold',   gold,       selection_bg),
         ('gold',            'yellow',       'black',        '',       gold,       default_bg),
         ('focus gold',      'yellow',       'black',        'bold',   gold,       selection_bg),
     ]
@@ -296,7 +296,7 @@ class MainWindow(urwid.WidgetWrap):
 
         self.footer = urwid.AttrWrap(
             urwid.Columns([
-                ('weight', 2, self.keys_widget),
+                ('weight', 4, self.keys_widget),
                 ('weight', 2, self.message_widget),
                 ('weight', 1, urwid.Text(f'{controller.run_path} [{controller.route_path}]', align='right')),
             ]),
@@ -515,7 +515,7 @@ class Spliter:
                 key = 'SPACE'
 
             text.append((color, key.upper()))
-            text.append(' ')
+            text.append('\xa0')
             text.append(func.__doc__ or '')
             text.append(' ')
 
