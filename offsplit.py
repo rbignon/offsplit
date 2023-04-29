@@ -1,23 +1,51 @@
 #!/usr/bin/env python3
 
+import colorsys
 import sys
+import time
 
 import urwid
 
 import yaml
 
 
-def get_time_str(seconds):
-    hours = int(abs(seconds) / 3600)
-    minutes = int(abs(seconds / 60) % 60)
-    seconds = int(abs(seconds) % 60)
+def get_big_timer(progress):
+    digits = [
+        "00000111112222233333444445555566666777778888899999  !!::..",
+        ".^^.  .|  .^^. .^^. .  | |^^^ .^^  ^^^| .^^. .^^.   |     ",
+        "|  |   |    .^   .^ |..| |..  |..    ][ ^..^ ^..|   | ^   ",
+        "|  |   |  .^   .  |    |    | |  |   |  |  |    |   ^ ^   ",
+        " ^^   ^^^ ^^^^  ^^     ^ ^^^   ^^    ^   ^^   ^^    ^   ^ ",
+    ]
+    uchars = {
+        '[': chr(0x258C),
+        ']': chr(0x2590),
+        '|': chr(0x2588),
+        '.': chr(0x2584),
+        '^': chr(0x2580),
+    }
+    text = get_time_str(progress)
+    display = '\n'
+    for line in digits[1:]:
+        for digit in text:
+            for idx, char in enumerate(digits[0]):
+                if char == digit:
+                    display += uchars.get(line[idx], line[idx])
+        display += '\n'
+    return display
+
+
+def get_time_str(ts):
+    hours = int(abs(ts) / 3600)
+    minutes = int(abs(ts / 60) % 60)
+    seconds = int(abs(ts) % 60)
 
     if hours:
         return '%02d:%02d:%02d' % (hours, minutes, seconds)
     if minutes:
         return '%02d:%02d' % (minutes, seconds)
 
-    return str(seconds)
+    return '%.1f' % abs(ts)
 
 
 def get_timer_display(progress, color='normal', sign=False):
@@ -31,8 +59,20 @@ def get_timer_display(progress, color='normal', sign=False):
     return (color, progress_text)
 
 
-class Split(urwid.WidgetWrap):
-    def __init__(self, name, color, build, description, stats, gold=None, pb=None, pb_start=None, progress=None, progress_start=None):
+class Segment(urwid.WidgetWrap):
+    def __init__(
+        self,
+        name,
+        color,
+        build,
+        description,
+        stats,
+        gold=None,
+        pb=None,
+        pb_start=None,
+        progress=None,
+        progress_start=None
+    ):
         # Route meta data
         self.name = name
         self.name_widget = urwid.Text(self.name, align='center')
@@ -45,10 +85,10 @@ class Split(urwid.WidgetWrap):
         for b in self.build:
             text.append(('build', b + '\n'))
 
-        color = 'hilight'
+        color = 'normal'
         for part in self.description.split('|'):
-            color = 'hilight' if color == 'normal' else 'normal'
             text.append((color, part))
+            color = 'hilight' if color == 'normal' else 'normal'
         self.description_widget = urwid.Text(text)
         self.stats = stats
         self.stats_widget = urwid.Text('\n'.join(f'{key} {value}' for key, value in self.stats.items()), align='right')
@@ -56,15 +96,16 @@ class Split(urwid.WidgetWrap):
         # PB
         self.pb = pb
         self.gold = gold
-        self.pb_start = pb_start or (None if self.pb is None else 0)
+        self.pb_start = pb_start or (None if self.pb is None else 0.0)
 
         # Run
         self.progress = progress
-        self.progress_start = progress_start or (None if self.progress is None else 0)
+        self.progress_start = progress_start or (None if self.progress is None else 0.0)
         self.time_widget = urwid.Text('', align='right')
         self.duration_widget = urwid.Text('', align='right')
         self.gold_widget = urwid.Text('', align='right')
         self.diff_widget = urwid.Text('', align='right')
+
         self.update(current=False)
 
         self.view = urwid.Columns(
@@ -80,27 +121,39 @@ class Split(urwid.WidgetWrap):
         )
         self.view = urwid.Padding(self.view, ('fixed left', 1), ('fixed right', 1))
         self.view = urwid.AttrWrap(self.view, 'body')
-        self.view = urwid.LineBox(self.view)
-        self.view = urwid.AttrWrap(self.view, 'line')
 
         super().__init__(self.view)
 
     @property
-    def time(self):
+    def duration(self):
+        """
+        Current duration of the segment.
+        """
         if self.progress is None or self.progress_start is None:
             return None
 
         return self.progress - self.progress_start
 
     def reset(self):
-        if self.time is not None and (self.gold is None or self.time < self.gold):
-            self.gold = self.time
+        """
+        Reset the segment.
+
+        It saves gold if any.
+        """
+        if self.duration is not None and (self.gold is None or self.duration < self.gold):
+            self.gold = self.duration
 
         self.progress = self.progress_start = None
 
     def update(self, current=True):
-        if self.time is not None:
-            if not current and self.gold is not None and self.time < self.gold:
+        """
+        Update display of the segment.
+
+        :param current: if True, it is the current played segment
+        :type current: bool
+        """
+        if self.duration is not None:
+            if not current and self.gold is not None and self.duration < self.gold:
                 color = 'gold'
             elif self.pb is not None and self.progress > (self.pb_start + self.pb):
                 color = 'red'
@@ -109,9 +162,9 @@ class Split(urwid.WidgetWrap):
 
         # PB time
         text = [get_timer_display((self.pb_start + self.pb) if self.pb is not None else None)]
-        if self.progress is not None and (not current or self.time > (self.gold or 0) or self.pb is None or self.progress >= (self.pb_start + self.pb)):
+        if self.progress is not None and (not current or self.duration > (self.gold or 0.0) or self.pb is None or self.progress >= (self.pb_start + self.pb)):
             text.append('\n',)
-            text.append(get_timer_display(self.progress - (0 if self.pb is None else (self.pb_start + self.pb)), color, sign=True))
+            text.append(get_timer_display(self.progress - (0.0 if self.pb is None else (self.pb_start + self.pb)), color, sign=True))
 
         self.time_widget.set_text(text)
 
@@ -120,109 +173,140 @@ class Split(urwid.WidgetWrap):
             text.append('\n')
             if self.pb is None:
                 color = 'normal'
-            elif self.time < self.gold and not current:
+            elif self.duration < self.gold and not current:
                 color = 'gold'
-            elif self.time > self.pb:
+            elif self.duration > self.pb:
                 color = 'red'
             else:
                 color = 'green'
-            text.append(get_timer_display(self.time, color))
+            text.append(get_timer_display(self.duration, color))
         self.duration_widget.set_text(text)
 
-        self.gold_widget.set_text(get_timer_display(self.gold, color='gold'))
+        self.gold_widget.set_text(get_timer_display(self.gold, color='fixed gold'))
 
         text = []
         if self.gold is not None:
             if self.pb is not None:
                 if self.pb == self.gold:
-                    text.append(('gold', '0'))
+                    text.append(('fixed gold', '0'))
                 else:
-                    text.append(get_timer_display(self.pb - self.gold, sign=True, color='gold' if self.pb <= self.gold else 'diff'))
-            if self.time is not None:
+                    text.append(get_timer_display(self.pb - self.gold, sign=True, color='diff'))
+            if self.duration is not None:
                 text.append('\n')
-                text.append(get_timer_display(self.time - self.gold, sign=True, color='gold' if self.time < self.gold and not current else 'diff'))
+                text.append(get_timer_display(self.duration - self.gold, sign=True, color='gold' if self.duration < self.gold and not current else 'diff'))
 
         self.diff_widget.set_text(text)
-
 
     def stop(self):
         self.update(current=False)
 
 
 class MainWindow(urwid.WidgetWrap):
+    default_bg = '#2f3542'
+    selection_bg = '#485460'
+    footer_bg = '#1e2431'
+    ahead_gain = '#2ed573'
+    ahead_loss = '#7bed9f'
+    behind_gain = '#ff6b81'
+    behind_loss = '#ff4757'
+    label = '#a4b0be'
+    idle = '#1e90ff'
+    text = '#f1f2f6'
+    gold = '#eccc68'
+
+    hilight = '#70a1ff'
+
     palette = [
-        ('body',            'white',        'black'),
+        # title             foreground      background      spec      256-fg     256bg
+        ('body',            'white',        'black',        '',       text,      default_bg),
+        ('focus body',      'white',        'black',        '',       text,      selection_bg),
 
-        ('header',          'white',        'dark blue'),
-        ('header normal',   'white',        'dark blue',    'bold'),
-        ('header green',    'black',        'dark green',   'bold'),
-        ('header red',      'white',        'dark red',     'bold'),
-        ('header paused',   'black',        'yellow',       'bold'),
+        ('header',          'white',        'dark blue',    '',       None,      idle),
+        ('header normal',   'white',        'dark blue',    'bold',   None,      idle),
+        ('header green',    'black',        'dark green',   'bold',   selection_bg, ahead_gain),
+        ('header red',      'white',        'dark red',     'bold',   text,      behind_loss),
+        ('header paused',   'black',        'yellow',       'bold',   selection_bg, gold),
 
+        ('footer',          'yellow',       'dark blue',    '',       idle,      footer_bg),
+        ('footer key',      'black',        'light gray',   '',       label,     selection_bg),
+        ('footer key active',   'black',    'dark green',   '',       label,     '#1a7a41'),
+        ('footer error',    'dark red',     'dark blue',    '',       '',        footer_bg),
+        ('footer msg',      'light green',  'dark blue',    '',       '',        footer_bg),
 
-        ('footer',          'yellow',       'dark blue'),
-        ('footer key',      'black',        'light gray'),
-        ('footer error',    'dark red',     'dark blue'),
-        ('footer msg',      'light green',  'dark blue'),
+        ('table head',      'white',        'black',        '',       'white',   default_bg),
 
-        ('line',            'white',        'black'),
-        ('focus line',      'yellow',       'black'),
-        ('hilight',         'light green',  'black'),
-        ('boss',            'light red',    'black'),
-        ('build',           'dark magenta', 'black'),
+        ('line',            'light gray',   'black',        '',       label,     default_bg),
+        ('focus line',      'yellow',       'black',        '',       gold,      selection_bg),
+        ('hilight',         'light green',  'black',        '',       hilight,   default_bg),
+        ('focus hilight',   'light green',  'black',        '',       hilight,   selection_bg),
+        ('boss',            'light red',    'black',        '',       '#ffa502', default_bg),
+        ('focus boss',      'light red',    'black',        '',       '#ffa502', selection_bg),
+        ('build',           'dark magenta', 'black',        '',       'white',   default_bg),
+        ('focus build',     'dark magenta', 'black',        '',       'white',   selection_bg),
 
-        ('diff',            'dark magenta', 'black'),
-        ('normal',          'light gray',   'black'),
-        ('green',           'light green',  'black'),
-        ('red',             'light red',    'black'),
-        ('gold',            'yellow',       'black'),
+        ('diff',            'dark magenta', 'black',        '',       '#a4b0be', default_bg),
+        ('focus diff',      'dark magenta', 'black',        '',       '#a4b0be', selection_bg),
+        ('normal',          'light gray',   'black',        '',       '',        default_bg),
+        ('focus normal',    'white',        'black',        'bold',   '#ffffff', selection_bg),
+        ('green',           'light green',  'black',        '',       ahead_gain,   default_bg),
+        ('focus green',     'light green',  'black',        'bold',   ahead_gain,   selection_bg),
+        ('red',             'light red',    'black',        '',       behind_loss,  default_bg),
+        ('focus red',       'light red',    'black',        'bold',   behind_loss,  selection_bg),
+        ('fixed gold',      'yellow',       'black',        '',       gold,       default_bg),
+        ('focus fixed gold',    'yellow',   'black',        '',       gold,       selection_bg),
+        ('gold',            'yellow',       'black',        '',       gold,       default_bg),
+        ('focus gold',      'yellow',       'black',        'bold',   gold,       selection_bg),
     ]
     focus_map = {
-        'line':     'focus line',
-        'split':    'focus split',
+        'line':         'focus line',
+        'segment':      'focus segment',
+        'body':         'focus body',
+        'normal':       'focus normal',
+        'green':        'focus green',
+        'red':          'focus red',
+        'gold':         'focus gold',
+        'fixed gold':   'focus fixed gold',
+        'diff':         'focus diff',
+        'hilight':      'focus hilight',
+        'boss':         'focus boss',
+        'build':        'focus build',
     }
-
-    footer_text = [
-        ' ',
-        ('footer key', 'ENTER'),
-        ' start/split',
-        ' ',
-        ('footer key', 'SPACE'),
-        ' pause',
-        ' ',
-        ('footer key', 'R'),
-        ' reset',
-        ' ',
-        ('footer key', 'S'),
-        ' save',
-        ' ',
-        ('footer key', 'G'),
-        ' save golds',
-        ' ',
-        ('footer key', 'Q'),
-        ' quit',
-    ]
 
     def __init__(self, controller):
         self.controller = controller
 
         self.stats = urwid.Text('', align='center')
-        self.timer = urwid.Text('Elapsed: 0', align='center')
-        self.pb = urwid.Text('PB: 0', align='center')
+        self.timer = urwid.Text('', align='right')
+        self.pb = urwid.Text('', align='center')
         self.header = urwid.AttrWrap(urwid.Columns([self.stats, self.pb, self.timer]), 'header')
+        self.table_head = urwid.Columns(
+            [
+                ('weight', 8, urwid.Text('')),
+                ('weight', 16, urwid.Text('')),
+                ('weight', 4, urwid.Text('')),
+                ('weight', 2, urwid.Text('Time', align='right')),
+                ('weight', 2, urwid.Text('Sgmt', align='right')),
+                ('weight', 2, urwid.Text('Gold', align='right')),
+                ('weight', 2, urwid.Text('Diff\nw/ gold', align='right')),
+            ],
+        )
+        self.table_head = urwid.Padding(self.table_head, ('fixed left', 1), ('fixed right', 1))
+        header = urwid.AttrWrap(urwid.Pile([self.header, self.table_head, urwid.Divider('─')]), 'table head')
+
         self.message_widget = urwid.AttrWrap(urwid.Text('', align='center'), 'footer msg')
+        self.keys_widget = urwid.Text('')
 
         self.footer = urwid.AttrWrap(
             urwid.Columns([
-                ('weight', 2, urwid.Text(self.footer_text)),
+                ('weight', 2, self.keys_widget),
                 ('weight', 2, self.message_widget),
                 ('weight', 1, urwid.Text(f'{controller.run_path} [{controller.route_path}]', align='right')),
             ]),
             'footer'
         )
-        self.splits = urwid.SimpleFocusListWalker([])
-        self.listbox = urwid.ListBox(self.splits)
-        self.view = urwid.Frame(urwid.AttrWrap(self.listbox, 'body'), header=self.header, footer=self.footer)
+        self.segments = urwid.SimpleFocusListWalker([])
+        self.listbox = urwid.ListBox(self.segments)
+        self.view = urwid.Frame(urwid.AttrWrap(self.listbox, 'body'), header=header, footer=self.footer)
 
         super().__init__(self.view)
 
@@ -232,17 +316,19 @@ class MainWindow(urwid.WidgetWrap):
     def message(self, message, color='footer msg'):
         self.message_widget.set_text((color, message))
 
-    def add_split(self, split):
-        self.splits.append(urwid.AttrMap(split, 'split', self.focus_map))
+    def add_segment(self, segment):
+        self.segments.append(urwid.AttrMap(segment, 'segment', self.focus_map))
+        self.segments.append(urwid.AttrMap(urwid.Divider('─'), 'line'))
 
     def set_enabled(self, enabled):
-        if enabled:
-            self.focus_map['line'] = 'focus line'
-        else:
-            self.focus_map.pop('line', None)
+        for key in self.focus_map:
+            if enabled:
+                self.focus_map[key] = 'focus ' + key.split()[-1]
+            else:
+                self.focus_map[key] = key
 
-        for split in self.splits:
-            split._invalidate()
+        for segment in self.segments:
+            segment._invalidate()
 
 
 class Spliter:
@@ -250,30 +336,32 @@ class Spliter:
         self.route_path = route_path
         self.run_path = run_path
         self.view = MainWindow(self)
-        self.current_split_idx = -1
-        self.splits = []
-        self.counter = 0
-        self.progress = 0
+        self.current_segment_idx = -1
+        self.segments = []
+        self.progress = 0.0
         self.paused = True
+        self.pressed_key = None
+        self.pressed_key_time = None
 
         self.run_route = {}
         self.route = {}
 
         self.loop = urwid.MainLoop(self.view, self.view.palette, unhandled_input=self.unhandled_input)
+        self.loop.screen.set_terminal_properties(colors=2**24)
 
     @property
-    def current_split(self):
-        if self.current_split_idx < 0:
+    def current_segment(self):
+        if self.current_segment_idx < 0:
             return None
 
-        return self.splits[self.current_split_idx]
+        return self.segments[self.current_segment_idx]
 
     @property
-    def previous_split(self):
-        if self.current_split_idx < 1:
+    def previous_segment(self):
+        if self.current_segment_idx < 1:
             return None
 
-        return self.splits[self.current_split_idx-1]
+        return self.segments[self.current_segment_idx-1]
 
     def main(self):
         try:
@@ -287,10 +375,10 @@ class Spliter:
             with open(self.run_path, 'r', encoding='utf-8') as fp:
                 self.run_route = yaml.safe_load(fp)['route']
 
-                for split in self.run_route:
-                    if 'time' not in split:
-                        split['time'] = split['pb']
-                        split.pop('pb')
+                #for segment in self.run_route:
+                #    if 'duration' not in segment:
+                #        segment['duration'] = segment['pb']
+                #        segment.pop('pb')
         except OSError:
             # Probably a new run
             self.run_route = [
@@ -301,7 +389,7 @@ class Spliter:
                     'description': route['description'],
                     'stats': route.get('stats', {}),
                     'gold': route.get('gold', route.get('bpt', None)),
-                    'pb': route.get('time', route.get('pb')),
+                    'pb': route.get('duration', route.get('time', route.get('pb'))),
                 }
                 for route in self.route
             ]
@@ -309,25 +397,33 @@ class Spliter:
         pb_start = None
         progress_start = None
         for i, s in enumerate(self.run_route):
-            split = Split(
+            # retrocompat
+            if 'duration' not in s:
+                s['duration'] = s.get('time')
+            if 'gold' not in s:
+                s['gold'] = s.get('bpt')
+            if 'gold' not in self.route[i]:
+                self.route[i]['gold'] = self.route[i].get('bpt')
+
+            segment = Segment(
                 s['name'],
                 s.get('color'),
                 s.get('build'),
                 s['description'],
                 s.get('stats', {}),
-                s.get('gold', s.get('bpt', self.route[i].get('bpt', self.route[i].get('gold')))),
+                s.get('gold', self.route[i].get('gold')),
                 s.get('pb', self.route[i].get('pb')),
                 pb_start,
-                None if s.get('time') is None else ((progress_start or 0) + s.get('time')),
-                None if s.get('time') is None else progress_start or (0 if s.get('time') else progress_start)
+                None if s.get('duration') is None else ((progress_start or 0.0) + s.get('duration')),
+                None if s.get('duration') is None else progress_start or (0.0 if s.get('duration') else progress_start)
             )
-            self.splits.append(split)
-            self.view.add_split(split)
-            if split.pb is not None:
-                pb_start = (pb_start or 0) + split.pb
+            self.segments.append(segment)
+            self.view.add_segment(segment)
+            if segment.pb is not None:
+                pb_start = (pb_start or 0.0) + segment.pb
 
-            if split.time is not None:
-                progress_start = (progress_start or 0) + split.time
+            if segment.duration is not None:
+                progress_start = (progress_start or 0.0) + segment.duration
 
         if progress_start is not None:
             self.progress = progress_start
@@ -335,36 +431,50 @@ class Spliter:
         self.view.set_enabled(False)
         self.update()
 
-        self.loop.set_alarm_in(1, self.tick)
+        self.loop.set_alarm_in(0.1, self.tick)
         self.loop.run()
 
         return 0
 
     def tick(self, loop=None, user_data=None):
         try:
+            # blink golds
+            ts = time.time()
+            h = 0.125
+            s = 0.59
+            v = 1 - 0.7 * abs(0.5 - (ts % 1))
+            color = '#' + ''.join('%02x' % int(i * 256) for i in colorsys.hsv_to_rgb(h, s, v))
+            self.loop.screen.register_palette_entry('gold', 'yellow', 'black', '', color, '#2f3542')
+            self.loop.screen.clear()
+
+            # reset display of pressed key after 0.1s
+            if self.pressed_key and self.pressed_key_time + 0.1 < time.time():
+                self.pressed_key = None
+                self.update()
+
             if self.paused:
                 return
 
-            self.progress += 1
-            if self.current_split:
-                self.current_split.progress = self.progress
+            self.progress += 0.1
+            if self.current_segment:
+                self.current_segment.progress = self.progress
 
             self.update()
         finally:
-            self.loop.set_alarm_in(1, self.tick)
+            self.loop.set_alarm_in(0.1, self.tick)
 
     def update(self):
-        if self.current_split:
-            self.current_split.update()
+        if self.current_segment:
+            self.current_segment.update()
 
-        if not self.current_split:
+        if not self.current_segment:
             color = 'header'
         elif self.paused:
             color = 'header paused'
-        elif self.previous_split and self.previous_split.pb is not None and self.previous_split.progress > self.previous_split.pb_start + self.previous_split.pb:
+        elif self.previous_segment and self.previous_segment.pb is not None and self.previous_segment.progress > self.previous_segment.pb_start + self.previous_segment.pb:
             color = 'header red'
-        elif self.current_split:
-            if self.current_split.pb is not None and self.current_split.progress > self.current_split.pb_start + self.current_split.pb:
+        elif self.current_segment:
+            if self.current_segment.pb is not None and self.current_segment.progress > self.current_segment.pb_start + self.current_segment.pb:
                 color = 'header red'
             else:
                 color = 'header green'
@@ -373,20 +483,20 @@ class Spliter:
 
         self.view.header.set_attr_map({None: color})
 
-        sob = 0
-        bpt = 0
-        pb = 0
-        for split in self.splits:
-            sob += min(split.time if split.time is not None else (split.gold or 0), split.gold or 0)
-            if split == self.current_split:
-                bpt += max(split.time if split.time is not None else (split.gold or 0), split.gold or 0)
-            elif split.time is not None:
-                bpt += split.time
+        sob = 0.0
+        bpt = 0.0
+        pb = 0.0
+        for segment in self.segments:
+            sob += min(segment.duration if segment.duration is not None and segment != self.current_segment else (segment.gold or 0.0), segment.gold or 0.0)
+            if segment == self.current_segment:
+                bpt += max(segment.duration if segment.duration is not None else (segment.gold or 0.0), segment.gold or 0.0)
+            elif segment.duration is not None:
+                bpt += segment.duration
             else:
-                bpt += split.gold or 0
-            pb += split.pb or 0
+                bpt += segment.gold or 0.0
+            pb += segment.pb or 0.0
 
-        text = []
+        text = ['\n', '\n']
         text.append('Sum of Best:        ')
         text.append(get_timer_display(sob, color))
         text.append('\n')
@@ -394,31 +504,48 @@ class Spliter:
         text.append(get_timer_display(bpt, color))
         self.view.stats.set_text(text)
 
-        self.view.timer.set_text(['Elapsed: ', get_timer_display(self.progress, color)])
-        self.view.pb.set_text(['PB: ', get_timer_display(pb, color)])
+        self.view.timer.set_text(get_big_timer(self.progress))
+        self.view.pb.set_text(['\n', '\n', 'PB: ', get_timer_display(pb, color)])
 
-    def go_next_split(self):
-        if self.current_split:
-            self.current_split.stop()
+        text = []
+        for key, func in self.keys.items():
+            text.append(' ')
+            color = 'footer key'
+            if self.pressed_key == key:
+                color += ' active'
 
-        self.current_split_idx += 1
+            if key == ' ':
+                key = 'SPACE'
 
-        if self.current_split_idx >= len(self.splits):
+            text.append((color, key.upper()))
+            text.append(' ')
+            text.append(func.__doc__ or '')
+
+        self.view.keys_widget.set_text(text)
+
+    def go_next_segment(self):
+        if self.current_segment:
+            self.current_segment.stop()
+
+        self.current_segment_idx += 1
+
+        if self.current_segment_idx >= len(self.segments):
             self.stop()
             return False
 
-        self.current_split.progress_start = self.progress
-        self.current_split.progress = self.progress
+        self.current_segment.progress_start = self.progress
+        self.current_segment.progress = self.progress
 
         return True
 
     def reset(self):
+        """reset"""
         self.paused = True
-        for split in self.splits:
-            split.reset()
-            split.update(current=False)
+        for segment in self.segments:
+            segment.reset()
+            segment.update(current=False)
         self.stop()
-        self.progress = 0
+        self.progress = 0.0
         self.update()
 
     def start(self):
@@ -426,20 +553,22 @@ class Spliter:
 
         self.view.set_enabled(True)
         self.paused = False
-        self.progress = 0
-        self.current_split_idx = 0
-        self.current_split.progress = 0
-        self.current_split.progress_start = 0
+        self.progress = 0.0
+        self.current_segment_idx = 0
+        self.current_segment.progress = 0.0
+        self.current_segment.progress_start = 0.0
         self.update()
 
     def stop(self):
         self.view.set_enabled(False)
-        self.current_split_idx = -1
+        self.current_segment_idx = -1
         self.paused = True
         self.update()
 
     def pause(self):
-        if not self.current_split:
+        """pause"""
+        if not self.current_segment:
+            self.pressed_key = None
             return
 
         self.paused = not self.paused
@@ -447,67 +576,92 @@ class Spliter:
 
         self.update()
 
+    def split(self):
+        """start/split"""
+        if not self.current_segment:
+            self.start()
+        elif not self.go_next_segment():
+            return
+
+        self.view.set_enabled(True)
+        self.view.listbox.set_focus(self.current_segment_idx*2, 'above')
+        self.view.listbox.set_focus_valign('middle')
+
+    def save_run(self):
+        """save run"""
+        self.save(self.run_path)
+
+    def save_pb(self):
+        """save PB"""
+        self.save(self.route_path)
+
+    def save(self, path):
+        try:
+            with open(path, 'w', encoding='utf-8') as fp:
+                route = []
+                for segment in self.segments:
+                    route.append({
+                        'name': segment.name,
+                        'description': segment.description,
+                        'pb': segment.pb,
+                        'gold': segment.gold,
+                        'duration': segment.duration,
+                        'color': segment.color,
+                        'stats': segment.stats,
+                        'build': segment.build,
+                    })
+                yaml.dump({'route': route}, fp)
+        except OSError as e:
+            self.view.error(f'Unable to save to {path}: {e.strerror}')
+        else:
+            self.view.message(f'Run saved in {path}')
+
+    def save_golds(self):
+        """save golds"""
+        try:
+            with open(self.route_path, 'w', encoding='utf-8') as fp:
+                for i, s in enumerate(self.route):
+                    segment = self.segments[i]
+                    if segment.duration is None:
+                        continue
+
+                    gold = s.get('gold', s.get('bpt'))
+                    if gold is None or segment.duration < gold:
+                        s['gold'] = segment.duration
+
+                yaml.dump({'route': self.route}, fp)
+        except OSError as e:
+            self.view.error(f'Unable to save to {self.route_path}: {e.strerror}')
+        else:
+            self.view.message(f'Golds saved in {self.route_path}')
+
+    def quit(self):
+        """quit"""
+        raise urwid.ExitMainLoop()
+
+    keys = {
+        'enter': split,
+        ' ': pause,
+        'r': reset,
+        's': save_run,
+        'p': save_pb,
+        'g': save_golds,
+        'q': quit,
+    }
+
     def unhandled_input(self, k):
-        if k == 'enter':
-            if not self.current_split:
-                self.start()
-            elif not self.go_next_split():
-                return
+        if isinstance(k, tuple):
+            # do not handle pointer
+            return
 
-            self.view.set_enabled(True)
-            self.view.listbox.set_focus(self.current_split_idx, 'above')
-            self.view.listbox.set_focus_valign('middle')
+        self.pressed_key = k
+        self.pressed_key_time = time.time()
 
-            self.update()
+        func = self.keys.get(k.lower())
+        if func:
+            func(self)
 
-        if k == ' ':
-            self.pause()
-
-        if k == 'r':
-            self.reset()
-
-        if k in ('p', 's'):
-            path = self.run_path if k == 's' else self.route_path
-            try:
-                with open(path, 'w', encoding='utf-8') as fp:
-                    route = []
-                    for split in self.splits:
-                        route.append({
-                            'name': split.name,
-                            'description': split.description,
-                            'pb': split.pb,
-                            'gold': split.gold,
-                            'time': split.time,
-                            'color': split.color,
-                            'stats': split.stats,
-                            'build': split.build,
-                        })
-                    yaml.dump({'route': route}, fp)
-            except OSError as e:
-                self.view.error(f'Unable to save to {path}: {e.strerror}')
-            else:
-                self.view.message(f'Run saved in {path}')
-
-        if k == 'g':
-            try:
-                with open(self.route_path, 'w', encoding='utf-8') as fp:
-                    for i, s in enumerate(self.route):
-                        split = self.splits[i]
-                        if split.time is None:
-                            continue
-
-                        gold = s.get('gold', s.get('bpt'))
-                        if gold is None or split.time < gold:
-                            s['gold'] = split.time
-
-                    yaml.dump({'route': self.route}, fp)
-            except OSError as e:
-                self.view.error(f'Unable to save to {self.route_path}: {e.strerror}')
-            else:
-                self.view.message(f'Golds saved in {self.route_path}')
-
-        if k in ('q', 'Q'):
-            raise urwid.ExitMainLoop()
+        self.update()
 
 
 if __name__ == '__main__':
