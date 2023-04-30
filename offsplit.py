@@ -151,15 +151,15 @@ class Segment(urwid.WidgetWrap):
         :param current: if True, it is the current played segment
         :type current: bool
         """
+        # PB time and diff with current time
         if self.duration is not None:
             if not current and self.gold is not None and self.duration < self.gold:
                 color = 'gold'
             elif self.pb is not None and self.progress > (self.pb_start + self.pb):
-                color = 'red'
+                color = 'behind gain' if self.duration < self.pb else 'behind loss'
             else:
-                color = 'green'
+                color = 'ahead gain' if self.duration < self.pb else 'ahead loss'
 
-        # PB time
         text = [get_timer_display((self.pb_start + self.pb) if self.pb is not None else None)]
         if self.progress is not None and (not current or self.duration > (self.gold or 0.0) or self.pb is None or self.progress >= (self.pb_start + self.pb)):
             text.append('\n',)
@@ -167,6 +167,7 @@ class Segment(urwid.WidgetWrap):
 
         self.time_widget.set_text(text)
 
+        # Segment duration
         text = [get_timer_display(self.pb)]
         if self.progress is not None:
             text.append('\n')
@@ -175,14 +176,16 @@ class Segment(urwid.WidgetWrap):
             elif self.duration < self.gold and not current:
                 color = 'gold'
             elif self.duration > self.pb:
-                color = 'red'
+                color = 'behind gain' if self.progress < (self.pb_start + self.pb) and current else 'behind loss'
             else:
-                color = 'green'
+                color = 'ahead gain' if not current or self.gold is None or self.progress < self.gold else 'ahead loss'
             text.append(get_timer_display(self.duration, color))
         self.duration_widget.set_text(text)
 
+        # Segment gold
         self.gold_widget.set_text(get_timer_display(self.gold, color='fixed gold'))
 
+        # Diff between gold and pb/current duration
         text = []
         if self.gold is not None:
             if self.pb is not None:
@@ -247,6 +250,15 @@ class MainWindow(urwid.WidgetWrap):
         ('focus diff',      'dark magenta', 'black',        '',       '#a4b0be', selection_bg),
         ('normal',          'light gray',   'black',        '',       '',        default_bg),
         ('focus normal',    'white',        'black',        'bold',   'white',   selection_bg),
+        ('ahead gain',      'light green',  'black',        'bold',   ahead_gain,   default_bg),
+        ('focus ahead gain','light green',  'black',        'bold',   ahead_gain,   selection_bg),
+        ('ahead loss',      'light green',  'black',        '',       ahead_loss,   default_bg),
+        ('focus ahead loss','light green',  'black',        '',       ahead_loss,   selection_bg),
+        ('behind gain',     'light red',    'black',        'bold',   behind_gain,  default_bg),
+        ('focus behind gain','light red',   'black',        'bold',   behind_gain,  selection_bg),
+        ('behind loss',     'light red',    'black',        '',       behind_loss,  default_bg),
+        ('focus behind loss','light red',   'black',        '',       behind_loss,  selection_bg),
+        ('fixed gold',      'yellow',       'black',        '',       gold,       default_bg),
         ('green',           'light green',  'black',        '',       ahead_gain,   default_bg),
         ('focus green',     'light green',  'black',        'bold',   ahead_gain,   selection_bg),
         ('red',             'light red',    'black',        '',       behind_loss,  default_bg),
@@ -261,6 +273,10 @@ class MainWindow(urwid.WidgetWrap):
         'segment':      'focus segment',
         'body':         'focus body',
         'normal':       'focus normal',
+        'ahead gain':   'focus ahead gain',
+        'ahead loss':   'focus ahead loss',
+        'behind gain':  'focus behind gain',
+        'behind loss':  'focus behind loss',
         'green':        'focus green',
         'red':          'focus red',
         'gold':         'focus gold',
@@ -321,7 +337,7 @@ class MainWindow(urwid.WidgetWrap):
     def set_enabled(self, enabled):
         for key in self.focus_map:
             if enabled:
-                self.focus_map[key] = 'focus ' + key.split()[-1]
+                self.focus_map[key] = 'focus ' + key
             else:
                 self.focus_map[key] = key
 
