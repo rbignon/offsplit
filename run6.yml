@@ -1,15 +1,8 @@
 route:
-- bpt: 0
-  build: []
-  color: null
-  description: "Samoura\xEF + Rune d'Entre-terre"
-  name: "Cr\xE9ation du perso"
-  pb: 0
-  stats: {}
 - bpt: 38
   build: []
   color: null
-  description: "Sauter dans le vide pr\xE8s du boss tuto"
+  description: "Samoura\xEF + Rune d'Entre-terre\nSauter dans le vide pr\xE8s du boss tuto"
   name: Chapelle de l'anticipation
   pb: 47
   stats: {}
