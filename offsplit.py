@@ -532,7 +532,7 @@ class Spliter:
 
             text.append((color, key.upper()))
             text.append('\xa0')
-            text.append(func.__doc__ or '')
+            text.append((func.__doc__ or '').strip().replace(' ', '\xa0'))
             text.append(' ')
 
         self.view.keys_widget.set_text(text)
@@ -573,11 +573,33 @@ class Spliter:
         self.current_segment.progress_start = 0.0
         self.update()
 
+    def resume(self):
+        """resume"""
+        progress = 0.0
+        for idx, segment in enumerate(self.segments):
+            if segment.duration is None:
+                self.paused = True
+                self.current_segment_idx = idx-1
+
+                self.focus()
+                self.update()
+                return
+
+
+            progress += segment.duration
+
     def stop(self):
         self.view.set_enabled(False)
         self.current_segment_idx = -1
         self.paused = True
         self.update()
+
+    def focus(self):
+        self.view.set_enabled(True)
+
+        if self.current_segment_idx >= 0:
+            self.view.listbox.set_focus(self.current_segment_idx*2, 'above')
+            self.view.listbox.set_focus_valign('middle')
 
     def pause(self):
         """pause"""
@@ -586,7 +608,6 @@ class Spliter:
             return
 
         self.paused = not self.paused
-        self.view.message('---PAUSED---' if self.paused else '')
 
         self.update()
 
@@ -597,9 +618,7 @@ class Spliter:
         elif not self.go_next_segment():
             return
 
-        self.view.set_enabled(True)
-        self.view.listbox.set_focus(self.current_segment_idx*2, 'above')
-        self.view.listbox.set_focus_valign('middle')
+        self.focus()
 
     def save_run(self):
         """save run"""
@@ -660,6 +679,7 @@ class Spliter:
         's': save_run,
         'p': save_pb,
         'g': save_golds,
+        'b': resume,
         'q': quit,
     }
 
