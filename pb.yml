@@ -1,7 +1,8 @@
 route:
 - build: []
   color: null
-  description: "Samoura\xEF + Rune d'Entre-terre\nSauter dans le vide pr\xE8s du boss tuto"
+  description: "Samoura\xEF + Rune d'Entre-terre\nSauter dans le vide pr\xE8s du boss\
+    \ tuto"
   duration: 41.00000000000032
   gold: 38
   name: Chapelle de l'anticipation
@@ -15,7 +16,7 @@ route:
     \ passage puis prendre le site des portes et r\xE9cup\xE9rer Torrent\n|TP Commencement|\
     \ puis direction E, prendre le coffre pi\xE9g\xE9 dans les ruines"
   duration: 219.5999999999905
-  gold: 219.5999999999905
+  gold: 214.09999999998945
   name: "N\xE9crolimbe"
   pb: 233
   stats: {}
@@ -26,7 +27,7 @@ route:
     \ remonter\nPrendre le site de gr\xE2ce dans l'\xE9glise puis aller au Bastion\
     \ avec Melina"
   duration: 196.30000000004463
-  gold: 196.30000000004463
+  gold: 35.50000000000807
   name: Caelid
   pb: 203
   stats: {}
@@ -45,7 +46,7 @@ route:
     \ le courant d'air pour monter et aller chercher |M\xE9daillon de Dectus (droite)|\
     \ dans le Fort Faroth\nPrendre le |Sceau meurtri de Radagon| et |TP Commencement|"
   duration: 269.5000000000612
-  gold: 209
+  gold: 197.00000000004474
   name: Caelid
   pb: 228
   stats: {}
@@ -70,7 +71,7 @@ route:
     \ N pour le portail vers l'acad\xE9mie\nJump du pont et portail vers Iji direction\
     \ NE\nPrendre le site devant Iji puis direction E aller \xE0 l'ascenseur de Dectus"
   duration: 349.1999999996824
-  gold: 345.0
+  gold: 330.69999999969923
   name: Liurnia
   pb: 349
   stats: {}
@@ -87,7 +88,7 @@ route:
   description: "Faire tomber le boss dans le vide\nApr\xE8s le boss, prendre le site\
     \ devant Leyndell et |TP Sud du lac d'Agheel|"
   duration: 557.2999999994931
-  gold: 58.0
+  gold: 52.39999999995234
   name: SENTINELLE DRACONIQUE
   pb: 108
   stats: {}
@@ -96,7 +97,7 @@ route:
   description: "Levelup |15 Force|, |23 Dex| et |12 Foi|\nAjouter 2 doses de fiole\
     \ et allouer 5 popo de mana\nDirection S pour la ge\xF4le de Darriwil"
   duration: 57.399999999947795
-  gold: 30
+  gold: 51.9
   name: "N\xE9crolimbe"
   pb: 63
   stats: {}
@@ -108,7 +109,7 @@ route:
   description: "WAR2 R1 WAR2, stun, WAR2 R1 WAR2\n\nApr\xE8s le fight, |TP Route du\
     \ manoir|"
   duration: 92.49999999991587
-  gold: 70.0
+  gold: 55.59999999994943
   name: DARRIWIL
   pb: 89
   stats:
@@ -207,7 +208,7 @@ route:
     \ le ch\xE2teau pour aller sur Godrick, ramasser |5 Khukuri| juste apr\xE8s les\
     \ secondes balistes"
   duration: 279.3999999997459
-  gold: 188
+  gold: 182.09999999983438
   name: "N\xE9crolimbe"
   pb: 262
   stats: {}
@@ -232,7 +233,7 @@ route:
   color: null
   description: Levelup |42 Dex|
   duration: 54.69999999995025
-  gold: 20
+  gold: 15.999999999985448
   name: Plateau Altus
   pb: 35
   stats: {}
@@ -268,7 +269,7 @@ route:
   color: null
   description: Aller sur Morgott directement
   duration: 92.10000000033506
-  gold: 92.10000000033506
+  gold: 87.19999999992069
   name: Leyndell
   pb: 106
   stats: {}
@@ -300,7 +301,7 @@ route:
     Courir jusqu'\xE0 l'ascenseur pour descendre aux Terres interdites\nPendant l'ascenseur\
     \ utiliser |Rune dor\xE9e (9)|, |Rune dor\xE9e (11)|"
   duration: 290.3000000010561
-  gold: 268.0
+  gold: 220.00000000080036
   name: Leyndell
   pb: 412
   stats: {}
@@ -409,7 +410,7 @@ route:
     \ hauteur \xE0 gauche\nJump sur la colonne tomb\xE9e juste apr\xE8s puis Bird\
     \ Skip"
   duration: 284.10000000103355
-  gold: 284.10000000103355
+  gold: 238.9000000008691
   name: Farum Azula
   pb: 302
   stats: {}
