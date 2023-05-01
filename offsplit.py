@@ -618,7 +618,7 @@ class Spliter:
                         'name': segment.name,
                         'description': segment.description,
                         'pb': segment.pb,
-                        'gold': segment.duration if segment.duration < segment.gold else segment.gold,
+                        'gold': segment.duration if golds and segment != self.current_segment and segment.duration and segment.duration < segment.gold else segment.gold,
                         'duration': segment.duration,
                         'color': segment.color,
                         'stats': segment.stats,
