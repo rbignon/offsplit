@@ -391,11 +391,6 @@ class Spliter:
         try:
             with open(self.run_path, 'r', encoding='utf-8') as fp:
                 self.run_route = yaml.safe_load(fp)['route']
-
-                #for segment in self.run_route:
-                #    if 'duration' not in segment:
-                #        segment['duration'] = segment['pb']
-                #        segment.pop('pb')
         except OSError:
             # Probably a new run
             self.run_route = [
@@ -587,7 +582,6 @@ class Spliter:
                 self.focus()
                 self.update()
                 return
-
 
             progress += segment.duration
 
