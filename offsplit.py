@@ -152,13 +152,15 @@ class Segment(urwid.WidgetWrap):
         :type current: bool
         """
         # PB time and diff with current time
+        color = 'normal'
         if self.duration is not None:
-            if not current and self.gold is not None and self.duration < self.gold:
+            if not current and (self.gold is None or self.duration < self.gold):
                 color = 'gold'
-            elif self.pb is not None and self.progress > (self.pb_start + self.pb):
-                color = 'behind gain' if self.duration < self.pb else 'behind loss'
-            else:
-                color = 'ahead gain' if self.duration < self.pb else 'ahead loss'
+            elif self.pb is not None:
+                if self.progress > (self.pb_start + self.pb):
+                    color = 'behind gain' if self.duration < self.pb else 'behind loss'
+                else:
+                    color = 'ahead gain' if self.duration < self.pb else 'ahead loss'
 
         text = [get_timer_display((self.pb_start + self.pb) if self.pb is not None else None)]
         if self.progress is not None and (not current or self.duration > (self.gold or 0.0) or self.pb is None or self.progress >= (self.pb_start + self.pb)):
@@ -171,14 +173,15 @@ class Segment(urwid.WidgetWrap):
         text = [get_timer_display(self.pb)]
         if self.progress is not None:
             text.append('\n')
-            if self.pb is None:
-                color = 'normal'
-            elif self.duration < self.gold and not current:
+            if (self.gold is None or self.duration < self.gold) and not current:
                 color = 'gold'
-            elif self.duration > self.pb:
-                color = 'behind gain' if self.progress < (self.pb_start + self.pb) and current else 'behind loss'
+            elif self.pb is not None:
+                if self.duration > self.pb:
+                    color = 'behind gain' if self.progress < (self.pb_start + self.pb) and current else 'behind loss'
+                else:
+                    color = 'ahead gain' if not current or self.gold is None or self.progress < self.gold else 'ahead loss'
             else:
-                color = 'ahead gain' if not current or self.gold is None or self.progress < self.gold else 'ahead loss'
+                color = 'normal'
             text.append(get_timer_display(self.duration, color))
         self.duration_widget.set_text(text)
 
@@ -197,7 +200,7 @@ class Segment(urwid.WidgetWrap):
                 text.append('\n')
                 text.append(get_timer_display(self.duration - self.gold, sign=True, color='gold' if self.duration < self.gold and not current else 'diff'))
 
-        self.diff_widget.set_text(text)
+        self.diff_widget.set_text(text or '')
 
     def stop(self):
         self.update(current=False)
@@ -637,7 +640,7 @@ class Spliter:
                         'name': segment.name,
                         'description': segment.description,
                         'pb': segment.pb,
-                        'gold': segment.duration if golds and segment != self.current_segment and segment.duration and segment.duration < segment.gold else segment.gold,
+                        'gold': segment.duration if golds and segment != self.current_segment and segment.duration and (segment.gold is None or segment.duration < segment.gold) else segment.gold,
                         'duration': segment.duration,
                         'color': segment.color,
                         'stats': segment.stats,
