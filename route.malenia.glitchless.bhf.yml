@@ -1,0 +1,401 @@
+route:
+- gold: null
+  build: []
+  color: null
+  description: "Samoura\xEF + Rune d'Entre-terre\nSauter dans le vide pr\xE8s du boss tuto"
+  name: Chapelle de l'anticipation
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Utiliser la |Rune d'Entre-terre| pendant l'ascenseur avant de sortir\n\
+    Prendre le site de gr\xE2ce du commencement\nAcheter |N\xE9cessaire de fabrication|\
+    \ au marchand\nDirection N+1, r\xE9cup\xE9rer |3 R\xE9sines de racine| sur le\
+    \ passage puis prendre le site des portes et r\xE9cup\xE9rer Torrent\n|TP Commencement|\
+    \ puis direction E, prendre le coffre pi\xE9g\xE9 dans les ruines"
+  name: "N\xE9crolimbe"
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Prendre le site pr\xE8s de la sortie de la grotte\nSortir de la grotte,\
+    \ direction SE |Graine dor\xE9e| puis faire le skip de Sellia sur la branche pour\
+    \ remonter\nPrendre le site de gr\xE2ce dans l'\xE9glise puis aller au Bastion\
+    \ avec Melina"
+  name: Caelid
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: '|TP Galerie cristalline de Sellia|'
+  name: Bastion de la Table ronde
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Sortir de la grotte, direction SW aller chercher |Pierre de forge\
+    \ sombre (5)| puis |TP \xC9glise de la putr\xE9faction|\nDirection N, prendre\
+    \ le courant d'air pour monter et aller chercher |M\xE9daillon de Dectus (droite)|\
+    \ dans le Fort Faroth\nPrendre le |Sceau meurtri de Radagon| et |TP Commencement|"
+  name: Caelid
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Direction E+1 prendre le site de gr\xE2ce pour Darriwil plus tard\n\
+    Direction N+1.5 descendre avec le courant d'air\nDirection E-1 ramasser |2 R\xE9\
+    sines de racine| sur le passage et acheter |10 Fl\xE8ches de Trina| au marchand\n\
+    Direction SE ramasser Rose de sang devant le Fort Haight et encore |4 Roses de\
+    \ sang| \xE0 l'int\xE9rieur\nPrendre le |Manuel de guerrier nomade 6| juste au\
+    \ dessus et monter tout en haut pour |M\xE9daillon de Dectus (gauche)|\n|TP Portes|,\
+    \ direction cabane W NW, |Graine dor\xE9e| sur le chemin\nPrendre le site du cabanon\
+    \ puis direction NW, skip Margit & Godrick en passant \xE0 droite vers Liurnia"
+  name: "N\xE9crolimbe"
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
+    \ N pour le portail vers l'acad\xE9mie\nPrendre le TP, et aller chercher le |medaillon de Rold (Droite)|.\n|TP à l'Académie|."
+  name: Liurnia
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Jump du pont et portail vers Iji direction\
+    \ NE\nPrendre le site devant Iji puis direction E aller \xE0 l'ascenseur de Dectus"
+  name: Liurnia
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Direction E-1 faire tout le trajet jusqu'\xE0 la Sentinelle Draconique"
+  name: Plateau Altus
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: boss
+  description: "Faire tomber le boss dans le vide\nApr\xE8s le boss, prendre le site\
+    \ devant Leyndell et |TP Sud du lac d'Agheel|"
+  name: SENTINELLE DRACONIQUE
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Levelup |15 Force|, |23 Dex| et |12 Foi|\nAjouter 2 doses de fiole\
+    \ et allouer 5 popo de mana\nDirection S pour la ge\xF4le de Darriwil"
+  name: "N\xE9crolimbe"
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Uchigatana'
+  - 'TALISMANS : Sceau meurtri de Radagon'
+  - 'BUFFS : Graisse sanguine'
+  color: boss
+  description: "WAR2 R1 WAR2, stun, WAR2 R1 WAR2\n\nApr\xE8s le fight, |TP Route du\
+    \ manoir|"
+  name: DARRIWIL
+  pb: null
+  stats:
+    DEX: 23
+    FOI: 12
+    FOR: 15
+- gold: null
+  build: []
+  color: null
+  description: "Parler \xE0 Iji et acheter |Pierre de forge sombre (1-2-3-4)|\nUpgrade\
+    \ le |Croc du limier en +5| puis |TP Commencement|"
+  name: Liurnia
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Croc du limier +5'
+  - 'TALISMANS : Sceau meurtri de Radagon'
+  - 'BUFFS : Aucun'
+  color: boss
+  description: "JR2, WA, combo WA (stun), combo WA, WA\n\nApr\xE8s le fight, |TP Commencement|\
+    \ pour r\xE9cup\xE9rer l'arme du boss plus vite"
+  name: SENTINELLE DE L'ARBRE
+  pb: null
+  stats:
+    DEX: 23
+    FOI: 12
+    FOR: 15
+- gold: null
+  build: []
+  color: null
+  description: "|TP \xC9glise de la putr\xE9faction|"
+  name: "N\xE9crolimbe"
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: Skip de l'effigie direction SE pour aller sur Radahn
+  name: Caelid
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Croc du limier +5'
+  - 'TALISMANS : Sceau meurtri de Radagon'
+  - "BUFFS : Serment dor\xE9, Graisse sanguine"
+  color: boss
+  description: "Opener safe : reculer jusqu'\xE0 ce que Radahn disparaisse, puis avancer\
+    \ vers lui\nInvoquer des PNJ au d\xE9but du fight et mettre |Graisse sanguine|\
+    \ sur le cheval en allant vers le boss\n\nRester \xE0 distance jusqu'\xE0 ce qu'il\
+    \ commence la premi\xE8re attaque qu'on voit dans la vid\xE9o\nJR1, 3 R1, combo\
+    \ WA, 2 R1, combo WA, combo WA\n\nApr\xE8s le fight, quitout pr\xE8s de l'emplacement\
+    \ d'Alexander\nTuer Alexander pour |Fragment de guerrier-jarre| et |TP Cabane\
+    \ de Valorage|"
+  name: 'RADAHN
+
+    Rune majeure 1'
+  pb: null
+  stats:
+    DEX: 23
+    FOI: 12
+    FOR: 15
+- gold: null
+  build: []
+  color: null
+  description: "Utiliser le |Souvenir du Fl\xE9au des astres| sur le cheval et aller\
+    \ sur Margit"
+  name: "N\xE9crolimbe"
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Croc du limier +5'
+  - 'TALISMANS : Sceau meurtri de Radagon'
+  - 'BUFFS : Aucun'
+  color: boss
+  description: CR2, combo WA (stun), 3 R1, WA
+  name: MARGIT
+  pb: null
+  stats:
+    DEX: 23
+    FOI: 12
+    FOR: 15
+- gold: null
+  build: []
+  color: null
+  description: "Parler au PNJ apr\xE8s Margit et lui demander de passer par la porte\
+    \ principale\nRevenir se coller \xE0 la grille et quitout pour l'ouvrir\nTraverser\
+    \ le ch\xE2teau pour aller sur Godrick, ramasser |5 Khukuri| juste apr\xE8s les\
+    \ secondes balistes"
+  name: "N\xE9crolimbe"
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Croc du limier +5'
+  - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
+  - "BUFFS : Serment dor\xE9"
+  color: boss
+  description: "CR2 R1 R1, combo WA (stun), frontstab, combo WA R1\n\nApr\xE8s le\
+    \ fight, |TP Rempart de la capitale|"
+  name: 'GODRICK
+
+    Rune majeure 2'
+  pb: null
+  stats:
+    DEX: 23
+    FOI: 12
+    FOR: 15
+- gold: null
+  build: []
+  color: null
+  description: Levelup |42 Dex|
+  name: Plateau Altus
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Pendant l'ascenseur utiliser le |Souvenir du greff\xE9|\nPrendre le\
+    \ premier site de gr\xE2ce rencontr\xE9 puis Leyndell Skip\nPartir sur la droite,\
+    \ ramasser |Arc noir| et |Rune dor\xE9e (9)| sur le passage vers le dragon mort\n\
+    Prendre un |Arc runique| apr\xE8s la s\xE9rie de jumps, monter \xE0 l'\xE9chelle,\
+    \ ramasser |Rune dor\xE9e (11)| et go Godfrey"
+  name: Leyndell
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Croc du limier +5'
+  - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
+  - "BUFFS : Serment dor\xE9"
+  color: boss
+  description: "Serment dor\xE9 \xE0 l'ext\xE9rieur de l'ar\xE8ne, quand le boss appara\xEE\
+    t |Khukuri| + popo de mana\n\nCombo WA quand c'est possible sinon juste WA ou\
+    \ JR1 quand il slide sur le c\xF4t\xE9"
+  name: GODFREY
+  pb: null
+  stats:
+    DEX: 42
+    FOI: 12
+    FOR: 15
+- gold: null
+  build: []
+  color: null
+  description: Aller sur Morgott directement
+  name: Leyndell
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Croc du limier +5'
+  - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
+  - "BUFFS : Serment dor\xE9, Graisse sanguine"
+  color: boss
+  description: "Avant le fight : Serment dor\xE9, popo de mana et |Graisse sanguine|\n\
+    \nJR1 au d\xE9but, combo WA, combo WA (stun), frontstab, combo WA, combo WA\n\
+    Si pas le temps de stun avec le 2\xE8me combo y'a une autre strat backup :\nJR1\
+    \ au d\xE9but, combo WA, CR2 (stun) JR1, frontstab, combo WA, combo WA\n\nApr\xE8\
+    s le fight, aller jusqu'aux ronces, revenir prendre le site et se reposer pour\
+    \ le |Medaillon de Rold|\nLevelup |25 Force 46 Dex| et |TP Rempart oriental de\
+    \ la capitale|"
+  name: MORGOTT
+  pb: null
+  stats:
+    DEX: 42
+    FOI: 12
+    FOR: 15
+- gold: null
+  build: []
+  color: null
+  description: "Refaire le Leyndell Skip pour descendre\nApr\xE8s la grande porte,\
+    \ |Pierre de forge sombre (6)| sur la gauche puis |Chair exalt\xE9e| sur le rebord\n\
+    Utiliser l'|Arc runique| et |Souvenir du roi R\xE9prouv\xE9| dans l'ascenseur\n\
+    Courir jusqu'\xE0 l'ascenseur pour descendre aux Terres interdites\nPendant l'ascenseur\
+    \ utiliser |Rune dor\xE9e (9)|, |Rune dor\xE9e (11)|"
+  name: Leyndell
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Ramasser |Pierre de forge sombre (7)| dans un cr\xE2ne g\xE9ant\n\
+    Ramasser |Graisse glaciale| \xE0 gauche avant l'ascenseur de Rold\nPrendre le TP devant l'ascenseur\
+    \ de Rold, puis l'emprunter pour aller aux Cimes des G\xE9ants"
+  name: Terres interdites
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Tuer le bousier apr\xE8s la muraille pour |Pierre de forge sombre\
+    \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s.\nAller jusqu'à Solcastel en faisant un détour pour prendre la |Pierre de forge sombre (9)|.\nPrendre le site devant Solcastel puis |TP Route du manoir|."
+  name: "Cimes des G\xE9ants"
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Upgrade le |Croc du limier en +9|\n|TP Solcastle|"
+  name: Liurnia
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Aller jusqu'à Niall"
+  name: "Cimes des G\xE9ants"
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Croc du limier +9'
+  - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
+  - "BUFFS : Serment dor\xE9"
+  color: boss
+  description: ""
+  name: "COMMANDANT NIALL"
+  pb: null
+  stats:
+    DEX: 46
+    FOI: 12
+    FOR: 25
+- gold: null
+  build: []
+  color: null
+  description: "Prendre le médaillon en haut de la tour, |TP Ascenseur de Rold| et le prendre."
+  name: "Cimes des G\xE9ants"
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Aller à l'est au bout de la rivière pour prendre la |Pierre de forge sombre des dragons anciens|.\nAller vers Ordina et prendre le site de grâce devant.\n|TP Route du manoir|"
+  name: "Champs de neige consacrés"
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: 'Upgrade le |Croc du limier en +10|
+
+    |TP Ordina|'
+  name: Liurnia
+  pb: null
+- gold: null
+  build: []
+  color: null
+  description: "Allumer les flames puis prendre le TP vers l'Arbre-Sacré de Miquella"
+  name: "Ordina"
+  pb: null
+  stats: {}
+- gold: null
+  build: []
+  color: null
+  description: "Aller vers Loretta"
+  name: "Arbre-Sacré de Miquella"
+  pb: null
+  stats: {}
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Arc noir et Croc du limier +10'
+  - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
+  - "BUFFS : Serment dor\xE9"
+  color: boss
+  description: ""
+  name: LORETTA 2
+  pb: null
+  stats:
+    DEX: 51
+    FOI: 12
+    FOR: 31
+- gold: null
+  build: []
+  color: null
+  description: "Aller jusqu'à Malenia"
+  name: "Arbre-Sacré de Miquella"
+  pb: null
+  stats: {}
+- gold: null
+  build:
+  - 'ARME : Croc du limier +10'
+  - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
+  - "BUFFS : Serment dor\xE9"
+  color: boss
+  description: ""
+  name: MALENIA
+  pb: null
+  stats:
+    DEX: 51
+    FOI: 12
+    FOR: 31
