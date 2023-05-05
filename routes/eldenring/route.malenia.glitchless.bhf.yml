@@ -62,7 +62,7 @@ route:
   build: []
   color: null
   description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
-    \ N pour le portail vers l'acad\xE9mie\nPrendre le TP, et aller chercher le |medaillon de Rold (Droite)|.\n|TP à l'Académie|."
+    \ N pour le portail vers l'acad\xE9mie\nPrendre le TP, et aller chercher le |Médaillon secret de l'Arbre Sacré (Droite)|.\n|TP à l'Académie|."
   name: Liurnia
   pb: null
   stats: {}
@@ -289,7 +289,7 @@ route:
   build: []
   color: null
   description: "Ramasser |Pierre de forge sombre (7)| dans un cr\xE2ne g\xE9ant\n\
-    Ramasser |Graisse glaciale| \xE0 gauche avant l'ascenseur de Rold\nPrendre le TP devant l'ascenseur\
+    Prendre le site de grâce devant l'ascenseur\
     \ de Rold, puis l'emprunter pour aller aux Cimes des G\xE9ants"
   name: Terres interdites
   pb: null
@@ -298,14 +298,15 @@ route:
   build: []
   color: null
   description: "Tuer le bousier apr\xE8s la muraille pour |Pierre de forge sombre\
-    \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s.\nAller jusqu'à Solcastel en faisant un détour pour prendre la |Pierre de forge sombre (9)|.\nPrendre le site devant Solcastel puis |TP Route du manoir|."
+    \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s.\nAller jusqu'à Solcastel en faisant un détour pour prendre la |Pierre de forge sombre (9)| sur le pont.\nPrendre le site devant Solcastel puis |TP Route du manoir|."
   name: "Cimes des G\xE9ants"
   pb: null
   stats: {}
 - gold: null
   build: []
   color: null
-  description: "Upgrade le |Croc du limier en +9|\n|TP Solcastle|"
+  description: "Upgrade le |Croc du limier en +9|\n|TP Solcastel|"
+  stats: {}
   name: Liurnia
   pb: null
   stats: {}
@@ -320,9 +321,9 @@ route:
   build:
   - 'ARME : Croc du limier +9'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
-  - "BUFFS : Serment dor\xE9"
+  - "BUFFS : Serment dor\xE9, Graisse sanguine"
   color: boss
-  description: ""
+  description: "Serment doré + Popo mana\nAttendre que le sbire aux épées vienne vers soi pour combo WA.\nSe rapprocher du second, et lorsqu'il est à portée et en anticipant son attaque, combo WA.\n\nSerment doré + Popo de mana\nLors de l'attaque en l'air : JR2 lorsqu'il tombe, puis R1\nLors de l'attaque où il court : combo WA dès que possible pour éviter son AOE sur le retour\nAux 3/4 de sa vie, il lance son AEO : se casser et regen son endurence. Combo WA, petite regen d'endu, CR2 CR2 (stun), fronstab, partir loin.\nLe finir."
   name: "COMMANDANT NIALL"
   pb: null
   stats:
@@ -332,14 +333,14 @@ route:
 - gold: null
   build: []
   color: null
-  description: "Prendre le médaillon en haut de la tour, |TP Ascenseur de Rold| et le prendre."
+  description: "Prendre le |Médaillon secret de l'Arbre Sacré (gauche)| en haut de la tour, |TP Ascenseur de Rold| et utiliser le médaillon."
   name: "Cimes des G\xE9ants"
   pb: null
   stats: {}
 - gold: null
   build: []
   color: null
-  description: "Aller à l'est au bout de la rivière pour prendre la |Pierre de forge sombre des dragons anciens|.\nAller vers Ordina et prendre le site de grâce devant.\n|TP Route du manoir|"
+  description: "Aller au nord ouest vers Ordina et prendre le site de grâce. Aller vers le sud pour combattre Anastasia et récupérer la |Pierre de forge sombre des dragons anciens|.\\n|TP Route du manoir|"
   name: "Champs de neige consacrés"
   pb: null
   stats: {}
@@ -347,9 +348,9 @@ route:
   build: []
   color: null
   description: 'Upgrade le |Croc du limier en +10|
-
     |TP Ordina|'
   name: Liurnia
+  stats: {}
   pb: null
 - gold: null
   build: []
@@ -368,11 +369,11 @@ route:
   stats: {}
 - gold: null
   build:
-  - 'ARME : Arc noir et Croc du limier +10'
+  - 'ARME : et Croc du limier +10'
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
   - "BUFFS : Serment dor\xE9"
   color: boss
-  description: ""
+  description: "Combo WA à l'ouverture.\nAttaque à la lance : après le premier coup aller derrière elle et WA.\nArc : avancer vers elle et WA\nLance bleue : à la fin combo WA"
   name: LORETTA 2
   pb: null
   stats:
@@ -392,7 +393,7 @@ route:
   - 'TALISMANS : Sceau meurtri de Radagon, Fragment de guerrier-jarre'
   - "BUFFS : Serment dor\xE9"
   color: boss
-  description: ""
+  description: "La combattre à la loyale."
   name: MALENIA
   pb: null
   stats:
