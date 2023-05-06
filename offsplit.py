@@ -571,19 +571,24 @@ class Spliter:
         self.current_segment.progress_start = 0.0
         self.update()
 
+    def resume_segment(self, idx):
+        self.paused = True
+        self.current_segment_idx = idx-1
+
+        self.focus()
+        self.update()
+
     def resume(self):
         """resume"""
         progress = 0.0
         for idx, segment in enumerate(self.segments):
-            if segment.duration is None:
-                self.paused = True
-                self.current_segment_idx = idx-1
-
-                self.focus()
-                self.update()
+            if segment.duration is None or idx == len(self.segments):
+                self.resume_segment(idx)
                 return
 
             progress += segment.duration
+
+        self.resume_segment(len(self.segments))
 
     def stop(self):
         self.view.set_enabled(False)
