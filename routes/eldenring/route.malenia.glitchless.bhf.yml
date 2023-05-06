@@ -5,6 +5,7 @@ route:
   color: null
   description: "Samoura\xEF + Rune d'Entre-terre\nSauter dans le vide pr\xE8s du boss\
     \ tuto"
+  id: 07c92ba0-8198-40c4-a4a6-fafeec410b98
   name: Chapelle de l'anticipation
   stats: {}
 - build: []
@@ -14,6 +15,7 @@ route:
     \ au marchand\nDirection N+1, r\xE9cup\xE9rer |3 R\xE9sines de racine| sur le\
     \ passage puis prendre le site des portes et r\xE9cup\xE9rer Torrent\n|TP Commencement|\
     \ puis direction E, prendre le coffre pi\xE9g\xE9 dans les ruines"
+  id: 4e8ba687-acf6-4877-b235-6fea7b08957d
   name: "N\xE9crolimbe"
   stats: {}
 - build: []
@@ -22,11 +24,13 @@ route:
     \ direction SE |Graine dor\xE9e| puis faire le skip de Sellia sur la branche pour\
     \ remonter\nPrendre le site de gr\xE2ce dans l'\xE9glise puis aller au Bastion\
     \ avec Melina"
+  id: 60276051-8ad5-49fd-a8db-1d0dc6f24ddc
   name: Caelid
   stats: {}
 - build: []
   color: null
   description: '|TP Galerie cristalline de Sellia|'
+  id: 16dc3991-cc08-4a6f-aa3e-c4590d398a0f
   name: Bastion de la Table ronde
   stats: {}
 - build: []
@@ -35,6 +39,7 @@ route:
     \ sombre (5)| puis |TP \xC9glise de la putr\xE9faction|\nDirection N, prendre\
     \ le courant d'air pour monter et aller chercher |M\xE9daillon de Dectus (droite)|\
     \ dans le Fort Faroth\nPrendre le |Sceau meurtri de Radagon| et |TP Commencement|"
+  id: 040efc52-46c7-4845-b5d2-0a31263103b7
   name: Caelid
   stats: {}
 - build: []
@@ -47,6 +52,7 @@ route:
     \ dessus et monter tout en haut pour |M\xE9daillon de Dectus (gauche)|\n|TP Portes|,\
     \ direction cabane W NW, |Graine dor\xE9e| sur le chemin\nPrendre le site du cabanon\
     \ puis direction NW, skip Margit & Godrick en passant \xE0 droite vers Liurnia"
+  id: f4e984f1-6994-4d41-8380-ecefffa293d0
   name: "N\xE9crolimbe"
   stats: {}
 - build: []
@@ -54,29 +60,34 @@ route:
   description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
     \ N pour le portail vers l'acad\xE9mie\nPrendre le TP, et aller chercher le |M\xE9\
     daillon secret de l'Arbre Sacr\xE9 (Droite)|.\n|TP \xE0 l'Acad\xE9mie|."
+  id: b7ede3b8-28b0-44f9-a122-ef04fb90171b
   name: Liurnia
   stats: {}
 - build: []
   color: null
   description: "Jump du pont et portail vers Iji direction NE\nPrendre le site devant\
     \ Iji puis direction E aller \xE0 l'ascenseur de Dectus"
+  id: e4a707a4-aa23-4546-a0ca-2b0d840363d7
   name: Liurnia
   stats: {}
 - build: []
   color: null
   description: "Direction E-1 faire tout le trajet jusqu'\xE0 la Sentinelle Draconique"
+  id: c19d8f3e-1712-4624-88fd-8479d8067153
   name: Plateau Altus
   stats: {}
 - build: []
   color: boss
   description: "Faire tomber le boss dans le vide\nApr\xE8s le boss, prendre le site\
     \ devant Leyndell et |TP Sud du lac d'Agheel|"
+  id: fb3a1b42-c966-4769-9d3b-24d7b0faed17
   name: SENTINELLE DRACONIQUE
   stats: {}
 - build: []
   color: null
   description: "Levelup |15 Force|, |23 Dex| et |12 Foi|\nAjouter 2 doses de fiole\
     \ et allouer 5 popo de mana\nDirection S pour la ge\xF4le de Darriwil"
+  id: 916b82c4-4340-45e8-be7f-486f96593b2d
   name: "N\xE9crolimbe"
   stats: {}
 - build:
@@ -86,6 +97,7 @@ route:
   color: boss
   description: "WAR2 R1 WAR2, stun, WAR2 R1 WAR2\n\nApr\xE8s le fight, |TP Route du\
     \ manoir|"
+  id: 07061fd8-83e4-4174-83aa-751a568abb79
   name: DARRIWIL
   stats:
     DEX: 23
@@ -95,6 +107,7 @@ route:
   color: null
   description: "Parler \xE0 Iji et acheter |Pierre de forge sombre (1-2-3-4)|\nUpgrade\
     \ le |Croc du limier en +5| puis |TP Commencement|"
+  id: a4a7e3b9-ba37-45a1-a993-8e4000b4f639
   name: Liurnia
   stats: {}
 - build:
@@ -104,6 +117,7 @@ route:
   color: boss
   description: "JR2, WA, combo WA (stun), combo WA, WA\n\nApr\xE8s le fight, |TP Commencement|\
     \ pour r\xE9cup\xE9rer l'arme du boss plus vite"
+  id: 085d61c8-4271-4249-9621-c87e946e8b26
   name: SENTINELLE DE L'ARBRE
   stats:
     DEX: 23
@@ -112,11 +126,13 @@ route:
 - build: []
   color: null
   description: "|TP \xC9glise de la putr\xE9faction|"
+  id: 77f62417-f16b-4cb8-885e-4b1732d94cae
   name: "N\xE9crolimbe"
   stats: {}
 - build: []
   color: null
   description: Skip de l'effigie direction SE pour aller sur Radahn
+  id: 72946768-2631-4619-9c5c-9e9a283a9a77
   name: Caelid
   stats: {}
 - build:
@@ -131,6 +147,7 @@ route:
     \ WA, 2 R1, combo WA, combo WA\n\nApr\xE8s le fight, quitout pr\xE8s de l'emplacement\
     \ d'Alexander\nTuer Alexander pour |Fragment de guerrier-jarre| et |TP Cabane\
     \ de Valorage|"
+  id: f882bf32-009d-4417-b57e-b15dfa3aa5f2
   name: 'RADAHN
 
     Rune majeure 1'
@@ -142,6 +159,7 @@ route:
   color: null
   description: "Utiliser le |Souvenir du Fl\xE9au des astres| sur le cheval et aller\
     \ sur Margit"
+  id: 94738f80-8e7d-446e-8e99-7a15756b26a1
   name: "N\xE9crolimbe"
   stats: {}
 - build:
@@ -150,6 +168,7 @@ route:
   - 'BUFFS : Aucun'
   color: boss
   description: CR2, combo WA (stun), 3 R1, WA
+  id: c18b6b0e-cef3-4fec-be4c-88c63b4696f2
   name: MARGIT
   stats:
     DEX: 23
@@ -161,6 +180,7 @@ route:
     \ principale\nRevenir se coller \xE0 la grille et quitout pour l'ouvrir\nTraverser\
     \ le ch\xE2teau pour aller sur Godrick, ramasser |5 Khukuri| juste apr\xE8s les\
     \ secondes balistes"
+  id: fb42a44e-ad0c-4f4d-a7a4-72efb0e4c565
   name: "N\xE9crolimbe"
   stats: {}
 - build:
@@ -170,6 +190,7 @@ route:
   color: boss
   description: "CR2 R1 R1, combo WA (stun), frontstab, combo WA R1\n\nApr\xE8s le\
     \ fight, |TP Rempart de la capitale|"
+  id: 0c9bcc68-1cac-4582-86b7-2fda27cc7281
   name: 'GODRICK
 
     Rune majeure 2'
@@ -180,6 +201,7 @@ route:
 - build: []
   color: null
   description: Levelup |42 Dex|
+  id: e36e6e6f-8c9c-450b-a122-1c5f9caabede
   name: Plateau Altus
   stats: {}
 - build: []
@@ -189,6 +211,7 @@ route:
     \ ramasser |Arc noir| et |Rune dor\xE9e (9)| sur le passage vers le dragon mort\n\
     Prendre un |Arc runique| apr\xE8s la s\xE9rie de jumps, monter \xE0 l'\xE9chelle,\
     \ ramasser |Rune dor\xE9e (11)| et go Godfrey"
+  id: 53aed49c-7c2d-4a5a-8331-face2f722346
   name: Leyndell
   stats: {}
 - build:
@@ -199,6 +222,7 @@ route:
   description: "Serment dor\xE9 \xE0 l'ext\xE9rieur de l'ar\xE8ne, quand le boss appara\xEE\
     t |Khukuri| + popo de mana\n\nCombo WA quand c'est possible sinon juste WA ou\
     \ JR1 quand il slide sur le c\xF4t\xE9"
+  id: 104dc676-1945-41ee-bcee-984aa8afe6e4
   name: GODFREY
   stats:
     DEX: 42
@@ -207,6 +231,7 @@ route:
 - build: []
   color: null
   description: Aller sur Morgott directement
+  id: 740ac21f-e23c-4a23-bb3e-05999d175181
   name: Leyndell
   stats: {}
 - build:
@@ -221,6 +246,7 @@ route:
     s le fight, aller jusqu'aux ronces, revenir prendre le site et se reposer pour\
     \ le |Medaillon de Rold|\nLevelup |25 Force 46 Dex| et |TP Rempart oriental de\
     \ la capitale|"
+  id: f82f688c-8f96-43db-94e8-3e1e07e3b134
   name: MORGOTT
   stats:
     DEX: 42
@@ -233,6 +259,7 @@ route:
     Utiliser l'|Arc runique| et |Souvenir du roi R\xE9prouv\xE9| dans l'ascenseur\n\
     Courir jusqu'\xE0 l'ascenseur pour descendre aux Terres interdites\nPendant l'ascenseur\
     \ utiliser |Rune dor\xE9e (9)|, |Rune dor\xE9e (11)|"
+  id: 1bb69f60-a2cf-48fd-89ec-d883f04ea597
   name: Leyndell
   stats: {}
 - build: []
@@ -240,6 +267,7 @@ route:
   description: "Ramasser |Pierre de forge sombre (7)| dans un cr\xE2ne g\xE9ant\n\
     Prendre le site de gr\xE2ce devant l'ascenseur de Rold, puis l'emprunter pour\
     \ aller aux Cimes des G\xE9ants"
+  id: 492a0922-884a-4eb1-b8d6-e96044bbca73
   name: Terres interdites
   stats: {}
 - build: []
@@ -248,6 +276,7 @@ route:
     \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s.\nAller jusqu'\xE0 Solcastel\
     \ en faisant un d\xE9tour pour prendre la |Pierre de forge sombre (9)| sur le\
     \ pont.\nPrendre le site devant Solcastel puis |TP Route du manoir|."
+  id: bf1cfe4f-342b-45f5-ab11-86daf1229b5a
   name: "Cimes des G\xE9ants"
   stats: {}
 - build: []
@@ -255,11 +284,13 @@ route:
   description: 'Upgrade le |Croc du limier en +9|
 
     |TP Solcastel|'
+  id: 1310c557-8706-44ba-b71e-18d8ca30e8f5
   name: Liurnia
   stats: {}
 - build: []
   color: null
   description: "Aller jusqu'\xE0 Niall"
+  id: 434a5de1-112d-426f-a836-20723cd07aa1
   name: "Cimes des G\xE9ants"
   stats: {}
 - build:
@@ -275,6 +306,7 @@ route:
     \ AOE sur le retour\nAux 3/4 de sa vie, il lance son AEO\_: se casser et regen\
     \ son endurence. Combo WA, petite regen d'endu, CR2 CR2 (stun), fronstab, partir\
     \ loin.\nLe finir."
+  id: 929aadde-c439-4811-8ea4-4aa3d03c2f07
   name: COMMANDANT NIALL
   stats:
     DEX: 46
@@ -284,6 +316,7 @@ route:
   color: null
   description: "Prendre le |M\xE9daillon secret de l'Arbre Sacr\xE9 (gauche)| en haut\
     \ de la tour, |TP Ascenseur de Rold| et utiliser le m\xE9daillon."
+  id: 887815aa-2e25-40e7-b315-cf58b16e6f0d
   name: "Cimes des G\xE9ants"
   stats: {}
 - build: []
@@ -291,21 +324,25 @@ route:
   description: "Aller au nord ouest vers Ordina et prendre le site de gr\xE2ce. Aller\
     \ vers le sud pour combattre Anastasia et r\xE9cup\xE9rer la |Pierre de forge\
     \ sombre des dragons anciens|.\\n|TP Route du manoir|"
+  id: d3c9ba98-ba12-4a65-960f-bf5ca5e57880
   name: "Champs de neige consacr\xE9s"
   stats: {}
 - build: []
   color: null
   description: Upgrade le |Croc du limier en +10| |TP Ordina|
+  id: 24ae1b3a-d525-4d8d-9d1e-2a6cb8c2fd78
   name: Liurnia
   stats: {}
 - build: []
   color: null
   description: "Allumer les flames puis prendre le TP vers l'Arbre-Sacr\xE9 de Miquella"
+  id: 6c3437db-5085-4d21-80cc-5c9beedc3e92
   name: Ordina
   stats: {}
 - build: []
   color: null
   description: Aller vers Loretta
+  id: ce65a543-b549-4079-a7a9-c288075f9831
   name: "Arbre-Sacr\xE9 de Miquella"
   stats: {}
 - build:
@@ -316,6 +353,7 @@ route:
   description: "Combo WA \xE0 l'ouverture.\nAttaque \xE0 la lance\_: apr\xE8s le premier\
     \ coup aller derri\xE8re elle et WA.\nArc\_: avancer vers elle et WA\nLance bleue\_\
     : \xE0 la fin combo WA"
+  id: ed29a5bf-01c7-4916-b652-af896bb09730
   name: LORETTA 2
   stats:
     DEX: 51
@@ -324,6 +362,7 @@ route:
 - build: []
   color: null
   description: "Aller jusqu'\xE0 Malenia"
+  id: 0e088c95-6f8b-4ec1-bd89-1ecc0e69b7ea
   name: "Arbre-Sacr\xE9 de Miquella"
   stats: {}
 - build:
@@ -332,6 +371,7 @@ route:
   - "BUFFS : Serment dor\xE9"
   color: boss
   description: "La combattre \xE0 la loyale."
+  id: 936f7d07-2ca4-4c65-81ed-d01b4cad9a0b
   name: MALENIA
   stats:
     DEX: 51

@@ -5,6 +5,7 @@ route:
   color: null
   description: "Samoura\xEF + Rune d'Entre-terre\nSauter dans le vide pr\xE8s du boss\
     \ tuto"
+  id: 2daddf1d-e7c1-4342-ba10-85d3db1c63b3
   name: Chapelle de l'anticipation
   stats: {}
 - build: []
@@ -14,6 +15,7 @@ route:
     \ au marchand\nDirection N+1, r\xE9cup\xE9rer |3 R\xE9sines de racine| sur le\
     \ passage puis prendre le site des portes et r\xE9cup\xE9rer Torrent\n|TP Commencement|\
     \ puis direction E, prendre le coffre pi\xE9g\xE9 dans les ruines"
+  id: 30e84bbb-8097-4d1a-a919-b2ed47379a25
   name: "N\xE9crolimbe"
   stats: {}
 - build: []
@@ -22,11 +24,13 @@ route:
     \ direction SE |Graine dor\xE9e| puis faire le skip de Sellia sur la branche pour\
     \ remonter\nPrendre le site de gr\xE2ce dans l'\xE9glise puis aller au Bastion\
     \ avec Melina"
+  id: 1e6b4a82-f8c3-4e36-b259-01d47f40a9b3
   name: Caelid
   stats: {}
 - build: []
   color: null
   description: '|TP Galerie cristalline de Sellia|'
+  id: aa78a331-a291-4375-b017-898c333f4509
   name: Bastion de la Table ronde
   stats: {}
 - build: []
@@ -35,6 +39,7 @@ route:
     \ sombre (5)| puis |TP \xC9glise de la putr\xE9faction|\nDirection N, prendre\
     \ le courant d'air pour monter et aller chercher |M\xE9daillon de Dectus (droite)|\
     \ dans le Fort Faroth\nPrendre le |Sceau meurtri de Radagon| et |TP Commencement|"
+  id: 158c072d-a0b7-41be-9fba-8ee3a754a984
   name: Caelid
   stats: {}
 - build: []
@@ -47,6 +52,7 @@ route:
     \ dessus et monter tout en haut pour |M\xE9daillon de Dectus (gauche)|\n|TP Portes|,\
     \ direction cabane W NW, |Graine dor\xE9e| sur le chemin\nPrendre le site du cabanon\
     \ puis direction NW, skip Margit & Godrick en passant \xE0 droite vers Liurnia"
+  id: ca9e98eb-8e97-49b2-8d62-b623ae6560d2
   name: "N\xE9crolimbe"
   stats: {}
 - build: []
@@ -54,23 +60,27 @@ route:
   description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
     \ N pour le portail vers l'acad\xE9mie\nJump du pont et portail vers Iji direction\
     \ NE\nPrendre le site devant Iji puis direction E aller \xE0 l'ascenseur de Dectus"
+  id: 8919555b-9366-4441-bf0e-8230413dde19
   name: Liurnia
   stats: {}
 - build: []
   color: null
   description: "Direction E-1 faire tout le trajet jusqu'\xE0 la Sentinelle Draconique"
+  id: a3905f62-e136-440b-9ecf-1ea277e4402d
   name: Plateau Altus
   stats: {}
 - build: []
   color: boss
   description: "Faire tomber le boss dans le vide\nApr\xE8s le boss, prendre le site\
     \ devant Leyndell et |TP Sud du lac d'Agheel|"
+  id: 3dce9cd7-6907-4e41-bde0-8815959708c3
   name: SENTINELLE DRACONIQUE
   stats: {}
 - build: []
   color: null
   description: "Levelup |15 Force|, |23 Dex| et |12 Foi|\nAjouter 2 doses de fiole\
     \ et allouer 5 popo de mana\nDirection S pour la ge\xF4le de Darriwil"
+  id: c5a2a767-01a2-4df2-8ad0-f05246c32ffd
   name: "N\xE9crolimbe"
   stats: {}
 - build:
@@ -80,6 +90,7 @@ route:
   color: boss
   description: "WAR2 R1 WAR2, stun, WAR2 R1 WAR2\n\nApr\xE8s le fight, |TP Route du\
     \ manoir|"
+  id: 698ea461-f2bc-4778-8deb-f3c66c0b92af
   name: DARRIWIL
   stats:
     DEX: 23
@@ -89,6 +100,7 @@ route:
   color: null
   description: "Parler \xE0 Iji et acheter |Pierre de forge sombre (1-2-3-4)|\nUpgrade\
     \ le |Croc du limier en +5| puis |TP Commencement|"
+  id: 7092bccd-70c4-4105-bc7e-8701b78d7077
   name: Liurnia
   stats: {}
 - build:
@@ -98,6 +110,7 @@ route:
   color: boss
   description: "JR2, WA, combo WA (stun), combo WA, WA\n\nApr\xE8s le fight, |TP Commencement|\
     \ pour r\xE9cup\xE9rer l'arme du boss plus vite"
+  id: ca724dcd-75ab-4478-aa0b-938fc8dfaec1
   name: SENTINELLE DE L'ARBRE
   stats:
     DEX: 23
@@ -106,11 +119,13 @@ route:
 - build: []
   color: null
   description: "|TP \xC9glise de la putr\xE9faction|"
+  id: 0e2b6575-8393-41a4-8bda-e0ff4ca6f47c
   name: "N\xE9crolimbe"
   stats: {}
 - build: []
   color: null
   description: Skip de l'effigie direction SE pour aller sur Radahn
+  id: acffe3d2-4654-47d9-ba37-5fe4f84eca00
   name: Caelid
   stats: {}
 - build:
@@ -125,6 +140,7 @@ route:
     \ WA, 2 R1, combo WA, combo WA\n\nApr\xE8s le fight, quitout pr\xE8s de l'emplacement\
     \ d'Alexander\nTuer Alexander pour |Fragment de guerrier-jarre| et |TP Cabane\
     \ de Valorage|"
+  id: ea863e15-7edc-443b-ae3a-e15f6dfd5943
   name: 'RADAHN
 
     Rune majeure 1'
@@ -136,6 +152,7 @@ route:
   color: null
   description: "Utiliser le |Souvenir du Fl\xE9au des astres| sur le cheval et aller\
     \ sur Margit"
+  id: 03c80213-b355-4c12-bda7-c0d3cee8c735
   name: "N\xE9crolimbe"
   stats: {}
 - build:
@@ -144,6 +161,7 @@ route:
   - 'BUFFS : Aucun'
   color: boss
   description: CR2, combo WA (stun), 3 R1, WA
+  id: d14ebaf9-bcbd-4517-b2d3-f0f95a9800e7
   name: MARGIT
   stats:
     DEX: 23
@@ -155,6 +173,7 @@ route:
     \ principale\nRevenir se coller \xE0 la grille et quitout pour l'ouvrir\nTraverser\
     \ le ch\xE2teau pour aller sur Godrick, ramasser |5 Khukuri| juste apr\xE8s les\
     \ secondes balistes"
+  id: 342687ed-658a-411b-bd14-edaa00805064
   name: "N\xE9crolimbe"
   stats: {}
 - build:
@@ -164,6 +183,7 @@ route:
   color: boss
   description: "CR2 R1 R1, combo WA (stun), frontstab, combo WA R1\n\nApr\xE8s le\
     \ fight, |TP Rempart de la capitale|"
+  id: 47f494f6-bd65-4317-9114-a3e9f267a72e
   name: 'GODRICK
 
     Rune majeure 2'
@@ -174,6 +194,7 @@ route:
 - build: []
   color: null
   description: Levelup |42 Dex|
+  id: 6c63c618-6db1-406d-bd15-af9a962e14df
   name: Plateau Altus
   stats: {}
 - build: []
@@ -183,6 +204,7 @@ route:
     \ ramasser |Arc noir| et |Rune dor\xE9e (9)| sur le passage vers le dragon mort\n\
     Prendre un |Arc runique| apr\xE8s la s\xE9rie de jumps, monter \xE0 l'\xE9chelle,\
     \ ramasser |Rune dor\xE9e (11)| et go Godfrey"
+  id: 123adc82-47db-45bc-b964-c59e124a60ad
   name: Leyndell
   stats: {}
 - build:
@@ -193,6 +215,7 @@ route:
   description: "Serment dor\xE9 \xE0 l'ext\xE9rieur de l'ar\xE8ne, quand le boss appara\xEE\
     t |Khukuri| + popo de mana\n\nCombo WA quand c'est possible sinon juste WA ou\
     \ JR1 quand il slide sur le c\xF4t\xE9"
+  id: abc73d02-49d8-4066-9ce1-f8fcda26c179
   name: GODFREY
   stats:
     DEX: 42
@@ -201,6 +224,7 @@ route:
 - build: []
   color: null
   description: Aller sur Morgott directement
+  id: 94727fac-749f-42a9-9681-070ea251a343
   name: Leyndell
   stats: {}
 - build:
@@ -215,6 +239,7 @@ route:
     s le fight, aller jusqu'aux ronces, revenir prendre le site et se reposer pour\
     \ le |Medaillon de Rold|\nLevelup |25 Force 46 Dex| et |TP Rempart oriental de\
     \ la capitale|"
+  id: b645344a-100e-4cc0-b3e5-d3146c85bf18
   name: MORGOTT
   stats:
     DEX: 42
@@ -227,6 +252,7 @@ route:
     Utiliser l'|Arc runique| et |Souvenir du roi R\xE9prouv\xE9| dans l'ascenseur\n\
     Courir jusqu'\xE0 l'ascenseur pour descendre aux Terres interdites\nPendant l'ascenseur\
     \ utiliser |Rune dor\xE9e (9)|, |Rune dor\xE9e (11)|"
+  id: ee811bd7-729b-4b66-9ae0-518acb46cb78
   name: Leyndell
   stats: {}
 - build: []
@@ -234,23 +260,27 @@ route:
   description: "Ramasser |Pierre de forge sombre (7)| dans un cr\xE2ne g\xE9ant\n\
     Ramasser |Graisse glaciale| \xE0 gauche avant l'ascenseur de Rold\nPrendre l'ascenseur\
     \ de Rold pour aller aux Cimes des G\xE9ants"
+  id: 2ce17290-8ae0-4b5e-9e16-8a2ff51423eb
   name: Terres interdites
   stats: {}
 - build: []
   color: null
   description: "Tuer le bousier apr\xE8s la muraille pour |Pierre de forge sombre\
     \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s et |TP Route du manoir|"
+  id: 2f56cfd2-9335-4ba2-9174-bbd6f3793fb7
   name: "Cimes des G\xE9ants"
   stats: {}
 - build: []
   color: null
   description: "Upgrade le |Croc du limier en +8|\n|TP Antiques ruines de la vall\xE9\
     e|"
+  id: ef433687-4fda-4a4a-85ac-b05663ee8705
   name: Liurnia
   stats: {}
 - build: []
   color: null
   description: "Aller jusqu'au G\xE9ant de Feu"
+  id: 3e3f3115-b3b3-4069-9009-da8b1e3af75f
   name: "Cimes des G\xE9ants"
   stats: {}
 - build:
@@ -261,6 +291,7 @@ route:
   description: "JR2, combo WA, WA, CR2 (stun)\nCombo WA, R1, CR2 (transi)\nPopo de\
     \ mana, |Kukri|, CR2, WA sur la main et le retour sur la t\xEAte (stun), combo\
     \ WA dans l'oeil"
+  id: 3e7dc015-500c-4deb-8fc3-baf0d58a2c48
   name: "G\xC9ANT DE FEU"
   stats:
     DEX: 46
@@ -271,6 +302,7 @@ route:
   description: "Utiliser le |Souvenir du G\xE9ant de feu| sur le cheval\nPrendre le\
     \ site de gr\xE2ce de la forge et levelup |31 Force 51 Dex|\nGo Farum Azula avec\
     \ Melina"
+  id: 97e69ba0-8693-45ad-84ba-eaaf53f3fc91
   name: "Cimes des G\xE9ants"
   stats: {}
 - build: []
@@ -278,6 +310,7 @@ route:
   description: 'Ramasser |Pierre de forge sombre (9)| avant le site du Duo
 
     Se reposer au site et |TP Route du manoir|'
+  id: 52f125bb-29f4-4cae-bec7-aa0ecee06bbe
   name: Farum Azula
   stats: {}
 - build: []
@@ -285,6 +318,7 @@ route:
   description: 'Upgrade le |Croc du limier en +9|
 
     |TP Temple du dragon|'
+  id: 0ef0f2c3-58ff-4858-8ee9-1e28a74e371b
   name: Liurnia
   stats: {}
 - build:
@@ -296,6 +330,7 @@ route:
     ches de Trina sur l'ap\xF4tre\nQuand les deux sont endormis, |Serment dor\xE9\
     |, popo de mana et |Chair exalt\xE9e|\n\nNoble : CR2 R2 combo WA (stun), frontstab,\
     \ combo WA\nAp\xF4tre : CR2 combo WA (stun), backstab, combo WA"
+  id: 78871eda-543f-4282-9739-ca47a1f47a16
   name: DUO SANCTECHAIR
   stats:
     DEX: 51
@@ -306,6 +341,7 @@ route:
   description: "Juste apr\xE8s le fight, petit skip en sautant sur les rebords en\
     \ hauteur \xE0 gauche\nJump sur la colonne tomb\xE9e juste apr\xE8s puis Bird\
     \ Skip"
+  id: 19c8f140-5231-4de3-a18c-20e2f100b4c0
   name: Farum Azula
   stats: {}
 - build:
@@ -315,6 +351,7 @@ route:
   color: boss
   description: "P1 : Trade CR2, combo WA (stun), frontstab, WA\nP2 : Lock et avancer\
     \ en marchant, d\xE8s qu'il jump CR2 combo WA (stun), frontstab, WA"
+  id: 4841a215-9df2-4fe0-9118-1c9bc6a56702
   name: MALIKETH
   stats:
     DEX: 51
@@ -323,6 +360,7 @@ route:
 - build: []
   color: null
   description: Go Gideon, |Graisse glaciale| dans l'ascenseur
+  id: c96bed36-94d5-49a7-b1e2-75b7e6619ce4
   name: Leyndell
   stats: {}
 - build:
@@ -332,6 +370,7 @@ route:
   color: boss
   description: "Serment dor\xE9 quand il commence \xE0 parler\nRater le premier WA\
     \ et le toucher avec le combo, backstab, combo WA"
+  id: 384973d5-9be1-49be-9746-9f412123fcad
   name: GIDEON
   stats:
     DEX: 51
@@ -340,6 +379,7 @@ route:
 - build: []
   color: null
   description: Levelup |15 Vigueur 44 Force|
+  id: 3dae016f-a2ec-4006-97ea-3a4c5776dc00
   name: Leyndell
   stats: {}
 - build:
@@ -350,6 +390,7 @@ route:
   description: 'P1 : 3 CR2 et 2 R1 (stun), frontstab, combo WA, combo WA
 
     P2 : Combo WA (stun), frontstab, combo WA'
+  id: 47a19b4f-0a5b-42fd-92c8-967cb1fc17db
   name: GODFREY / HOARAH
   stats:
     DEX: 51
@@ -368,6 +409,7 @@ route:
     \ sur la droite, CR2, combo WA pendant qu'il plonge (stun)\nCombo WA, R1, frontstab,\
     \ R1, combo WA\nR1 WA\nQuitout \xE0 la fin, activer les cr\xE9dits, ALT+F4, montrer\
     \ le temps de la save, GG WP"
+  id: c26239a7-9d5f-4c41-ae3a-970c5a918719
   name: RADABEAST
   stats:
     DEX: 51

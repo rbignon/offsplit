@@ -7,6 +7,7 @@ import time
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
+from uuid import uuid4
 
 import urwid
 
@@ -72,6 +73,7 @@ def get_timer_display(progress, color='normal', sign=False):
 class Segment(urwid.WidgetWrap):
     def __init__(
         self,
+        id,
         name,
         color,
         build,
@@ -84,6 +86,7 @@ class Segment(urwid.WidgetWrap):
         progress_start=None
     ):
         # Route meta data
+        self.id = id
         self.name = name
         self.name_widget = urwid.Text(self.name, align='center')
         self.color = color
@@ -334,7 +337,7 @@ class MainWindow(urwid.WidgetWrap):
         )
         self.segments = urwid.SimpleFocusListWalker([])
         self.listbox = urwid.ListBox(self.segments)
-        self.view = urwid.Frame(urwid.AttrWrap(self.listbox, 'body'), header=header, footer=self.footer)
+        self.view = urwid.Frame(self.listbox, header=header, footer=self.footer)
 
         super().__init__(self.view)
 
@@ -365,7 +368,7 @@ class Run:
     route: str
     created: datetime
     updated: datetime
-    run: list
+    segs: dict
 
     @property
     def name(self):
@@ -377,32 +380,41 @@ class Run:
             d = yaml.safe_load(fp)
 
         d['path'] = path
+        if 'segs' not in d:
+            d['segs'] = {}
+
+        if 'run' in d:
+            route = Route.load(d['route'])
+            for idx, seg in enumerate(route.route):
+                d['segs'][seg['id']] = d['run'][idx]
+            d.pop('run')
+
         return Run(**d)
 
     @classmethod
     def from_route(cls, path, route):
-        run = []
-        for _ in route.route:
-            run.append({'pb': None, 'duration': None, 'gold': None})
+        segs = {}
+        for segment in route.route:
+            segs[segment['id']] = {'pb': None, 'duration': None, 'gold': None}
         return Run(
             path,
             route.path,
             created=datetime.now(),
             updated=datetime.now(),
-            run=run
+            segs=segs
         )
 
     @classmethod
     def from_pb(cls, path, pb):
-        run = []
-        for segment in pb.run:
-            run.append({'pb': segment['duration'], 'duration': None, 'gold': segment['gold']})
+        segs = {}
+        for id, segment in pb.segs.items():
+            segs[id] = {'pb': segment['duration'], 'duration': None, 'gold': segment['gold']}
         return Run(
             path,
             pb.route,
             created=datetime.now(),
             updated=datetime.now(),
-            run=run
+            segs=segs,
         )
 
     def get_route(self):
@@ -413,10 +425,11 @@ class Run:
 
         pb_start = None
         progress_start = None
-        for idx, route_seg in enumerate(route.route):
-            run_seg = self.run[idx]
+        for route_seg in route.route:
+            run_seg = self.segs[route_seg['id']]
 
             segment = Segment(
+                route_seg['id'],
                 route_seg['name'],
                 route_seg.get('color'),
                 route_seg.get('build'),
@@ -494,6 +507,7 @@ class Spliter:
         self.segments = []
         self.progress = 0.0
         self.paused = True
+        self.debug = False
         self.pressed_key = None
         self.pressed_key_time = None
 
@@ -690,6 +704,10 @@ class Spliter:
 
         text = []
         for key, func in self.keys.items():
+            doc = func.__doc__ or ''
+            if not doc:
+                continue
+
             color = 'footer key'
             if self.pressed_key == key:
                 color += ' active'
@@ -699,7 +717,7 @@ class Spliter:
 
             text.append((color, key.upper()))
             text.append('\xa0')
-            text.append((func.__doc__ or '').strip().replace(' ', '\xa0'))
+            text.append((doc).strip().replace(' ', '\xa0'))
             text.append(' ')
 
         self.view.keys_widget.set_text(text)
@@ -751,7 +769,7 @@ class Spliter:
         """resume"""
         progress = 0.0
         for idx, segment in enumerate(self.segments):
-            if segment.duration is None or idx == len(self.segments):
+            if segment.duration is None:
                 self.resume_segment(idx)
                 return
 
@@ -794,64 +812,56 @@ class Spliter:
     def save_run(self):
         """save run"""
         self.run.updated = datetime.now()
-        self.run.run = [
-            {
+        self.run.segs = {
+            segment.id: {
                 'duration': segment.duration,
                 'pb': segment.pb,
-                'gold': segment.gold
+                'gold': segment.gold,
             }
             for segment in self.segments
-        ]
+        }
         self.run.save()
+        self.view.message(f'Run saved in {self.run.path}')
 
     def save_pb(self):
         """save PB"""
         self.pb.created = datetime.now()
         self.pb.updated = datetime.now()
-        self.pb.run = [
+        self.pb.run = {
+            segment.id:
             {
                 'duration': segment.duration,
                 'pb': segment.pb,
                 'gold': segment.duration if segment != self.current_segment and segment.duration and (segment.gold is None or segment.duration < segment.gold) else segment.gold,
             }
             for segment in self.segments
-        ]
+        }
         self.pb.save()
-
-    def save(self, path, golds=False):
-        try:
-            with open(path, 'w', encoding='utf-8') as fp:
-                route = []
-                for segment in self.segments:
-                    route.append({
-                        'name': segment.name,
-                        'description': segment.description,
-                        'pb': segment.pb,
-                        'gold': segment.duration if golds and segment != self.current_segment and segment.duration and (segment.gold is None or segment.duration < segment.gold) else segment.gold,
-                        'duration': segment.duration,
-                        'color': segment.color,
-                        'stats': segment.stats,
-                        'build': segment.build,
-                    })
-                yaml.dump({'route': route}, fp)
-        except OSError as e:
-            self.view.error(f'Unable to save to {path}: {e.strerror}')
-        else:
-            self.view.message(f'Run saved in {path}')
+        self.view.message(f'PB saved in {self.pb.path}')
 
     def save_golds(self):
         """save golds"""
         self.pb.updated = datetime.now()
-        for idx, segment in enumerate(self.segments):
-            gold = self.pb.run[idx]['gold']
+        for segment in self.segments:
+            gold = self.pb.segs[segment.id]['gold']
             if segment.duration and gold is None or segment.duration < gold:
-                self.pb.run[idx]['gold'] = segment.duration
+                self.pb.segs[segment.id]['gold'] = segment.duration
 
         self.pb.save()
+        self.view.message(f'Golds saved in {self.pb.path}')
 
     def quit(self):
         """quit"""
         raise urwid.ExitMainLoop()
+
+    def toggle_debug(self):
+        self.debug = not self.debug
+
+        for seg in self.segments:
+            if self.debug:
+                seg.name_widget.set_text([seg.name, '\n', seg.id])
+            else:
+                seg.name_widget.set_text(seg.name)
 
     keys = {
         'enter': split,
@@ -862,6 +872,7 @@ class Spliter:
         'g': save_golds,
         'b': resume,
         'q': quit,
+        'd': toggle_debug,
     }
 
     def unhandled_input(self, k):
