@@ -1,12 +1,22 @@
 #!/usr/bin/env python3
 
 import colorsys
+import os
 import sys
 import time
+from dataclasses import asdict, dataclass
+from datetime import datetime
+from pathlib import Path
 
 import urwid
 
 import yaml
+
+try:
+    from termcolor import colored
+except ImportError:
+    def colored(text, *args, **kwargs):
+        return text
 
 
 def get_big_timer(progress):
@@ -312,12 +322,13 @@ class MainWindow(urwid.WidgetWrap):
 
         self.message_widget = urwid.AttrWrap(urwid.Text('', align='center'), 'footer msg')
         self.keys_widget = urwid.Text('')
+        self.run_widget = urwid.Text('', align='right')
 
         self.footer = urwid.AttrWrap(
             urwid.Columns([
                 ('weight', 4, self.keys_widget),
                 ('weight', 2, self.message_widget),
-                ('weight', 1, urwid.Text(f'{controller.run_path} [{controller.route_path}]', align='right')),
+                ('weight', 1, self.run_widget),
             ]),
             'footer'
         )
@@ -348,10 +359,136 @@ class MainWindow(urwid.WidgetWrap):
             segment._invalidate()
 
 
+@dataclass
+class Run:
+    path: str
+    route: str
+    created: datetime
+    updated: datetime
+    run: list
+
+    @property
+    def name(self):
+        return Path(self.path).stem
+
+    @classmethod
+    def load(cls, path):
+        with open(path, 'r', encoding='utf-8') as fp:
+            d = yaml.safe_load(fp)
+
+        d['path'] = path
+        return Run(**d)
+
+    @classmethod
+    def from_route(cls, path, route):
+        run = []
+        for _ in route.route:
+            run.append({'pb': None, 'duration': None, 'gold': None})
+        return Run(
+            path,
+            route.path,
+            created=datetime.now(),
+            updated=datetime.now(),
+            run=run
+        )
+
+    @classmethod
+    def from_pb(cls, path, pb):
+        run = []
+        for segment in pb.run:
+            run.append({'pb': segment['duration'], 'duration': None, 'gold': segment['gold']})
+        return Run(
+            path,
+            pb.route,
+            created=datetime.now(),
+            updated=datetime.now(),
+            run=run
+        )
+
+    def get_route(self):
+        return Route.load(self.route)
+
+    def iter_segments(self):
+        route = self.get_route()
+
+        pb_start = None
+        progress_start = None
+        for idx, route_seg in enumerate(route.route):
+            run_seg = self.run[idx]
+
+            segment = Segment(
+                route_seg['name'],
+                route_seg.get('color'),
+                route_seg.get('build'),
+                route_seg['description'],
+                route_seg.get('stats', {}),
+                run_seg['gold'],
+                run_seg['pb'],
+                pb_start,
+                None if run_seg.get('duration') is None else ((progress_start or 0.0) + run_seg.get('duration')),
+                None if run_seg.get('duration') is None else progress_start or (0.0 if run_seg.get('duration') else progress_start)
+            )
+            yield segment
+
+            if segment.pb is not None:
+                pb_start = (pb_start or 0.0) + segment.pb
+
+            if segment.duration is not None:
+                progress_start = (progress_start or 0.0) + segment.duration
+
+    def save(self):
+        d = asdict(self)
+        d.pop('path')
+
+        with open(self.path, 'w', encoding='utf-8') as fp:
+            yaml.dump(d, fp)
+
+    @classmethod
+    def iter_runs(cls, path):
+        for root, _, files in os.walk(path):
+            for f in files:
+                if f.endswith('.yml'):
+                    yield Run.load(os.path.join(root, f))
+
+
+@dataclass
+class Route:
+    ROUTES_DIR = 'routes'
+
+    path: str
+    game: str
+    name: str
+    route: list
+
+    @classmethod
+    def load(cls, path):
+        with open(path, 'r', encoding='utf-8') as fp:
+            d = yaml.safe_load(fp)
+
+        d['path'] = path
+        return Route(**d)
+
+    def save(self):
+        d = asdict(self)
+        d.pop('path')
+
+        with open(self.path, 'w', encoding='utf-8') as fp:
+            yaml.dump(d, fp)
+
+    @classmethod
+    def iter_routes(cls):
+        for root, _, files in os.walk(cls.ROUTES_DIR):
+            for f in files:
+                if f.endswith('.yml'):
+                    yield Route.load(os.path.join(root, f))
+
+
 class Spliter:
-    def __init__(self, route_path, run_path):
-        self.route_path = route_path
-        self.run_path = run_path
+    def __init__(self):
+        self.pb = None
+        self.route = None
+        self.run = None
+
         self.view = MainWindow(self)
         self.current_segment_idx = -1
         self.segments = []
@@ -359,9 +496,6 @@ class Spliter:
         self.paused = True
         self.pressed_key = None
         self.pressed_key_time = None
-
-        self.run_route = {}
-        self.route = {}
 
         self.loop = urwid.MainLoop(self.view, self.view.palette, unhandled_input=self.unhandled_input)
         self.loop.screen.set_terminal_properties(colors=2**24)
@@ -380,59 +514,84 @@ class Spliter:
 
         return self.segments[self.current_segment_idx-1]
 
+    def iter_routes(self):
+        for root, _, files in os.walk('routes'):
+            for f in files:
+                if f.endswith('.yml'):
+                    yield Route.load(os.path.join(root, f))
+
     def main(self):
-        try:
-            with open(self.route_path, 'r', encoding='utf-8') as fp:
-                self.route = yaml.safe_load(fp)['route']
-        except OSError as e:
-            print(f'Unable to open {self.route_path}: {e.strerror}', file=sys.stderr)
+        if len(sys.argv) < 2 or sys.argv[1] in ('-h', '--help'):
+            print(f'{sys.argv[0]} RUN_DIR [RUN_ID]', file=sys.stderr)
             return 1
 
-        try:
-            with open(self.run_path, 'r', encoding='utf-8') as fp:
-                self.run_route = yaml.safe_load(fp)['route']
-        except OSError:
-            # Probably a new run
-            self.run_route = [
-                {
-                    'name': route['name'],
-                    'color': route.get('color'),
-                    'build': route.get('build'),
-                    'description': route['description'],
-                    'stats': route.get('stats', {}),
-                    'gold': route.get('gold', route.get('bpt', None)),
-                    'pb': route.get('duration', route.get('time', route.get('pb'))),
-                }
-                for route in self.route
-            ]
+        run_dir = Path(sys.argv[1])
 
-        pb_start = None
+        if not (run_dir / 'pb.yml').exists():
+            print('No runs in %s. Do you want to create it? (Y/n)' % colored(run_dir, 'yellow'), end=' ', flush=True)
+            if sys.stdin.readline().strip() in ('N', 'n'):
+                return 0
+
+            routes = []
+            for idx, r in enumerate(Route.iter_routes()):
+                print(' %s %s − %s' % (colored(idx, 'magenta'), colored(r.game, 'green'), colored(r.name, 'blue')))
+                routes.append(r)
+
+            while self.route is None:
+                print('What route do you want to use?', end=' ', flush=True)
+                i = sys.stdin.readline().strip()
+                try:
+                    self.route = routes[int(i)-1]
+                except (ValueError, TypeError):
+                    if i == 'q':
+                        return 0
+                except IndexError:
+                    continue
+
+            try:
+                os.makedirs(run_dir)
+            except FileExistsError:
+                pass
+
+            self.pb = Run.from_route(run_dir / 'pb.yml', self.route)
+            self.pb.save()
+        else:
+            self.pb = Run.load(run_dir / 'pb.yml')
+            self.route = self.pb.get_route()
+
+            print('Loaded route %s − %s' % (colored(self.route.game, 'green'), colored(self.route.name, 'blue')))
+
+        run_path = None
+        if len(sys.argv) < 3:
+            runs = []
+            for r in sorted(Run.iter_runs(run_dir), key=lambda r: r.updated):
+                if r.name == 'pb':
+                    print(' %s %s' % (colored('%-10s' % r.name, 'magenta', attrs=['bold']), r.updated))
+                else:
+                    print(' %s %s' % (colored('%-10s' % r.name, 'magenta'), r.updated))
+                runs.append(r)
+
+            while run_path is None:
+                print('Enter name of the route, or new one to create it:', end=' ', flush=True)
+                run_path = sys.stdin.readline().strip()
+        else:
+            run_path = sys.argv[2]
+
+        if Path(run_path).exists():
+            self.run = Run.load(run_path)
+        elif Path(run_dir / run_path).with_suffix('.yml').exists():
+            self.run = Run.load(Path(run_dir / run_path).with_suffix('.yml'))
+        elif run_path.endswith('.yml'):
+            self.run = Run.from_pb(run_path, self.pb)
+        else:
+            self.run = Run.from_pb(Path(run_dir / run_path).with_suffix('.yml'), self.pb)
+
+        self.view.run_widget.set_text(f'{self.run.path}')
+
         progress_start = None
-        for i, s in enumerate(self.run_route):
-            # retrocompat
-            if 'duration' not in s:
-                s['duration'] = s.get('time')
-            if 'gold' not in s:
-                s['gold'] = s.get('bpt')
-            if 'gold' not in self.route[i]:
-                self.route[i]['gold'] = self.route[i].get('bpt')
-
-            segment = Segment(
-                s['name'],
-                s.get('color'),
-                s.get('build'),
-                s['description'],
-                s.get('stats', {}),
-                s.get('gold', self.route[i].get('gold')),
-                s.get('pb', self.route[i].get('pb')),
-                pb_start,
-                None if s.get('duration') is None else ((progress_start or 0.0) + s.get('duration')),
-                None if s.get('duration') is None else progress_start or (0.0 if s.get('duration') else progress_start)
-            )
+        for segment in self.run.iter_segments():
             self.segments.append(segment)
             self.view.add_segment(segment)
-            if segment.pb is not None:
-                pb_start = (pb_start or 0.0) + segment.pb
 
             if segment.duration is not None:
                 progress_start = (progress_start or 0.0) + segment.duration
@@ -517,7 +676,17 @@ class Spliter:
         self.view.stats.set_text(text)
 
         self.view.timer.set_text(get_big_timer(self.progress))
-        self.view.pb.set_text(['\n', '\n', 'PB: ', get_timer_display(pb, color)])
+        self.view.pb.set_text(
+            [
+                '\n',
+                f'{self.route.game} – {self.route.name}',
+                '\n',
+                '\n',
+                'PB: ', get_timer_display(pb, color),
+                '\n',
+                self.pb.created.strftime('%Y-%m-%d %H:%M')
+            ]
+        )
 
         text = []
         for key, func in self.keys.items():
@@ -624,11 +793,30 @@ class Spliter:
 
     def save_run(self):
         """save run"""
-        self.save(self.run_path)
+        self.run.updated = datetime.now()
+        self.run.run = [
+            {
+                'duration': segment.duration,
+                'pb': segment.pb,
+                'gold': segment.gold
+            }
+            for segment in self.segments
+        ]
+        self.run.save()
 
     def save_pb(self):
         """save PB"""
-        self.save(self.route_path, golds=True)
+        self.pb.created = datetime.now()
+        self.pb.updated = datetime.now()
+        self.pb.run = [
+            {
+                'duration': segment.duration,
+                'pb': segment.pb,
+                'gold': segment.duration if segment != self.current_segment and segment.duration and (segment.gold is None or segment.duration < segment.gold) else segment.gold,
+            }
+            for segment in self.segments
+        ]
+        self.pb.save()
 
     def save(self, path, golds=False):
         try:
@@ -653,22 +841,13 @@ class Spliter:
 
     def save_golds(self):
         """save golds"""
-        try:
-            with open(self.route_path, 'w', encoding='utf-8') as fp:
-                for i, s in enumerate(self.route):
-                    segment = self.segments[i]
-                    if segment.duration is None:
-                        continue
+        self.pb.updated = datetime.now()
+        for idx, segment in enumerate(self.segments):
+            gold = self.pb.run[idx]['gold']
+            if segment.duration and gold is None or segment.duration < gold:
+                self.pb.run[idx]['gold'] = segment.duration
 
-                    gold = s.get('gold', s.get('bpt'))
-                    if gold is None or segment.duration < gold:
-                        s['gold'] = segment.duration
-
-                yaml.dump({'route': self.route}, fp)
-        except OSError as e:
-            self.view.error(f'Unable to save to {self.route_path}: {e.strerror}')
-        else:
-            self.view.message(f'Golds saved in {self.route_path}')
+        self.pb.save()
 
     def quit(self):
         """quit"""
@@ -701,8 +880,7 @@ class Spliter:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3 or sys.argv[1] in ('-h', '--help'):
-        print(f'{sys.argv[0]} [route] [run]')
+    try:
+        sys.exit(Spliter().main())
+    except KeyboardInterrupt:
         sys.exit(0)
-
-    sys.exit(Spliter(sys.argv[1], sys.argv[2]).main())
