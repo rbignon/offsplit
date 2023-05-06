@@ -455,7 +455,7 @@ class Spliter:
             h = 0.125
             s = 0.59
             v = 1 - 0.7 * abs(0.5 - (ts % 1))
-            color = '#' + ''.join('%02x' % int(i * 256) for i in colorsys.hsv_to_rgb(h, s, v))
+            color = '#' + ''.join('%02x' % int(i * 255) for i in colorsys.hsv_to_rgb(h, s, v))
             self.loop.screen.register_palette_entry('gold', 'yellow', 'black', '', color, '#2f3542')
             self.loop.screen.clear()
 
