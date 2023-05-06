@@ -3,10 +3,10 @@ route:
   color: null
   description: "Samoura\xEF + Rune d'Entre-terre\nSauter dans le vide pr\xE8s du boss\
     \ tuto"
-  duration: 41.100000000000314
+  duration: 41.60000000000032
   gold: 38
   name: Chapelle de l'anticipation
-  pb: null
+  pb: 41.100000000000314
   stats: {}
 - build: []
   color: null
@@ -15,10 +15,10 @@ route:
     \ au marchand\nDirection N+1, r\xE9cup\xE9rer |3 R\xE9sines de racine| sur le\
     \ passage puis prendre le site des portes et r\xE9cup\xE9rer Torrent\n|TP Commencement|\
     \ puis direction E, prendre le coffre pi\xE9g\xE9 dans les ruines"
-  duration: 245.59999999999638
+  duration: 264.0000000000007
   gold: 214.09999999998945
   name: "N\xE9crolimbe"
-  pb: null
+  pb: 245.59999999999638
   stats: {}
 - build: []
   color: null
@@ -26,18 +26,18 @@ route:
     \ direction SE |Graine dor\xE9e| puis faire le skip de Sellia sur la branche pour\
     \ remonter\nPrendre le site de gr\xE2ce dans l'\xE9glise puis aller au Bastion\
     \ avec Melina"
-  duration: 189.40000000004306
+  duration: 235.80000000005356
   gold: 35.50000000000807
   name: Caelid
-  pb: null
+  pb: 189.40000000004306
   stats: {}
 - build: []
   color: null
   description: '|TP Galerie cristalline de Sellia|'
-  duration: 7.30000000000166
+  duration: 7.8000000000017735
   gold: 7.0
   name: Bastion de la Table ronde
-  pb: null
+  pb: 7.30000000000166
   stats: {}
 - build: []
   color: null
@@ -45,10 +45,10 @@ route:
     \ sombre (5)| puis |TP \xC9glise de la putr\xE9faction|\nDirection N, prendre\
     \ le courant d'air pour monter et aller chercher |M\xE9daillon de Dectus (droite)|\
     \ dans le Fort Faroth\nPrendre le |Sceau meurtri de Radagon| et |TP Commencement|"
-  duration: 271.5000000000617
+  duration: 271.8000000000359
   gold: 197.00000000004474
   name: Caelid
-  pb: null
+  pb: 271.5000000000617
   stats: {}
 - build: []
   color: null
@@ -60,55 +60,55 @@ route:
     \ dessus et monter tout en haut pour |M\xE9daillon de Dectus (gauche)|\n|TP Portes|,\
     \ direction cabane W NW, |Graine dor\xE9e| sur le chemin\nPrendre le site du cabanon\
     \ puis direction NW, skip Margit & Godrick en passant \xE0 droite vers Liurnia"
-  duration: 397.799999999944
+  duration: 383.5000000000115
   gold: 368.09999999990373
   name: "N\xE9crolimbe"
-  pb: null
+  pb: 397.799999999944
   stats: {}
 - build: []
   color: null
   description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
     \ N pour le portail vers l'acad\xE9mie\nPrendre le TP, et aller chercher le |M\xE9\
     daillon secret de l'Arbre Sacr\xE9 (Droite)|.\n|TP \xE0 l'Acad\xE9mie|."
-  duration: 357.0999999996752
-  gold: 330.69999999969923
+  duration: 300.89999999972633
+  gold: 300.89999999972633
   name: Liurnia
-  pb: null
+  pb: 357.0999999996752
   stats: {}
 - build: []
   color: null
   description: "Jump du pont et portail vers Iji direction NE\nPrendre le site devant\
     \ Iji puis direction E aller \xE0 l'ascenseur de Dectus"
-  duration: 410.39999999962674
-  gold: 330.69999999969923
+  duration: 223.0999999997971
+  gold: 223.0999999997971
   name: Liurnia
-  pb: null
+  pb: 410.39999999962674
   stats: {}
 - build: []
   color: null
   description: "Direction E-1 faire tout le trajet jusqu'\xE0 la Sentinelle Draconique"
-  duration: 217.89999999980182
+  duration: 248.499999999774
   gold: 217.89999999980182
   name: Plateau Altus
-  pb: null
+  pb: 217.89999999980182
   stats: {}
 - build: []
   color: boss
   description: "Faire tomber le boss dans le vide\nApr\xE8s le boss, prendre le site\
     \ devant Leyndell et |TP Sud du lac d'Agheel|"
-  duration: 51.099999999953525
+  duration: 152.3999999998614
   gold: 51.099999999953525
   name: SENTINELLE DRACONIQUE
-  pb: null
+  pb: 51.099999999953525
   stats: {}
 - build: []
   color: null
   description: "Levelup |15 Force|, |23 Dex| et |12 Foi|\nAjouter 2 doses de fiole\
     \ et allouer 5 popo de mana\nDirection S pour la ge\xF4le de Darriwil"
-  duration: 63.49999999994225
+  duration: 55.59999999994943
   gold: 51.69999999995298
   name: "N\xE9crolimbe"
-  pb: null
+  pb: 63.49999999994225
   stats: {}
 - build:
   - 'ARME : Uchigatana'
@@ -117,10 +117,10 @@ route:
   color: boss
   description: "WAR2 R1 WAR2, stun, WAR2 R1 WAR2\n\nApr\xE8s le fight, |TP Route du\
     \ manoir|"
-  duration: 42.699999999961165
+  duration: 76.49999999993042
   gold: 42.699999999961165
   name: DARRIWIL
-  pb: null
+  pb: 42.699999999961165
   stats:
     DEX: 23
     FOI: 12
@@ -129,10 +129,10 @@ route:
   color: null
   description: "Parler \xE0 Iji et acheter |Pierre de forge sombre (1-2-3-4)|\nUpgrade\
     \ le |Croc du limier en +5| puis |TP Commencement|"
-  duration: 26.899999999975535
+  duration: 88.09999999991987
   gold: 23
   name: Liurnia
-  pb: null
+  pb: 26.899999999975535
   stats: {}
 - build:
   - 'ARME : Croc du limier +5'
@@ -141,10 +141,10 @@ route:
   color: boss
   description: "JR2, WA, combo WA (stun), combo WA, WA\n\nApr\xE8s le fight, |TP Commencement|\
     \ pour r\xE9cup\xE9rer l'arme du boss plus vite"
-  duration: 160.39999999985412
+  duration: 160.0
   gold: 68.0
   name: SENTINELLE DE L'ARBRE
-  pb: null
+  pb: 160.39999999985412
   stats:
     DEX: 23
     FOI: 12
@@ -152,18 +152,18 @@ route:
 - build: []
   color: null
   description: "|TP \xC9glise de la putr\xE9faction|"
-  duration: 7.799999999992906
+  duration: 8.0
   gold: 3
   name: "N\xE9crolimbe"
-  pb: null
+  pb: 7.799999999992906
   stats: {}
 - build: []
   color: null
   description: Skip de l'effigie direction SE pour aller sur Radahn
-  duration: 27.799999999974716
+  duration: 26.0
   gold: 26.0
   name: Caelid
-  pb: null
+  pb: 27.799999999974716
   stats: {}
 - build:
   - 'ARME : Croc du limier +5'
@@ -177,12 +177,12 @@ route:
     \ WA, 2 R1, combo WA, combo WA\n\nApr\xE8s le fight, quitout pr\xE8s de l'emplacement\
     \ d'Alexander\nTuer Alexander pour |Fragment de guerrier-jarre| et |TP Cabane\
     \ de Valorage|"
-  duration: 308.0999999997198
+  duration: 190.0
   gold: 169.9999999998454
   name: 'RADAHN
 
     Rune majeure 1'
-  pb: null
+  pb: 308.0999999997198
   stats:
     DEX: 23
     FOI: 12
@@ -191,10 +191,10 @@ route:
   color: null
   description: "Utiliser le |Souvenir du Fl\xE9au des astres| sur le cheval et aller\
     \ sur Margit"
-  duration: 52.099999999952615
+  duration: 53.0
   gold: 49
   name: "N\xE9crolimbe"
-  pb: null
+  pb: 52.099999999952615
   stats: {}
 - build:
   - 'ARME : Croc du limier +5'
@@ -202,10 +202,10 @@ route:
   - 'BUFFS : Aucun'
   color: boss
   description: CR2, combo WA (stun), 3 R1, WA
-  duration: 100.09999999990896
+  duration: 100.0
   gold: 32.0
   name: MARGIT
-  pb: null
+  pb: 100.09999999990896
   stats:
     DEX: 23
     FOI: 12
@@ -216,10 +216,10 @@ route:
     \ principale\nRevenir se coller \xE0 la grille et quitout pour l'ouvrir\nTraverser\
     \ le ch\xE2teau pour aller sur Godrick, ramasser |5 Khukuri| juste apr\xE8s les\
     \ secondes balistes"
-  duration: 155.8999999998582
+  duration: 156.0
   gold: 155.8999999998582
   name: "N\xE9crolimbe"
-  pb: null
+  pb: 155.8999999998582
   stats: {}
 - build:
   - 'ARME : Croc du limier +5'
@@ -228,12 +228,12 @@ route:
   color: boss
   description: "CR2 R1 R1, combo WA (stun), frontstab, combo WA R1\n\nApr\xE8s le\
     \ fight, |TP Rempart de la capitale|"
-  duration: 172.4999999998431
+  duration: 172.0
   gold: 71
   name: 'GODRICK
 
     Rune majeure 2'
-  pb: null
+  pb: 172.4999999998431
   stats:
     DEX: 23
     FOI: 12
@@ -241,10 +241,10 @@ route:
 - build: []
   color: null
   description: Levelup |42 Dex|
-  duration: 56.69999999994843
+  duration: 56.0
   gold: 15.999999999985448
   name: Plateau Altus
-  pb: null
+  pb: 56.69999999994843
   stats: {}
 - build: []
   color: null
@@ -253,10 +253,10 @@ route:
     \ ramasser |Arc noir| et |Rune dor\xE9e (9)| sur le passage vers le dragon mort\n\
     Prendre un |Arc runique| apr\xE8s la s\xE9rie de jumps, monter \xE0 l'\xE9chelle,\
     \ ramasser |Rune dor\xE9e (11)| et go Godfrey"
-  duration: 386.09999999964884
+  duration: 386.0
   gold: 375
   name: Leyndell
-  pb: null
+  pb: 386.09999999964884
   stats: {}
 - build:
   - 'ARME : Croc du limier +5'
@@ -266,10 +266,10 @@ route:
   description: "Serment dor\xE9 \xE0 l'ext\xE9rieur de l'ar\xE8ne, quand le boss appara\xEE\
     t |Khukuri| + popo de mana\n\nCombo WA quand c'est possible sinon juste WA ou\
     \ JR1 quand il slide sur le c\xF4t\xE9"
-  duration: 142.5999999998703
+  duration: 142.0
   gold: 124.90000000045438
   name: GODFREY
-  pb: null
+  pb: 142.5999999998703
   stats:
     DEX: 42
     FOI: 12
@@ -277,10 +277,10 @@ route:
 - build: []
   color: null
   description: Aller sur Morgott directement
-  duration: 91.6999999999166
+  duration: 91.0
   gold: 87.19999999992069
   name: Leyndell
-  pb: null
+  pb: 91.6999999999166
   stats: {}
 - build:
   - 'ARME : Croc du limier +5'
@@ -294,10 +294,10 @@ route:
     s le fight, aller jusqu'aux ronces, revenir prendre le site et se reposer pour\
     \ le |Medaillon de Rold|\nLevelup |25 Force 46 Dex| et |TP Rempart oriental de\
     \ la capitale|"
-  duration: 1096.9000000034812
+  duration: 1095.9999999999995
   gold: 333.8999999996963
   name: MORGOTT
-  pb: null
+  pb: 1096.9000000034812
   stats:
     DEX: 42
     FOI: 12
@@ -309,20 +309,20 @@ route:
     Utiliser l'|Arc runique| et |Souvenir du roi R\xE9prouv\xE9| dans l'ascenseur\n\
     Courir jusqu'\xE0 l'ascenseur pour descendre aux Terres interdites\nPendant l'ascenseur\
     \ utiliser |Rune dor\xE9e (9)|, |Rune dor\xE9e (11)|"
-  duration: 268.8000000009779
+  duration: 268.0
   gold: 220.00000000080036
   name: Leyndell
-  pb: null
+  pb: 268.8000000009779
   stats: {}
 - build: []
   color: null
   description: "Ramasser |Pierre de forge sombre (7)| dans un cr\xE2ne g\xE9ant\n\
     Prendre le site de gr\xE2ce devant l'ascenseur de Rold, puis l'emprunter pour\
     \ aller aux Cimes des G\xE9ants"
-  duration: 100.90000000036707
+  duration: 105.0
   gold: 100.90000000036707
   name: Terres interdites
-  pb: null
+  pb: 100.90000000036707
   stats: {}
 - build: []
   color: null
@@ -330,28 +330,28 @@ route:
     \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s.\nAller jusqu'\xE0 Solcastel\
     \ en faisant un d\xE9tour pour prendre la |Pierre de forge sombre (9)| sur le\
     \ pont.\nPrendre le site devant Solcastel puis |TP Route du manoir|."
-  duration: 828.3000000030133
-  gold: 828.3000000030133
+  duration: 377.0
+  gold: 377.0
   name: "Cimes des G\xE9ants"
-  pb: null
+  pb: 828.3000000030133
   stats: {}
 - build: []
   color: null
   description: 'Upgrade le |Croc du limier en +9|
 
     |TP Solcastel|'
-  duration: 0.4000000000014552
-  gold: 0.4000000000014552
+  duration: 29.699999999999818
+  gold: 20
   name: Liurnia
-  pb: null
+  pb: 20
   stats: {}
 - build: []
   color: null
   description: "Aller jusqu'\xE0 Niall"
-  duration: 0.3000000000010914
-  gold: 0.3000000000010914
+  duration: 141.0
+  gold: 141.0
   name: "Cimes des G\xE9ants"
-  pb: null
+  pb: 500
   stats: {}
 - build:
   - 'ARME : Croc du limier +9'
@@ -366,10 +366,10 @@ route:
     \ AOE sur le retour\nAux 3/4 de sa vie, il lance son AEO\_: se casser et regen\
     \ son endurence. Combo WA, petite regen d'endu, CR2 CR2 (stun), fronstab, partir\
     \ loin.\nLe finir."
-  duration: 13264.299999990775
-  gold: 13264.299999990775
+  duration: 2984.999999999999
+  gold: 2984.999999999999
   name: COMMANDANT NIALL
-  pb: null
+  pb: 13264.299999990775
   stats:
     DEX: 46
     FOI: 12
@@ -378,44 +378,44 @@ route:
   color: null
   description: "Prendre le |M\xE9daillon secret de l'Arbre Sacr\xE9 (gauche)| en haut\
     \ de la tour, |TP Ascenseur de Rold| et utiliser le m\xE9daillon."
-  duration: 17.199999999749707
+  duration: 50.20000000000073
   gold: 17.199999999749707
   name: "Cimes des G\xE9ants"
-  pb: null
+  pb: 17.199999999749707
   stats: {}
 - build: []
   color: null
   description: "Aller au nord ouest vers Ordina et prendre le site de gr\xE2ce. Aller\
     \ vers le sud pour combattre Anastasia et r\xE9cup\xE9rer la |Pierre de forge\
-    \ sombre des dragons anciens|.\\n|TP Route du manoir|"
-  duration: 302.49999999559805
-  gold: 302.49999999559805
+    \ sombre des dragons anciens|.\n|TP Route du manoir|"
+  duration: 50.20000000000073
+  gold: 50.20000000000073
   name: "Champs de neige consacr\xE9s"
-  pb: null
+  pb: 302.49999999559805
   stats: {}
 - build: []
   color: null
   description: Upgrade le |Croc du limier en +10| |TP Ordina|
-  duration: 22.599999999671127
+  duration: 22.600000000000364
   gold: 22.599999999671127
   name: Liurnia
-  pb: null
+  pb: 22.599999999671127
   stats: {}
 - build: []
   color: null
   description: "Allumer les flames puis prendre le TP vers l'Arbre-Sacr\xE9 de Miquella"
-  duration: 413.9999999939755
+  duration: 2550.0
   gold: 413.9999999939755
   name: Ordina
-  pb: null
+  pb: 413.9999999939755
   stats: {}
 - build: []
   color: null
   description: Aller vers Loretta
-  duration: 615.6999999910404
-  gold: 615.6999999910404
+  duration: 285.0
+  gold: 285.0
   name: "Arbre-Sacr\xE9 de Miquella"
-  pb: null
+  pb: 615.6999999910404
   stats: {}
 - build:
   - 'ARME : et Croc du limier +10'
@@ -425,21 +425,21 @@ route:
   description: "Combo WA \xE0 l'ouverture.\nAttaque \xE0 la lance\_: apr\xE8s le premier\
     \ coup aller derri\xE8re elle et WA.\nArc\_: avancer vers elle et WA\nLance bleue\_\
     : \xE0 la fin combo WA"
-  duration: 2218.399999967718
+  duration: 7725.000000000002
   gold: 2218.399999967718
   name: LORETTA 2
-  pb: null
+  pb: 2218.399999967718
   stats:
-    DEX: 51
+    DEX: 47
     FOI: 12
-    FOR: 31
+    FOR: 29
 - build: []
   color: null
   description: "Aller jusqu'\xE0 Malenia"
-  duration: 691.5999999899359
-  gold: 691.5999999899359
+  duration: 457.0
+  gold: 457.0
   name: "Arbre-Sacr\xE9 de Miquella"
-  pb: null
+  pb: 691.5999999899359
   stats: {}
 - build:
   - 'ARME : Croc du limier +10'
@@ -447,10 +447,10 @@ route:
   - "BUFFS : Serment dor\xE9"
   color: boss
   description: "La combattre \xE0 la loyale."
-  duration: 13490.899999803685
-  gold: 13490.899999803685
+  duration: 1270.9999999953288
+  gold: 1270.9999999953288
   name: MALENIA
-  pb: null
+  pb: 13490.899999803685
   stats:
     DEX: 51
     FOI: 12
