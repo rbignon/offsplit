@@ -7,7 +7,6 @@ import time
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
-from uuid import uuid4
 
 import urwid
 
@@ -426,7 +425,12 @@ class Run:
         pb_start = None
         progress_start = None
         for route_seg in route.route:
-            run_seg = self.segs[route_seg['id']]
+            try:
+                run_seg = self.segs[route_seg['id']]
+            except KeyError:
+                # This is probably a new segment in the route that was not
+                # present in the run/pb.
+                run_seg = {'pb': None, 'duration': None, 'gold': None}
 
             segment = Segment(
                 route_seg['id'],
