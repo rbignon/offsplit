@@ -398,8 +398,8 @@ class Run:
         return Run(
             path,
             route.path,
-            created=datetime.now(),
-            updated=datetime.now(),
+            created=None,
+            updated=None,
             segs=segs
         )
 
@@ -702,7 +702,7 @@ class Spliter:
                 '\n',
                 'PB: ', get_timer_display(pb, color),
                 '\n',
-                self.pb.created.strftime('%Y-%m-%d %H:%M')
+                self.pb.created.strftime('%Y-%m-%d %H:%M') if self.pb.created else ''
             ]
         )
 
