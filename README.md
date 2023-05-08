@@ -70,6 +70,12 @@ In the application, you can use the following shortcuts:
 * `d`: show debug information
 * `q`: quit
 
+## Leaderboard
+
+`leaderboard.py` is a script to see all runs by everybody.
+
+Feel free to do PR to add your own runs!
+
 ## How to create routes
 
 Routes are YAML files. There is no editor, but you can create them easily.
