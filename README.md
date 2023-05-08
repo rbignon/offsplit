@@ -1,6 +1,6 @@
 # OFF Split
 
-Offsplit is a terminal speedrun splitter to use offline, i.e. you must split by yourself.
+Offsplit is a terminal speedrun splitter to use offline, i.e. you must split by yourself (in opposite to [livesplit](https://livesplit.org/)).
 
 ![Demo](demo.gif)
 
