@@ -4,6 +4,8 @@ Offsplit is a terminal speedrun splitter to use offline, i.e. you must split by 
 
 ![Demo](demo.gif)
 
+I personally use it on my laptop next to me when playing my PS5 on my video projector.
+
 ## Dependencies
 
 ```
