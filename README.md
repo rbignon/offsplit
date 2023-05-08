@@ -84,7 +84,7 @@ Feel free to do PR to add your own runs!
 
 ## How to create routes
 
-Routes are YAML files. There is no editor, but you can create them easily.
+Routes are YAML files stored in `routes/`. There is no editor, but you can create them easily.
 
 The structure is:
 
