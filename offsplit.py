@@ -831,7 +831,7 @@ class Spliter:
         """save PB"""
         self.pb.created = datetime.now()
         self.pb.updated = datetime.now()
-        self.pb.run = {
+        self.pb.segs = {
             segment.id:
             {
                 'duration': segment.duration,
