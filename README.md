@@ -10,6 +10,12 @@ Offsplit is a terminal speedrun splitter to use offline, i.e. you must split by 
 pip install -r requirements.txt
 ```
 
+## TL;DR
+
+Launch:
+
+`./offsplit.py runs/YOURNAME/YOURGAME run1`
+
 ## How to launch it
 
 The files structure is:
@@ -64,7 +70,7 @@ In the application, you can use the following shortcuts:
 * `SPACE`: pause the run
 * `r`: reset the run (can't be undone)
 * `s`: save the run
-* `p`: save the run in the file `pb.yml`
+* `p`: GG you have PB, save the run in the file `pb.yml`
 * `g`: save golds of this run in `pb.yml`
 * `b`: resume the run (for example, if you saved the run, exited, and then reopen the run, you can use `b` to go back at the previous segment)
 * `d`: show debug information
