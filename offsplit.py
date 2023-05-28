@@ -848,7 +848,7 @@ class Spliter:
         self.pb.updated = datetime.now()
         for segment in self.segments:
             gold = self.pb.segs[segment.id]['gold']
-            if segment.duration and gold is None or segment.duration < gold:
+            if segment.duration and (gold is None or segment.duration < gold):
                 self.pb.segs[segment.id]['gold'] = segment.duration
 
         self.pb.save()
