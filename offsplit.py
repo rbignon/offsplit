@@ -207,7 +207,7 @@ class Segment(urwid.WidgetWrap):
                 if self.pb == self.gold:
                     text.append(('fixed gold', '0'))
                 else:
-                    text.append(get_timer_display(self.pb - self.gold, sign=True, color='diff'))
+                    text.append(get_timer_display(self.pb - self.gold, sign=True, color=('diff' if self.pb < self.gold + 60 else 'behind loss')))
             if self.duration is not None:
                 text.append('\n')
                 text.append(get_timer_display(self.duration - self.gold, sign=True, color='gold' if self.duration < self.gold and not current else 'diff'))
