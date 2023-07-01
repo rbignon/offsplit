@@ -50,14 +50,13 @@ route:
     Direction SE ramasser Rose de sang devant le Fort Haight et encore |4 Roses de\
     \ sang| \xE0 l'int\xE9rieur\nPrendre le |Manuel de guerrier nomade 6| juste au\
     \ dessus et monter tout en haut pour |M\xE9daillon de Dectus (gauche)|\n|TP Portes|,\
-    \ direction cabane W NW, |Graine dor\xE9e| sur le chemin\nPrendre le site du cabanon\
-    \ puis direction NW, skip Margit & Godrick en passant \xE0 droite vers Liurnia"
+    \ direction cabane W NW, |Graine dor\xE9e| sur le chemin\nPrendre le site du cabanon"
   id: ca9e98eb-8e97-49b2-8d62-b623ae6560d2
   name: "N\xE9crolimbe"
   stats: {}
 - build: []
   color: null
-  description: "Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
+  description: "Direction NW, skip Margit & Godrick en passant \xE0 droite vers Liurnia. Skip pour descendre apr\xE8s le deuxi\xE8me groupe de loups et direction\
     \ N pour le portail vers l'acad\xE9mie\nJump du pont et portail vers Iji direction\
     \ NE\nPrendre le site devant Iji puis direction E aller \xE0 l'ascenseur de Dectus"
   id: 8919555b-9366-4441-bf0e-8230413dde19
@@ -199,11 +198,9 @@ route:
   stats: {}
 - build: []
   color: null
-  description: "Pendant l'ascenseur utiliser le |Souvenir du greff\xE9|\nPrendre le\
-    \ premier site de gr\xE2ce rencontr\xE9 puis Leyndell Skip\nPartir sur la droite,\
-    \ ramasser |Arc noir| et |Rune dor\xE9e (9)| sur le passage vers le dragon mort\n\
+  description: "Prendre le site |Balcon sur l'avenue|, ramasser |Rune dor\xE9e (9)| sur le passage vers le dragon mort\n\
     Prendre un |Arc runique| apr\xE8s la s\xE9rie de jumps, monter \xE0 l'\xE9chelle,\
-    \ ramasser |Rune dor\xE9e (11)| et go Godfrey"
+    \ ramasser |Rune dor\xE9e (11)|, et go Godfrey"
   id: 123adc82-47db-45bc-b964-c59e124a60ad
   name: Leyndell
   stats: {}
@@ -213,8 +210,7 @@ route:
   - "BUFFS : Serment dor\xE9"
   color: boss
   description: "Serment dor\xE9 \xE0 l'ext\xE9rieur de l'ar\xE8ne, quand le boss appara\xEE\
-    t |Khukuri| + popo de mana\n\nCombo WA quand c'est possible sinon juste WA ou\
-    \ JR1 quand il slide sur le c\xF4t\xE9"
+    t |Khukuri| + popo de mana\n\n2 Combo WA, 5 R1, Stun"
   id: abc73d02-49d8-4066-9ce1-f8fcda26c179
   name: GODFREY
   stats:
@@ -223,7 +219,7 @@ route:
     FOR: 15
 - build: []
   color: null
-  description: Aller sur Morgott directement
+  description: "|Rune dorée (9)|, Levelup |46 Dex 19 Vig|"
   id: 94727fac-749f-42a9-9681-070ea251a343
   name: Leyndell
   stats: {}
@@ -266,22 +262,15 @@ route:
 - build: []
   color: null
   description: "Tuer le bousier apr\xE8s la muraille pour |Pierre de forge sombre\
-    \ (8)|\nPrendre le site de gr\xE2ce juste apr\xE8s et |TP Route du manoir|"
-  id: 2f56cfd2-9335-4ba2-9174-bbd6f3793fb7
-  name: "Cimes des G\xE9ants"
-  stats: {}
-- build: []
-  color: null
-  description: "Upgrade le |Croc du limier en +8|\n|TP Antiques ruines de la vall\xE9\
-    e|"
-  id: ef433687-4fda-4a4a-85ac-b05663ee8705
-  name: Liurnia
-  stats: {}
-- build: []
-  color: null
-  description: "Aller jusqu'au G\xE9ant de Feu"
+    \ (8)|\nAller jusqu'au G\xE9ant de Feu\nUtiliser souvenirs, |Rune dorée (12)| et |Rune dorée (13)|, et level up |25 Force|"
   id: 3e3f3115-b3b3-4069-9009-da8b1e3af75f
   name: "Cimes des G\xE9ants"
+  stats: {}
+- build: []
+  color: null
+  description: "Upgrade le |Croc du limier en +8|\n|TP site du Géant|"
+  id: ef433687-4fda-4a4a-85ac-b05663ee8705
+  name: Liurnia
   stats: {}
 - build:
   - 'ARME : Croc du limier +8'
